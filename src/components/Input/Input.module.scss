@@ -1,0 +1,46 @@
+@import url('../../styles/variables.scss');
+
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-xxs);
+}
+
+.inputIcon {
+  display: inline-flex;
+  position: absolute;
+  left: var(--space-left);
+  top: var(--space-26);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  
+  svg path {
+    fill: var(--text-secondary);
+  }
+}
+
+.inputField {
+  display: inline-flex;
+  width: 470px;
+  height: 52px;
+  padding: var(--space-16) var(--space-xs);
+  gap: var(--space-xxs);
+  background-color: var(--input-bg);
+  border: none;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+
+  &:focus {
+    border: 1px solid var(--input-border-focus);
+  }
+
+  &::placeholder {
+    color: var(--input-placeholder);
+  }
+} 

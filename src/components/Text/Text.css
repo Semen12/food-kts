@@ -1,0 +1,50 @@
+@import '../variables.css';
+.text-p14{
+    font-family: Roboto;
+font-size: 14px;
+font-weight: 400;
+line-height: 18px;
+text-align: left;
+color: var(--primary-color);
+}
+.text-p16{
+    font-family: Roboto;
+font-size: 16px;
+font-weight: 400;
+line-height: 20px;
+text-align: left;
+color: var(--primary-color);
+}
+
+.text-p18{
+    font-family: Roboto;
+font-size: 18px;
+font-weight: 400;
+line-height: 22px;
+text-align: left;
+color: var(--primary-color);
+}
+
+.text-p20{
+    font-family: Roboto;
+font-size: 20px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+color: var(--primary-color);
+}
+.text-title{font-family: Roboto;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 48px;
+    text-align: left;
+    color: var(--primary-color);
+}
+.text-button{
+    font-family: Roboto;
+font-size: 18px;
+font-weight: 400;
+line-height: 18px;
+text-align: left;
+color: var(--primary-color);
+}

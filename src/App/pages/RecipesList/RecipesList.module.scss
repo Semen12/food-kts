@@ -1,0 +1,41 @@
+@import url('../../../styles/variables.scss');
+
+.recipes     {
+    &__content {
+        background: rgba(255, 192, 118, 0.23);
+        padding: var(--space-xl);
+        &__search {
+            width: 470px;
+            margin-bottom: var(--space-xl);
+        }
+        &__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
+            gap: var(--space-xl);
+            justify-items: center;
+            margin-bottom: var(--space-xl);
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-s);
+}
+
+.pageButton {
+    padding: var(--space-xs) var(--space-s);
+    border: 1px solid var(--primary-color);
+    background: none;
+    cursor: pointer;
+
+    &.active {
+        background: var(--primary-color);
+        color: var(--white-color);
+    }
+
+    &:hover {
+        background: var(--primary-color20);
+    }
+}

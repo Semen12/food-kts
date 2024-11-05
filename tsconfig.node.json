@@ -26,7 +26,8 @@
       "config": ["config/*"],
       "styles": ["styles/*"],
       "utils": ["utils/*"],
-      "assets": ["assets/*"]
+      "assets": ["assets/*"],
+      "pages": ["pages/*"]
 
     }
   },

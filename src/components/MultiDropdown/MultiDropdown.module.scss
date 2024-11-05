@@ -1,0 +1,31 @@
+.root {
+  width: 370px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+
+  :global(.input-container) {
+    :global(.input-icon) {
+      left: var(--space-left320);
+    }
+  }
+}
+
+.options {
+  background-color: var(--white-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  padding-bottom: 8px;
+}
+
+.option {
+  padding: var(--space-s) var(--space-xs);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--secondary-color);
+  }
+
+  &.selected {
+    color: var(--brand);
+  }
+} 

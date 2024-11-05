@@ -1,0 +1,52 @@
+.text {
+  font-family: Roboto;
+  text-align: left;
+
+  &[data-view="p14"] {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
+  &[data-view="p16"] {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  &[data-view="p18"] {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  &[data-view="p20"] {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  &[data-view="title"] {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 48px;
+  }
+
+  &[data-view="button"] {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 18px;
+  }
+
+  &[data-color="primary"] {
+    color: var(--primary-color);
+  }
+
+  &[data-color="secondary"] {
+    color: var(--secondary-color);
+  }
+
+  &[data-color="accent"] {
+    color: var(--accent-color);
+  }
+} 
