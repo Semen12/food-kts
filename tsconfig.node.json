@@ -25,7 +25,9 @@
       "components": ["components/*"],
       "config": ["config/*"],
       "styles": ["styles/*"],
-      "utils": ["utils/*"]
+      "utils": ["utils/*"],
+      "assets": ["assets/*"]
+
     }
   },
   "include": ["vite.config.ts", "tsconfig.json"]

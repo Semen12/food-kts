@@ -1,0 +1,86 @@
+@use '../../styles/variables.scss' as *;
+
+.header {
+  width: 100%;
+  background-color: var(--card-bg);
+  &__container {
+    max-width: 1240px;
+    height: 64px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    margin-right: 80px;
+  }
+
+  &__logoLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 8px;
+  }
+
+  &__logoImg {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__logoText {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 120%;
+    color: var(--text-primary);
+  }
+
+  &__menuItems {
+    display: flex;
+    margin-right: 448px;
+    &:not(:last-child) {
+      column-gap: 16px;
+    }
+  }
+
+  &__menuItem {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--text-primary);
+    
+    &:hover {
+       
+        font-weight: 600;
+        color: var(--brand);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    
+    &:hover {
+      background-color: var(--button-primary-bg-hover);
+      border-radius: 50%;
+    }
+    
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+
+
