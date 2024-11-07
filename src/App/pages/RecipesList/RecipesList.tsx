@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import Input from '../../../components/Input/Input';
-import MultiDropdown from '../../../components/MultiDropdown/MultiDropdown';
-import Banner from './components/Banner/Banner';
-import styles from './RecipesList.module.scss';
-import { Recipe, RecipesResponse } from '../../../types/recipe';
-import axiosInstance from '../../../config/axios';
 import classNames from 'classnames';
-import Card from '../../../components/Card/Card';
-import Button from '../../../components/Button/Button';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import axiosInstance from 'config/axios';
+import { Recipe, RecipesResponse } from 'types/recipe';
+import Banner from './components/Banner/index';
+import styles from './RecipesList.module.scss';
+import Card from 'components/Card';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import MultiDropdown from 'components/MultiDropdown';
 
 const RecipesList = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);

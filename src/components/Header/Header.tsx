@@ -1,4 +1,7 @@
 import styles from './Header.module.scss';
+import logo from 'assets/logo.svg';
+import like from 'assets/like.svg';
+import user from 'assets/user.svg';
 
 const Header = () => {
   return (
@@ -6,7 +9,7 @@ const Header = () => {
       <div className={styles.header__container}>
         <div className={styles.header__logo}>
           <a href="/" className={styles.header__logoLink}>
-            <img src="assets/logo.svg" alt="logo" className={styles.header__logoImg} />
+            <img src={logo} alt="logo" className={styles.header__logoImg} />
             <p className={styles.header__logoText}>Food Client</p>
           </a>
         </div>
@@ -29,10 +32,10 @@ const Header = () => {
         </div>
         <div className={styles.header__buttons}>
           <button className={styles.header__button}>
-            <img src="assets/like.svg" alt="like" />
+            <img src={like} alt="like" />
           </button>
           <button className={styles.header__button}>
-            <img src="assets/user.svg" alt="user" />
+            <img src={user} alt="user" />
           </button>
         </div>
       </div>

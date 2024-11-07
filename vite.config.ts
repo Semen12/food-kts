@@ -1,29 +1,18 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import svgr from "vite-plugin-svgr";
 
-import path from 'path';
-
-import tsconfig from './tsconfig.json';
-import tsconfignode from './tsconfig.node.json';
-
-const SRC_PATH = path.resolve(__dirname, 'src');
-
-const parseTsConfigPaths = (paths: Record<string, string[]>): Record<string, string> => {
-  const webpackConfigAliases: Record<string, string> = {};
-
-  Object.entries(paths).forEach(([alias, paths]) => {
-    const aliasPath = paths[0].replace(/[^a-zA-Z]/g, '');
-
-    webpackConfigAliases[alias] = path.join(SRC_PATH, aliasPath);
-  });
-
-  return webpackConfigAliases;
-};
-
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   resolve: {
-    alias: parseTsConfigPaths( tsconfignode.compilerOptions.paths),
+    alias: {
+      components: '/src/components',
+      assets: '/src/assets',
+      utils: '/src/utils',
+      services: '/src/services',
+      styles: '/src/styles',
+      types: '/src/types',
+      config: '/src/config',
+    },
   },
-})
+});

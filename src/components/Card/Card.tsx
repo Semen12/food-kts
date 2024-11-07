@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import Text from '../Text';
-import './Card.css';
 
 export type CardProps = {
   /** Дополнительный classname */

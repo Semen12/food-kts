@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styles from './Icon.module.scss'
+import classNames from 'classnames';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
     className?: string;
@@ -14,13 +15,13 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = ({color,
     className,
     children,
     ...props}) => {
-      const colorClass = styles[`icon_${color}`];
+      
         return(
             <svg
             width={width}
             height={height}
            
-            className={`${colorClass} ${className || ''} `}
+            className={classNames(styles[`icon_${color}`], className)}
             xmlns="http://www.w3.org/2000/svg"
             viewBox='0 0 24 24'
            /*  fillRule='evenodd' */

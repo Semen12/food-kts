@@ -19,13 +19,13 @@ export const getRecipes = async (page: number = 1, pageSize: number = 9) => {
     return data;
   } catch (error) {
     console.error('Error fetching recipes:', error);
-    throw error;
+  
   }
 };
 
 export const getRecipeById = async (id: number) => {
   try {
-    const { data } = await axiosInstance.get(`/recipes/${id}/information`, {
+    const { data} = await axiosInstance.get(`/recipes/${id}/information`, {
       params: {
         apiKey: import.meta.env.VITE_API_KEY
       }
@@ -33,6 +33,6 @@ export const getRecipeById = async (id: number) => {
     return data;
   } catch (error) {
     console.error('Ошибка при получении данных рецепта:', error);
-    throw error;
+ 
   }
 }; 
