@@ -1,4 +1,4 @@
-@import 'styles/components.scss';
+@use 'styles/styles.scss' as *;
 
 .root {
   width: 370px;

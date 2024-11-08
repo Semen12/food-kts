@@ -2,33 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRecipeById } from '../../../services/recipesService';
 import styles from './RecipeDetails.module.scss';
+import { RecipeDetails as RecipeDetailsType } from 'types/recipe';
 
-type RecipeDetails = {
-  title: string;
-  image: string;
-  readyInMinutes: number;
-  preparationMinutes: number;
-  cookingMinutes: number;
-  aggregateLikes: number;
-  servings: number;
-  summary: string;
-  extendedIngredients: Array<{
-    original: string;
-  }>;
-  analyzedInstructions: Array<{
-    steps: Array<{
-      number: number;
-      step: string;
-      equipment: Array<{
-        name: string;
-      }>;
-    }>;
-  }>;
-};
 
 const RecipeDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const [recipe, setRecipe] = useState<RecipeDetails | null>(null);
+  const [recipe, setRecipe] = useState<RecipeDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

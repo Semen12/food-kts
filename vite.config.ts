@@ -15,4 +15,14 @@ export default defineConfig({
       config: '/src/config',
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        
+      },
+    },
+  },
+  server: {
+    port: 3000,
+  },
 });

@@ -17,6 +17,29 @@ export type Recipe = {
   }[];
 };
 
+export type RecipeDetails = {
+  title: string;
+  image: string;
+  readyInMinutes: number;
+  preparationMinutes: number;
+  cookingMinutes: number;
+  aggregateLikes: number;
+  servings: number;
+  summary: string;
+  extendedIngredients: Array<{
+    original: string;
+  }>;
+  analyzedInstructions: Array<{
+    steps: Array<{
+      number: number;
+      step: string;
+      equipment: Array<{
+        name: string;
+      }>;
+    }>;
+  }>;
+};
+
 export type RecipesResponse = {
   results: Recipe[];
   offset: number;

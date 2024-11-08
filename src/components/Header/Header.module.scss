@@ -1,86 +1,96 @@
-@import 'styles/components.scss';
+@use 'styles/styles.scss' as *;
 
 .header {
-  width: 100%;
-  background-color: var(--card-bg);
   &__container {
     max-width: 1240px;
-    height: 64px;
+    padding: 0 $space-16;
     margin: 0 auto;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    height: 65px;
+
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 710px;
+    width: 100%;
+    height: 100%;
   }
 
   &__logo {
-    display: flex;
-    align-items: center;
-    margin-right: 80px;
-  }
-
-  &__logoLink {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    gap: 8px;
-  }
-
-  &__logoImg {
-    width: 32px;
-    height: 32px;
-  }
-
-  &__logoText {
-    font-family: var(--font-family);
-    font-weight: 700;
+    font-family: $font-family;
     font-size: 20px;
     line-height: 120%;
-    color: var(--text-primary);
+    color: $text-primary;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: $space-xl;
+      text-decoration: none;
+      color: $primary-color;
+    }
+
+    &LinkPending {
+      color: $text-secondary;
+    }
+
+    &LinkActive {
+      color: $primary-color;
+      font-weight: 700;
+    }
   }
 
   &__menuItems {
     display: flex;
-    margin-right: 448px;
-    &:not(:last-child) {
-      column-gap: 16px;
-    }
-  }
+    gap: $space-xs;
+    list-style: none;
+    justify-content: space-between;
 
-  &__menuItem {
-    font-family: var(--font-family);
+    font-family: $font-family;
     font-weight: 400;
     font-size: 16px;
     line-height: 125%;
-    color: var(--text-primary);
-    
-    &:hover {
-       
-        font-weight: 600;
-        color: var(--brand);
+    color: $text-primary;
+
+    a {
+      text-decoration: none;
+      color: $text-primary;
+
+      &:hover {
+        color: $brand-hover-color;
+        transition: color 0.3s ease;
+        text-decoration: underline;
+      }
+
+    }
+
+    a.header__menuItemActive {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 125%;
+        color: $brand;
     }
   }
-
   &__buttons {
     display: flex;
-    gap: 16px;
-  }
-
-  &__button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    
-    &:hover {
-      background-color: var(--button-primary-bg-hover);
-      border-radius: 50%;
-    }
-    
+    gap: $space-16;
+    align-items: center;
+    justify-content: center;
     img {
-      width: 24px;
-      height: 24px;
+      transition: all 0.3s ease;
+    }
+    img:hover {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0.8;
+      transform: scale(1.5);
+      
+     
     }
   }
 }
-
-
-

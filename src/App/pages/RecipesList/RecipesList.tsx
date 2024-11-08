@@ -58,34 +58,33 @@ const RecipesList = () => {
   };
 
   return (
-    <div className={styles.recipes}>
-      <Banner />
-      <div className={styles.recipes__content}>
-        <div className={styles.recipes__content__search}>
-          <Input value="" onChange={() => {}} />
-          <MultiDropdown options={[]} value={[]} onChange={() => {}} getTitle={() => ''} />
-        </div>
-        <div className={styles.recipes__content__grid}>
-          {recipes.map((recipe) => (
-            <Card
-              key={recipe.id}
-              image={recipe.image}
-              captionSlot={`${recipe.readyInMinutes ?? 0} мин`}
-              title={recipe.title}
-              subtitle={(recipe.extendedIngredients ?? []).map(i => i.name).join(' + ')}
-              contentSlot={`${Math.round(recipe.nutrition?.nutrients[0]?.amount ?? 0)} ккал`}
-              onClick={() => navigate(`/recipe/${recipe.id}`)}
-              actionSlot={
-                <Button onClick={(e) => e.stopPropagation()}>
-                  Сохранить
-                </Button>
-              }
-            />
-          ))}
-        </div>
-        {renderPagination()}
-      </div>
+    <><div className={styles.banner}>
+     
     </div>
+      <div className={styles.recipes}>
+        <div className={styles.recipes__content}>
+          <div className={styles.recipes__content__search}>
+            <Input value="" onChange={() => { } } />
+            <MultiDropdown options={[]} value={[]} onChange={() => { } } getTitle={() => ''} />
+          </div>
+          <div className={styles.recipes__content__grid}>
+            {recipes.map((recipe) => (
+              <Card
+                key={recipe.id}
+                image={recipe.image}
+                captionSlot={`${recipe.readyInMinutes ?? 0} мин`}
+                title={recipe.title}
+                subtitle={(recipe.extendedIngredients ?? []).map(i => i.name).join(' + ')}
+                contentSlot={`${Math.round(recipe.nutrition?.nutrients[0]?.amount ?? 0)} ккал`}
+                onClick={() => navigate(`/recipe/${recipe.id}`)}
+                actionSlot={<Button onClick={(e) => e.stopPropagation()}>
+                  Сохранить
+                </Button>} />
+            ))}
+          </div>
+          {renderPagination()}
+        </div>
+      </div></>
   );
 };
 

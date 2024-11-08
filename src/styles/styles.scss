@@ -1,3 +1,5 @@
+@use 'reset.scss' as *;
+@use 'fonts.scss' as *;
 $loader-bg: #b5460f;
 $button-primary-bg: #b5460f;
 $button-primary-text: #fff;
@@ -37,3 +39,28 @@ $brand-active: #872d01;
 $brand-hover: rgba(181, 70, 15, 0.7);
 $font-family: "Roboto", sans-serif;
 $second-family: "Eudoxus Sans", sans-serif;
+
+// Colors
+$primary-color: #000000;
+$primary-color-40: #00000040;
+$secondary-color: #AFADB5;
+$accent-color: #518581;
+$white-color: #ffffff;
+$brand-color: #518581;
+$brand-hover-color: #86AAA7;
+$brand-disabled-color: #D9D9D9;
+$brand-active-color: #487773;
+
+// Spacing
+$space-s: 14px;
+$space-16: 16px;
+$space-26: 26px;
+$space-l: 20px;
+$space-xxs: 8px;
+$space-xxs10: 10px;
+$space-xl: 24px;
+$space-xs: 12px;
+$space-80: 80px;
+$space-left: 414px;
+$space-left322: 346px;
+$space-left320: 320px;

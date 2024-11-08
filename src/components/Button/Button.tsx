@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import Loader from '../Loader';
-import './Button.css';
+
+import styles from './Button.module.scss';
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   /** Состояние загрузки */
   loading?: boolean;
@@ -12,9 +13,9 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const Button: React.FC<ButtonProps> = ({ loading, children, className, disabled, onClick, ...props }) => {
   const buttonClasses = classNames(
-    'button',
+    styles.button,
     className,
-    { 'button--loading': loading }
+    { [styles['button--loading']]: loading }
   );
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,13 +31,11 @@ const Button: React.FC<ButtonProps> = ({ loading, children, className, disabled,
       type="button"
       className={buttonClasses}
       disabled={disabled || loading} // Disable if loading or explicitly disabled
-      data-loading={loading}
-      data-disabled={disabled}
       onClick={handleClick}
       {...props}
     >
-      {loading && <Loader className="button__loader" size='s' fill="#fff" />}
-      <span className="button__text">{children}</span>
+      {loading && <Loader className={styles['button__loader']} size='s' fill="#fff" />}
+      <span className={styles['button__text']}>{children}</span>
     </button>
   );
 };

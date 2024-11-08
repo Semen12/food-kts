@@ -12,6 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<RecipesList />} />
+        <Route path="/recipes" element={<RecipesList />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="*" element={<RecipesList />} />
       </Routes>

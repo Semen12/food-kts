@@ -1,8 +1,0 @@
-@use 'styles/styles.scss' as *;
-
-.banner {
-   &__content {
-    background: $brand url('assets/bg.png') no-repeat center center / cover;
-    height: 572px;
-   }
-}
