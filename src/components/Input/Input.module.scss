@@ -1,46 +1,42 @@
-@import url('styles/styles.scss');
+@use 'styles/styles.scss' as *;
 
-
-.inputContainer {
+.input-container {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--space-xxs);
-}
-
-.inputIcon {
-  display: inline-flex;
-  position: absolute;
-  left: var(--space-left);
-  top: var(--space-26);
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-  
-  svg path {
-    fill: var(--text-secondary);
-  }
-}
-
-.inputField {
-  display: inline-flex;
-  width: 470px;
+  width: 100%;
   height: 52px;
-  padding: var(--space-16) var(--space-xs);
-  gap: var(--space-xxs);
-  background-color: var(--input-bg);
+}
+
+.input {
+  font-family: "Roboto";
+  width: 100%;
+  height: 100%;
+  padding: $space-s $space-xs;
   border: none;
-  font-family: Roboto;
+  border-radius: 10px;
+  background-color: $white-color;
   font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  text-align: left;
+  color: $text-primary;
+}
 
-  &:focus {
-    border: 1px solid var(--input-border-focus);
-  }
+.input:focus {
+  outline: 1px solid $brand;
+}
 
-  &::placeholder {
-    color: var(--input-placeholder);
-  }
-} 
+.input:disabled {
+  background-color: $white-color;
+  color: $text-secondary;
+}
+
+.input::placeholder {
+  color: $text-secondary;
+}
+
+.after-slot {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  right: 0;
+  transform: translate(-50%, -50%);
+}

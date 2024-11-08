@@ -19,21 +19,31 @@ export type TextProps = {
     maxLines?: number;
 };
 
-const Text: React.FC<TextProps> = ({className, view, tag = 'div', weight, children, color, maxLines}) => {
-    const Tag = tag;
-    const textClass = classNames(styles.text, className);
+const Text: React.FC<TextProps> = ({className='', view, tag: Tag = 'div', weight, children, color, maxLines}) => {
     
-    return (
-        <Tag 
-            className={textClass} 
-            data-view={view} 
-            data-weight={weight} 
-            data-color={color} 
-            data-max-lines={maxLines}
-        >
-            {children}
+    const classes = [
+        styles['text'],
+        view ? styles[`text-${view}`] : '',
+        weight ? styles[`text-weight-${weight}`] : '',
+        color ? styles[`text-color-${color}`] : '',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ');
+        const style: React.CSSProperties = maxLines
+        ? {
+            display: '-webkit-box',
+            WebkitLineClamp: maxLines,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }
+        : {};
+    
+      return (
+        <Tag className={classes} style={style}>
+          {children}
         </Tag>
-    )
+      );
 };
 
 export default Text;

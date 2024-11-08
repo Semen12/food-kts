@@ -1,6 +1,9 @@
 @use 'styles/styles.scss' as *;
 
 .header {
+  position: sticky;
+  top: 0;
+  background: $button-primary-text;
   &__container {
     max-width: 1240px;
     padding: 0 $space-16;

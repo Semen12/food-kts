@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import Text from '../Text';
+import styles from './Card.module.scss';
 
 export type CardProps = {
   /** Дополнительный classname */
@@ -31,38 +32,38 @@ const Card: React.FC<CardProps> = ({ className,
   actionSlot, }) => {
     const handleClick = (e: React.MouseEvent) => {
       // Проверяем, что клик не был по кнопке "Сохранить"
-      if (!(e.target as HTMLElement).closest('.card__action')) {
+      if (!(e.target as HTMLElement).closest(`.${styles.card__action}`)) {
       onClick?.(e);
     }
   };
-  const cardClasses = classNames('card', className);
+  const cardClasses = classNames(styles.card, className);
   return (
     <div className={cardClasses} onClick={onClick}>
       {/* Изображение с сохранением пропорций */}
-      <div className="card__image-container">
-        <img src={image} alt="" className="card__image" />
+      <div className={styles.card__imageContainer}>
+        <img src={image} alt="" className={styles.card__image} />
       </div>
-      <div className="card__wrapper">
+      <div className={styles.card__wrapper}>
         {/* Слот над заголовком (опциональный) */}
        
 
         {/* Заголовок и описание */}
-        <div className="card__content"> 
-          {captionSlot && <div className="card__caption">{captionSlot}</div>}
-          <Text className="card__title" maxLines={2}>
+        <div className={styles.card__content}> 
+          {captionSlot && <Text className={styles.card__content_caption} view="p-14" color="secondary" weight="medium" tag="div">{captionSlot}</Text>}
+          <Text className={styles.card__content_title} tag="h3" view="p-20" weight="medium" maxLines={2}>
             {title}
           </Text>
-          <Text className="card__subtitle" maxLines={3}>
+          <Text className={styles.card__content_subtitle} view="p-14" color="secondary" weight="medium" tag="div" maxLines={3}>
             {subtitle}
           </Text>
           
         </div>
-        <div className='card__actions'>
+        <div className={styles.card__actions}>
           {/* Футер или боковая часть */}
-          {contentSlot && <div className="card__footer">{contentSlot}</div>}
+          {contentSlot && <div className={styles.card__footer}>{contentSlot}</div>}
 
           {/* Слот для действия (опциональный) */}
-          {actionSlot && <div className="card__action">{actionSlot}</div>}
+          {actionSlot && <div className={styles.card__action}>{actionSlot}</div>}
         </div>
 
       </div>

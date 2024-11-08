@@ -5,16 +5,23 @@ export type Nutrient = {
 };
 
 export type Recipe = {
-  readyInMinutes: number;
   id: number;
   title: string;
   image: string;
+  readyInMinutes: number;
   nutrition?: {
-    nutrients: Nutrient[];
+    nutrients: Array<{
+      name: string;
+      amount: number;
+      unit: string;
+    }>;
+    ingredients: Array<{
+      id: number;
+      name: string;
+      amount: number;
+      unit: string;
+    }>;
   };
-  extendedIngredients: {
-    name: string;
-  }[];
 };
 
 export type RecipeDetails = {

@@ -103,14 +103,12 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
                   (selected) => selected.key === option.key
                 );
 
-                const optionClassname = classNames(styles.option, {
-                  [styles.selected]: isSelected,
-                });
+              
 
                 return (
                   <div
                     key={option.key}
-                    className={optionClassname}
+                    className={classNames(styles.option, isSelected && styles.selected)} 
                     onClick={() => handleSelection(option)}
                   >
                     {option.value}

@@ -1,23 +1,74 @@
 @use 'styles/styles.scss' as *;
+
 .banner {
-    background: $brand url('assets/bg.png') no-repeat center center / cover;
+    background: url('assets/bg.jpg') no-repeat center center / cover;
     height: 572px;
 }
 
 .recipes {
-    &__content {
-        background: rgba(255, 192, 118, 0.23);
-        padding: var(--space-xl);
-        &__search {
-            width: 470px;
-            margin-bottom: var(--space-xl);
+    background: rgba(255, 192, 118, 0.23);
+    padding-top: $space-36;
+
+    &__container {
+        max-width: 1240px;
+        margin: 0 auto;
+
+    }
+
+    &__title {
+        font-size: 20px;
+        line-height: 120%;
+        color: $text-primary;
+        text-align: center;
+
+        span {
+            text-decoration: underline;
+            text-decoration-skip-ink: none;
         }
+
+        margin-bottom: $space-48;
+    }
+
+
+    &__content {
+        padding: $space-xxs;
+
+        &__search {
+            // background: $primary-color;
+            margin-bottom: $space-48;
+            display: flex;
+            justify-content: flex-end;
+            gap: $space-l;
+            flex-wrap: wrap;
+
+            &__input {
+                position: relative;
+                input[type="text"] {
+                    max-width: 1150px;
+                }
+
+                
+                    button[type="button"] {
+                        width: 64px;
+                        height: 52px;
+                        border-radius: 10px;
+                        padding: 14px 20px;
+                        background: $brand;
+                        position: absolute;
+                        right: 0;
+                       
+                    }
+                
+            }
+
+        }
+
         &__grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
-            gap: var(--space-xl);
+            gap: $space-xl;
             justify-items: center;
-            margin-bottom: var(--space-xl);
+            margin-bottom: $space-xl;
         }
     }
 }
@@ -25,21 +76,21 @@
 .pagination {
     display: flex;
     justify-content: center;
-    gap: var(--space-s);
+    gap: $space-s;
 }
 
 .pageButton {
-    padding: var(--space-xs) var(--space-s);
-    border: 1px solid var(--primary-color);
+    padding: $space-xs $space-s;
+    border: 1px solid $primary-color;
     background: none;
     cursor: pointer;
 
     &.active {
-        background: var(--primary-color);
-        color: var(--white-color);
+        background: $primary-color;
+        color: $white-color;
     }
 
     &:hover {
-        background: var(--primary-color20);
+        background: $primary-color-40;
     }
 }

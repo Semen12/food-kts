@@ -1,52 +1,60 @@
+@use "styles/styles.scss" as *;
+
+// Размеры текста
 .text {
-  font-family: Roboto;
-  text-align: left;
+  color: inherit;
+}
 
-  &[data-view="p14"] {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-  }
+.text-title {
+  font-size: 24px;
+}
 
-  &[data-view="p16"] {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-  }
+.text-button {
+  font-size: 16px;
+}
 
-  &[data-view="p18"] {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 22px;
-  }
+.text-p-20 {
+  font-size: 20px;
+  line-height: 24px;
+}
 
-  &[data-view="p20"] {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24px;
-  }
+.text-p-18 {
+  font-size: 18px;
+  line-height: 22px;
+}
 
-  &[data-view="title"] {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 48px;
-  }
+.text-p-16 {
+  font-size: 16px;
+  line-height: 20px;
+}
 
-  &[data-view="button"] {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 18px;
-  }
+.text-p-14 {
+  font-size: 14px;
+  line-height: 18px;
+}
 
-  &[data-color="primary"] {
-    color: var(--primary-color);
-  }
+.text-weight-normal {
+  font-weight: 400;
+}
 
-  &[data-color="secondary"] {
-    color: var(--secondary-color);
-  }
+.text-weight-medium {
+  font-weight: 500;
+}
 
-  &[data-color="accent"] {
-    color: var(--accent-color);
-  }
-} 
+.text-weight-bold {
+  font-weight: 700;
+}
+
+.text-color-primary {
+  color: $brand-color;
+}
+
+.text-color-secondary {
+  color: $text-secondary;
+}
+
+.text-color-accent {
+  color: $text-accent;
+}
+
+

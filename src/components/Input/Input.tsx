@@ -17,12 +17,13 @@ export type InputProps = Omit<
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ value, onChange, afterSlot, className, ...props }, ref) => {
     // Классы для инпута и контейнера
-    const inputContainerClasses = classNames(styles.inputContainer, className);
-    const inputClasses = classNames(styles.inputField);
+    const inputContainerClasses = classNames(styles['input-container'], className);
+    const inputClasses = classNames(styles.input);
 
     // Обработчик события `onChange`
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange(e.target.value);
+      
     };
 
     return (
@@ -35,7 +36,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type='text'
           {...props}
         />
-        {afterSlot && <div className={styles.inputIcon}>{afterSlot}</div>}
+        {afterSlot && <div className={styles['after-slot']}>{afterSlot}</div>}
       </div>
     );
   }
