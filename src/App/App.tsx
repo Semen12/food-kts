@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import Header from '@components/Header/Header';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails';
 import RecipesList from './pages/RecipesList/RecipesList';
-import Header from '@components/Header/Header';
 
 function App() {
   return (
