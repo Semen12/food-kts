@@ -30,7 +30,7 @@
       "@styles/*": ["styles/*"],
       "@types/*": ["types/*"],
       "@config/*": ["config/*"],
-      "@pages/*": ["pages/*"] // добавьте это, если используете @pages
+      "@pages/*": ["pages/*"] 
     }
   },
   "include": ["src", ".eslintrc.cjs"],

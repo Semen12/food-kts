@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import { getRecipeById } from '../../../services/recipesService';
+import { getRecipeById } from '@services/recipesService';
 import styles from './RecipeDetails.module.scss';
-import { RecipeDetails as RecipeDetailsType } from 'types/recipe';
-import ArrowRound from 'assets/arrow-round.svg?react';
+import { RecipeDetails as RecipeDetailsType } from '@types/recipe';
+import ArrowRound from '@assets/arrow-round.svg?react';
 const RecipeDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [recipe, setRecipe] = useState<RecipeDetailsType | null>(null);
@@ -21,7 +21,7 @@ const RecipeDetails = () => {
 
     fetchRecipe();
   }, [id]);
-  
+
   /*  useEffect(() => {
         setRecipe(getTestRecipe());
         setLoading(false);

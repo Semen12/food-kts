@@ -2,17 +2,17 @@ import classNames from 'classnames';
 import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Recipe } from 'types/recipe';
+import clock from '@assets/clock.svg';
+import Search from '@assets/search.svg?react';
+import Button from '@components/Button';
+import Card from '@components/Card';
+import Input from '@components/Input';
+import Loader from '@components/Loader';
+import MultiDropdown from '@components/MultiDropdown';
+import Consts from '@config/consts';
+import { getRecipes } from '@services/recipesService';
+import { Recipe } from '@types/recipe';
 import styles from './RecipesList.module.scss';
-import Card from 'components/Card';
-import Button from 'components/Button';
-import Input from 'components/Input';
-import MultiDropdown from 'components/MultiDropdown';
-import clock from 'assets/clock.svg';
-import { getRecipes } from 'services/recipesService';
-import Loader from 'components/Loader/Loader';
-import Consts from 'config/consts';
-import Search from 'assets/search.svg?react';
 const RecipesList = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [currentPage, setCurrentPage] = useState(1);

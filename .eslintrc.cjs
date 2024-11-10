@@ -51,8 +51,22 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.scss', '.svg', '.png', '.jpg', '.svg?react'],
     },
     'import/resolver': {
+      alias: {
+        map: [
+          ['@', path.resolve(__dirname, 'src')],
+          ['@components', path.resolve(__dirname, 'src/components')],
+          ['@assets', path.resolve(__dirname, 'src/assets')],
+          ['@utils', path.resolve(__dirname, 'src/utils')],
+          ['@services', path.resolve(__dirname, 'src/services')],
+          ['@styles', path.resolve(__dirname, 'src/styles')],
+          ['@types', path.resolve(__dirname, 'src/types')],
+          ['@config', path.resolve(__dirname, 'src/config')],
+          ['@pages', path.resolve(__dirname, 'src/pages')]
+        ],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.svg']
+      },
       typescript: {
-        project: path.resolve('./tsconfig.json'),
+        project: path.resolve(__dirname,'./tsconfig.json'),
       },
     },
     'import/external-module-folders': ['node_modules', 'node_modules/@types'],
