@@ -1,4 +1,4 @@
-@use 'styles/styles.scss' as *;
+
 
 .card {
   
@@ -40,6 +40,9 @@
 
     &_caption {
       margin-bottom: $space-xxs;
+      img{
+        margin-right: $space-xxs;
+      }
     }
 
     &_title {
