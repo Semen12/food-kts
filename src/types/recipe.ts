@@ -10,11 +10,7 @@ export type Recipe = {
   image: string;
   readyInMinutes: number;
   nutrition?: {
-    nutrients: Array<{
-      name: string;
-      amount: number;
-      unit: string;
-    }>;
+    nutrients: Nutrient[];
     ingredients: Array<{
       id: number;
       name: string;
@@ -25,6 +21,7 @@ export type Recipe = {
 };
 
 export type RecipeDetails = {
+  id: number;
   title: string;
   image: string;
   readyInMinutes: number;
@@ -33,9 +30,15 @@ export type RecipeDetails = {
   aggregateLikes: number;
   servings: number;
   summary: string;
-  extendedIngredients: Array<{
-    original: string;
-  }>;
+  nutrition?: {
+    nutrients: Nutrient[];
+    ingredients: Array<{
+      id: number;
+      name: string;
+      amount: number;
+      unit: string;
+    }>;
+  };
   analyzedInstructions: Array<{
     steps: Array<{
       number: number;

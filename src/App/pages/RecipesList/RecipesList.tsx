@@ -1,26 +1,26 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axiosInstance from 'config/axios';
-import { Recipe, RecipesResponse } from 'types/recipe';
-import Banner from './components/Banner/index';
+import { Recipe } from 'types/recipe';
 import styles from './RecipesList.module.scss';
 import Card from 'components/Card';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import MultiDropdown from 'components/MultiDropdown';
-import Text from 'components/Text';
 import clock from 'assets/clock.svg';
-
+import { getRecipes } from 'services/recipesService';
+import Loader from 'components/Loader/Loader';
+import Consts from 'config/consts';
+import Search from 'assets/search.svg?react';
 const RecipesList = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<Option[]>([]);
   const navigate = useNavigate();
-
+/* 
   const fetchRecipes = async (page: number) => {
     setLoading(true);
     try {
@@ -37,13 +37,22 @@ const RecipesList = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }; */
 
   useEffect(() => {
-    fetchRecipes(currentPage);
+    const fetchData = async () => {
+      const response = await getRecipes(currentPage);
+      if (response?.results) {
+        setRecipes(response.results);
+        if(recipes){
+          setLoading(false);
+        }
+      }
+    };
+    fetchData();
   }, [currentPage]);
 
-  const renderPagination = () => {
+  const renderPagination = useMemo(() => {
     return (
       <div className={styles.pagination}>
         {[...Array(9)].map((_, index) => (
@@ -59,12 +68,16 @@ const RecipesList = () => {
         ))}
       </div>
     );
-  };
+  }, [currentPage]);
 
+ 
   return (
-    <>
-      <div className={styles.banner}></div>
-      <div className={styles.recipes}>
+    <>  
+      {loading && <div  className={styles.loader}><Loader size='l' /></div>}
+      {! loading && (
+        <>
+          <div className={styles.banner}></div>
+          <div className={styles.recipes}>
         <div className={styles.recipes__container}>
           <div className={styles.recipes__title}>
             Find the perfect food and <span>drink ideas</span> for every occasion, from <span>weeknight dinners</span>{' '}
@@ -79,22 +92,12 @@ const RecipesList = () => {
                 placeholder='Enter dishes'
                 afterSlot={
                   <Button>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M13 11H12.21L11.93 10.73C12.91 9.59 13.5 8.11 13.5 6.5C13.5 2.91 10.59 0 7 0C3.41 0 0.5 2.91 0.5 6.5C0.5 10.09 3.41 13 7 13C8.61 13 10.09 12.41 11.23 11.43L11.5 11.71V12.5L16.5 17.49L17.99 16L13 11ZM7 11C4.51 11 2.5 8.99 2.5 6.5C2.5 4.01 4.51 2 7 2C9.49 2 11.5 4.01 11.5 6.5C11.5 8.99 9.49 11 7 11Z"
-                        fill="white"
-                      />
-                    </svg>
+                   <Search />
                   </Button>
                 }
               />
               <MultiDropdown 
-                options={[
-                  {key: 'breakfast', value: 'Breakfast'}, 
-                  {key: 'lunch', value: 'Lunch'}, 
-                  {key: 'dinner', value: 'Dinner'}, 
-                  {key: 'dessert', value: 'Dessert'}
-                ]} 
+                options={Consts.options}
                 value={selectedCategories} 
                 onChange={setSelectedCategories} 
                 getTitle={(selected) => selected.length ? selected.map(s => s.value).join(', ') : 'Categories'} 
@@ -114,10 +117,12 @@ const RecipesList = () => {
                 />
               ))}
             </div>
-            {renderPagination()}
+            {renderPagination}
           </div>
         </div>
-      </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

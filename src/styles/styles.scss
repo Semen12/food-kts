@@ -1,5 +1,6 @@
-@use 'reset.scss' as *;
-@use 'fonts.scss' as *;
+@use '_fonts.scss' as *;
+@use '_reset.scss' as *;
+@use '_mixin.scss' as *;
 $loader-bg: #b5460f;
 $button-primary-bg: #b5460f;
 $button-primary-text: #fff;

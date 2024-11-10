@@ -1,10 +1,8 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Header from 'components/Header';
-import RecipeDetails from './pages/RecipeDetails';
-import RecipesList from './pages/RecipesList';
-
-import 'styles/reset.scss';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import RecipeDetails from './pages/RecipeDetails/RecipeDetails';
+import RecipesList from './pages/RecipesList/RecipesList';
+import Header from '@components/Header/Header';
 
 function App() {
   return (
@@ -14,7 +12,7 @@ function App() {
         <Route path="/" element={<RecipesList />} />
         <Route path="/recipes" element={<RecipesList />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="*" element={<RecipesList />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );

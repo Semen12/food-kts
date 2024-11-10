@@ -21,15 +21,13 @@ export type TextProps = {
 
 const Text: React.FC<TextProps> = ({className='', view, tag: Tag = 'div', weight, children, color, maxLines}) => {
     
-    const classes = [
+    const classes = classNames(
         styles['text'],
-        view ? styles[`text-${view}`] : '',
-        weight ? styles[`text-weight-${weight}`] : '',
-        color ? styles[`text-color-${color}`] : '',
+        view && styles[`text-${view}`],
+        weight && styles[`text-weight-${weight}`],
+        color && styles[`text-color-${color}`],
         className,
-      ]
-        .filter(Boolean)
-        .join(' ');
+      )
         const style: React.CSSProperties = maxLines
         ? {
             display: '-webkit-box',

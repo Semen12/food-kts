@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
 
 import Input from '../Input';
@@ -76,11 +76,14 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     onChange(newValue);
   };
 
-  const filteredOptions = filter
-    ? options.filter((option) =>
-        option.value.toLowerCase().includes(filter.toLowerCase())
-      )
-    : options;
+  const filteredOptions = useMemo(() => 
+    filter
+      ? options.filter((option) =>
+          option.value.toLowerCase().includes(filter.toLowerCase())
+        )
+      : options,
+    [filter, options]
+  );
 
   const rootClass = classNames(styles.root, className);
 

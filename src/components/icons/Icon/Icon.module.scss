@@ -1,37 +1,14 @@
+
 .icon {
   &_primary {
-    path {
-      fill: var(--primary-color);
-      stroke: var(--primary-color);
-      
-      &:first-child {
-        fill: none;
-        stroke: var(--primary-color);
-      }
-    }
+    @include icon-color('primary');
   }
 
   &_secondary {
-    path {
-      fill: var(--secondary-color);
-      stroke: var(--secondary-color);
-      
-      &:first-child {
-        fill: none;
-        stroke: var(--secondary-color);
-      }
-    }
+    @include icon-color('secondary');
   }
 
   &_accent {
-    path {
-      fill: var(--accent-color);
-      stroke: var(--accent-color);
-      
-      &:first-child {
-        fill: none;
-        stroke: var(--accent-color);
-      }
-    }
+    @include icon-color('accent');
   }
 } 

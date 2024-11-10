@@ -23,15 +23,17 @@
     "baseUrl": "./src",
 
     "paths": {
-      "components/*": ["components/*"],
-      "assets/*": ["assets/*"],
-      "utils/*": ["utils/*"],
-      "services/*": ["services/*"],
-      "styles/*": ["styles/*"],
-      "types/*": ["types/*"],
-      "config/*": ["config/*"]
+      "@components/*": ["components/*"],
+      "@assets/*": ["assets/*"],
+      "@utils/*": ["utils/*"],
+      "@services/*": ["services/*"],
+      "@styles/*": ["styles/*"],
+      "@types/*": ["types/*"],
+      "@config/*": ["config/*"],
+      "@pages/*": ["pages/*"] // добавьте это, если используете @pages
     }
   },
-  "include": ["src", ".eslintrx.cjs"],
+  "include": ["src", ".eslintrc.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+

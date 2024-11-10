@@ -25,7 +25,7 @@ export const getRecipes = async (page: number = 1, pageSize: number = 9) => {
 
 export const getRecipeById = async (id: number) => {
   try {
-    const { data} = await axiosInstance.get(`/recipes/${id}/information`, {
+    const { data } = await axiosInstance.get(`/recipes/${id}/information`, {
       params: {
         apiKey: import.meta.env.VITE_API_KEY
       }

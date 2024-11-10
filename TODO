@@ -1,0 +1,39 @@
+kurakinasv3 days ago
+[] если стили типографики будут повторяться или использоваться часто, можно вынести их в отдельные миксины, например, font-primary-s18. как вариант, в качестве аргументов можно передавать line-height / weight
+font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+
+  [] нужно вынести в миксин и в качестве аргумента передавать количество строк
+   display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Ограничение на количество строк */
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    inputValue);
+    setIsOpen(true);
+  };
+
+
+[+] для улучшения читаемости лучше вынести в отдельный компонент (можно в пределах текущего, только нужно будет обернуть в useMemo)
+  ? filteredOptions.map((option) => {
+                const isSelected = value.some(
+                  (selected) => selected.key === option.key
+                );
+
+                const optionClassname = classNames(styles.option, {
+                  [styles.selected]: isSelected,
+                });
+
+                return (
+                  <div
+                    key={option.key}
+                    className={optionClassname}
+                    onClick={() => handleSelection(option)}
+                  >
+                    {option.value}
+                  </div>
+                );
+              })
