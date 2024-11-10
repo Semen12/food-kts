@@ -1,10 +1,10 @@
+import classnames from 'classnames';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Like from '@assets/like.svg?react';
 import Logo from '@assets/logo.svg?react';
 import User from '@assets/user.svg?react';
-import classnames from 'classnames';
 // eslint-disable-next-line import/default
-import React from 'react';
-import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 const Header = () => {

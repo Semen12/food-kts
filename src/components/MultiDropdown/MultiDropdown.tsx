@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';

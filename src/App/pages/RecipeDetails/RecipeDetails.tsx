@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
-import { getRecipeById } from '@services/recipesService';
-import styles from './RecipeDetails.module.scss';
-import { RecipeDetails as RecipeDetailsType } from '@types/recipe';
 import ArrowRound from '@assets/arrow-round.svg?react';
+import { getRecipeById } from '@services/recipesService';
+import { RecipeDetails as RecipeDetailsType } from '@types/recipe';
+import styles from './RecipeDetails.module.scss';
 const RecipeDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [recipe, setRecipe] = useState<RecipeDetailsType | null>(null);
