@@ -1,0 +1,14 @@
+@use '@styles/mixin.scss' as *;
+.icon {
+  &_primary {
+    @include icon-color('primary');
+  }
+
+  &_secondary {
+    @include icon-color('secondary');
+  }
+
+  &_accent {
+    @include icon-color('accent');
+  }
+} 

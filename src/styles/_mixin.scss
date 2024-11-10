@@ -1,0 +1,11 @@
+@mixin icon-color($color) {
+  path {
+    fill: var(--#{$color}-color);
+    stroke: var(--#{$color}-color);
+    
+    &:first-child {
+      fill: none;
+      stroke: var(--#{$color}-color);
+    }
+  }
+}

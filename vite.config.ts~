@@ -1,0 +1,30 @@
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { defineConfig } from 'vite';
+import svgr from "vite-plugin-svgr";
+
+export default defineConfig({
+  plugins: [react(), svgr()],
+  resolve: {
+    alias: {
+      '@' : path.resolve(__dirname, 'src'),
+      components: '@/components',
+      assets: '@/assets',
+      utils: '@/utils',
+      services: '@/services',
+      styles: '@/styles',
+      types: '@/types',
+      config: '@/config',
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        includePaths: [path.resolve(__dirname, 'src/styles')],
+      },
+    },
+  },
+  server: {
+    port: 3000,
+  },
+});

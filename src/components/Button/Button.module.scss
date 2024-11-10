@@ -1,0 +1,76 @@
+
+.button {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
+  color: $white-color;
+  border: none;
+  min-height: 52px;
+  padding: $space-s $space-l;
+  gap: $space-xxs;
+  background-color: $brand;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+  /* Add transition for smooth hover effect */
+
+  &:hover {
+    background-color: $brand-hover;
+  }
+
+  &:disabled {
+    background-color: $brand-disabled-color;
+    cursor: not-allowed;
+    /* Change cursor for disabled state */
+  }
+
+  &:active {
+    background-color: $brand-active;
+  }
+
+  &--loading {
+    background-color: $brand;
+    /* Ensure the background remains the same during loading */
+    color: $white-color;
+    padding: $space-s $space-l;
+    /* Ensure padding remains consistent */
+    gap: $space-xxs;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    /* Prevent any interaction when loading */
+  }
+
+
+  &:hover {
+    background-color: $brand-hover;
+  }
+
+  &:disabled {
+    background-color: $brand-disabled-color;
+    cursor: not-allowed;
+    /* Change cursor for disabled state */
+  }
+
+  &:active {
+    background-color: $brand-active;
+  }
+
+  &--loading {
+    background-color: $brand;
+    /* Ensure the background remains the same during loading */
+    color: $white-color;
+    padding: $space-s $space-l;
+    /* Ensure padding remains consistent */
+    gap: $space-xxs;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    /* Prevent any interaction when loading */
+  }
+}

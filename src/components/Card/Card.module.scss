@@ -1,0 +1,80 @@
+
+
+.card {
+  
+  width: 360px;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  &__imageContainer {
+    width: 360px;
+    height: 360px;
+    background-color: $button-primary-text;
+
+    .card__image {
+      width: 360px;
+      height: 360px;
+      object-fit: cover;
+    }
+
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: $space-xl $space-xs;
+    background-color: $white-color;
+    flex: 1;
+  }
+
+  &__content {
+    margin-bottom: -$space-l;
+
+    &_caption {
+      margin-bottom: $space-xxs;
+      img{
+        margin-right: $space-xxs;
+      }
+    }
+
+    &_title {
+      margin-bottom: $space-xxs;
+    }
+
+    &_subtitle {
+      margin-bottom: $space-l;
+    }
+  }
+
+  &__actions {
+    margin-top: $space-l;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__action {
+    button{
+        font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: $button-primary-text;
+
+    border-radius: 10px;
+    border: 10px;
+    width: 79px;
+    height: 52px;
+    min-height: 52px;
+    }
+  
+  }
+
+}

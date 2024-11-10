@@ -1,0 +1,38 @@
+
+
+.root {
+  font-family: $font-family;
+  width: 370px;
+  display: flex;
+  
+  gap: $space-xs;
+  position: relative;
+
+}
+
+.options {
+  background-color: $white-color;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  padding-bottom: 8px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border-radius: 10px;
+  z-index: 3;
+  
+
+}
+
+.option {
+  padding: $space-s $space-xs;
+  cursor: pointer;
+
+  &:hover {
+    color: $secondary-color;
+  }
+
+  &.selected {
+    color: $brand;
+  }
+} 
