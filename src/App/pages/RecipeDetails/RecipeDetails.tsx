@@ -1,35 +1,36 @@
-import { useEffect, useState } from 'react';
+import { observer, useLocalStore } from 'mobx-react-lite';
+import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import ArrowRound from '@assets/arrow-round.svg?react';
-import { getRecipeById } from '@services/recipesService';
-import { RecipeDetails as RecipeDetailsType } from '@types/recipe';
+import Loader from '@components/Loader';
+import RecipeDetailsStore from '@store/RecipeDetailsStore/RecipeDetailsStore';
+import { Meta } from '@store/types';
 import styles from './RecipeDetails.module.scss';
-const RecipeDetails = () => {
+import React from 'react';
+
+const RecipeDetails = observer(() => {
   const { id } = useParams<{ id: string }>();
-  const [recipe, setRecipe] = useState<RecipeDetailsType | null>(null);
-  /*  const [recipe, setRecipe] = useState<IRawSingleRecipeData>(getTestRecipe()); */
-  const [loading, setLoading] = useState(true);
+  const recipeStore = useLocalStore(() => new RecipeDetailsStore());
 
   useEffect(() => {
-    const fetchRecipe = async () => {
-      const data = await getRecipeById(Number(id));
-      if (data) {
-        setRecipe(data);
-      }
-      setLoading(false);
-    };
+    if (id) {
+      recipeStore.getRecipeDetails(Number(id));
+    }
+  }, [id, recipeStore]);
 
-    fetchRecipe();
-  }, [id]);
+  if (recipeStore.meta === Meta.loading) {
+    return <div className={styles.loader}><Loader size='l' /></div>;
+  }
 
-  /*  useEffect(() => {
-        setRecipe(getTestRecipe());
-        setLoading(false);
-      }, [id] );*/
+  if (recipeStore.meta === Meta.error || !recipeStore.recipe) {
+    return <div>Рецепт не найден</div>;
+  }
 
-  if (loading) return <div>Загрузка...</div>;
-  if (!recipe) return <div>Рецепт не найден</div>;
+  const recipe = recipeStore.recipe;
+  console.log(recipe.nutrition);
   return (
+    <React.Fragment> 
+      
     <div className={styles.recipe}>
       <div className={styles.recipe__container}>
         <div className={styles.recipe__top}>
@@ -93,9 +94,10 @@ const RecipeDetails = () => {
             ))}
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
-};
+});
 
 export default RecipeDetails;

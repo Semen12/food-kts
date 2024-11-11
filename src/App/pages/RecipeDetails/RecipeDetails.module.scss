@@ -1,4 +1,18 @@
-
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 65px);
+  width: 100%;
+  overflow: hidden;
+  svg{
+      animation: spin 1s linear infinite;
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 .recipe {
   background: rgba(255, 192, 118, 0.23);
