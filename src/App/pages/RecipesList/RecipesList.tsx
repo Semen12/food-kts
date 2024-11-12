@@ -46,11 +46,7 @@ const RecipesList = observer(() => {
     );
   }, [currentPage]);
 
-  const handleCardClick = (recipeId: number) => {
-    runInAction(() => {
-      navigate(`/recipe/${recipeId}`);
-    });
-  };
+ 
 
   return (
     <React.Fragment>
@@ -89,7 +85,7 @@ const RecipesList = observer(() => {
                   title={recipe.title}
                   subtitle={recipe.nutrition?.ingredients?.map(i => i.name).join(' + ') || 'No ingredients'}
                   contentSlot={`${Math.round(recipe.nutrition?.nutrients[0]?.amount ?? 0)} kcal`}
-                  onClick={() => handleCardClick(recipe.id)}
+                  onClick={() => navigate(`/recipe/${recipe.id}`)}
                   actionSlot={<Button onClick={(e) => e.stopPropagation()}>Save</Button>}
                 />
               ))}

@@ -19,7 +19,6 @@ class RecipeDetailsStore {
       getRecipeDetails: action
     });
   }
-
   get recipe(): RecipeDetails | null {
     return this._recipe;
   }
@@ -32,6 +31,7 @@ class RecipeDetailsStore {
     this._meta = Meta.loading;
     try {
       const response = await getRecipeById(id);
+      console.log(response.data);
       runInAction(() => {
         if (response) {
           this._recipe = response;
