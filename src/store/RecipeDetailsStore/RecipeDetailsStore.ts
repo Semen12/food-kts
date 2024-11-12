@@ -1,13 +1,13 @@
 import { makeObservable, observable, computed, action, runInAction } from 'mobx';
 import { getRecipeById } from '@services/recipesService';
 import  IRecipeDetail  from '@store/types';
-import { RecipeDetails } from '@types/recipe';
+import { Recipe, RecipeDetails } from '@types/recipe';
 import { Meta } from '../types';
 
 type PrivateFields = '_recipe' | '_meta';
 
 class RecipeDetailsStore {
-  private _recipe: RecipeDetails | null = null;
+  private _recipe: RecipeDetails & Recipe = null;
   private _meta: Meta = Meta.initial;
 
   constructor() {
@@ -19,7 +19,7 @@ class RecipeDetailsStore {
       getRecipeDetails: action
     });
   }
-  get recipe(): RecipeDetails | null {
+  get recipe(): RecipeDetails & Recipe | null {
     return this._recipe;
   }
 
@@ -31,7 +31,7 @@ class RecipeDetailsStore {
     this._meta = Meta.loading;
     try {
       const response = await getRecipeById(id);
-      console.log(response.data);
+      console.log(response);
       runInAction(() => {
         if (response) {
           this._recipe = response;

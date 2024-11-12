@@ -21,7 +21,6 @@ export type Recipe = {
 };
 
 export type RecipeDetails = {
- 
   id: number;
   title: string;
   image: string;

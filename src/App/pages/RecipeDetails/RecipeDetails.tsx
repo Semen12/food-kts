@@ -24,7 +24,7 @@ const RecipeDetails = observer(() => {
     return <div>Рецепт не найден</div>;
   }
 
-  console.log(recipeDetailsStore.recipe.analyzedInstructions[0]?.steps[0].ingredients[0].name);
+  console.log(recipeDetailsStore.recipe.nutrition?.ingredients[0].name);
   return (
     <React.Fragment> 
       {recipeDetailsStore.meta === Meta.loading && <div className={styles.loader}><Loader size='l' /></div>}
