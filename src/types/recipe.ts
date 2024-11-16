@@ -48,6 +48,11 @@ export type RecipeDetails = {
       }>;
     }>;
   }>;
+  extendedIngredients: Array<{
+    name: string;
+    amount: number;
+    unit: string;
+  }>;
 };
 
 export type RecipesResponse = {
@@ -56,3 +61,15 @@ export type RecipesResponse = {
   number: number;
   totalResults: number;
 }; 
+
+export interface GetRecipesParams {
+  page?: number;
+  pageSize?: number;
+  query?: string;
+  type?: string[];
+}
+
+
+export interface GetRecipeById {
+  id: number;
+}

@@ -1,15 +1,19 @@
-import axiosInstance from '../config/axios';
-import { RecipesResponse } from '../types/recipe';
+import axiosInstance from '@config/axios';
+import { GetRecipesParams } from '@types/recipe';
 
-export const getRecipes = async (page: number = 1, pageSize: number = 9) => {
+
+
+export const getRecipes = async ({ page = 1, pageSize = 9, query, type }: GetRecipesParams = {}) => {
   const offset = (page - 1) * pageSize;
   
   try {
-    const { data } = await axiosInstance.get<RecipesResponse>('/recipes/complexSearch', {
+    const { data } = await axiosInstance.get<GetRecipesParams>('/recipes/complexSearch', {
       params: {
         apiKey: import.meta.env.VITE_API_KEY,
         offset,
         number: pageSize,
+        query,
+        type: type?.join(','),
         addRecipeNutrition: true,
         addRecipeInformation: true,
         instructionsRequired: true
@@ -19,11 +23,10 @@ export const getRecipes = async (page: number = 1, pageSize: number = 9) => {
     return data;
   } catch (error) {
     console.error('Error fetching recipes:', error);
-  
   }
 };
 
-export const getRecipeById = async (id: number) => {
+export const getRecipeById = async (id:number) => {
   try {
     const { data } = await axiosInstance.get(`/recipes/${id}/information`, {
       params: {

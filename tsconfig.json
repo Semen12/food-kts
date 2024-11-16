@@ -30,7 +30,8 @@
       "@styles/*": ["styles/*"],
       "@types/*": ["types/*"],
       "@config/*": ["config/*"],
-      "@pages/*": ["pages/*"] 
+      "@pages/*": ["pages/*"],
+      "@store/*": ["store/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],
