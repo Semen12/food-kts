@@ -1,6 +1,7 @@
+import { AxiosResponse } from 'axios';
 import { makeObservable, observable, computed, action, runInAction } from 'mobx';
-import { Recipe } from '@types/recipe';
 import { getRecipes } from '@services/recipesService';
+import { Recipe } from '@types/recipe';
 
 import { Meta, IRecipesStore } from '../types';
 
@@ -9,7 +10,7 @@ type PrivateFields = '_recipes' | '_meta' | '_searchQuery';
 interface GetRecipesParams {
   page: number;
   query?: string;
-  types?: string[];
+  type?: string[];
 }
 
 class RecipesStore  {
@@ -26,7 +27,7 @@ class RecipesStore  {
       recipes: computed,
       meta: computed,
       searchQuery: computed,
-      setSearchQuery: action,
+      
       getRecipesList: action
     });
   }
@@ -46,27 +47,24 @@ class RecipesStore  {
     return this._searchQuery;
   }
 
-  setSearchQuery(query: string) {
-    this._searchQuery = query;
-  }
+ 
 
   async getRecipesList(params: GetRecipesParams): Promise<void> {
+    if (this._meta === Meta.loading) {
+      return;
+    }
     this._meta = Meta.loading;
-    try {
-      const response = await getRecipes(params);
+
+      const response= await getRecipes(params);
       runInAction(() => {
         if (response?.results) {
           this._recipes = response.results;
           this._meta = Meta.success;
+        } else {
+          this._meta = Meta.error;
         }
-      });
-    } catch (error) {
-      runInAction(() => {
-        this._meta = Meta.error;
-      });
-    }
+    });
   }
-
 }
 
 export default RecipesStore;

@@ -1,25 +1,19 @@
 import axiosInstance from '@config/axios';
-import { IRawRecipesResponse } from '@utils/types';
+import { GetRecipesParams } from '@types/recipe';
 
 
-interface GetRecipesParams {
-  page?: number;
-  pageSize?: number;
-  query?: string;
-  types?: string[];
-}
 
-export const getRecipes = async ({ page = 1, pageSize = 9, query, types }: GetRecipesParams = {}) => {
+export const getRecipes = async ({ page = 1, pageSize = 9, query, type }: GetRecipesParams = {}) => {
   const offset = (page - 1) * pageSize;
   
   try {
-    const { data } = await axiosInstance.get<GetRecipesParams & IRawRecipesResponse>('/recipes/complexSearch', {
+    const { data } = await axiosInstance.get<GetRecipesParams>('/recipes/complexSearch', {
       params: {
         apiKey: import.meta.env.VITE_API_KEY,
         offset,
         number: pageSize,
         query,
-        types: types?.join(','),
+        type: type?.join(','),
         addRecipeNutrition: true,
         addRecipeInformation: true,
         instructionsRequired: true
@@ -32,7 +26,7 @@ export const getRecipes = async ({ page = 1, pageSize = 9, query, types }: GetRe
   }
 };
 
-export const getRecipeById = async (id: number) => {
+export const getRecipeById = async (id:number) => {
   try {
     const { data } = await axiosInstance.get(`/recipes/${id}/information`, {
       params: {

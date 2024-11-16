@@ -1,8 +1,8 @@
 import { makeObservable, observable, computed, action, runInAction } from 'mobx';
 import { getRecipeById } from '@services/recipesService';
-import  IRecipeDetail  from '@store/types';
+import { Meta } from '@store/types';
 import { Recipe, RecipeDetails } from '@types/recipe';
-import { Meta } from '../types';
+
 
 type PrivateFields = '_recipe' | '_meta';
 
@@ -19,7 +19,7 @@ class RecipeDetailsStore {
       getRecipeDetails: action
     });
   }
-  get recipe(): RecipeDetails & Recipe | null {
+  get recipe(): RecipeDetails & Recipe  {
     return this._recipe;
   }
 
@@ -28,22 +28,20 @@ class RecipeDetailsStore {
   }
 
   async getRecipeDetails(id: number): Promise<void> {
-    this._meta = Meta.loading;
-    try {
-      const response = await getRecipeById(id);
-      console.log(response);
-      runInAction(() => {
-        if (response) {
-          this._recipe = response;
-          this._meta = Meta.success;
-        }
-      });
-    } catch (error) {
-      runInAction(() => {
-        this._meta = Meta.error;
-      });
-      console.error('Ошибка при загрузке рецепта:', error);
+    if (this._meta === Meta.loading) {
+      return;
     }
+    this._meta = Meta.loading;
+    const response = await getRecipeById(id);
+    console.log(response);
+    runInAction(() => {
+      if (response) {
+        this._recipe = response;
+        this._meta = Meta.success;
+      } else {
+        this._meta = Meta.error;
+      }
+    });
   }
 }
 

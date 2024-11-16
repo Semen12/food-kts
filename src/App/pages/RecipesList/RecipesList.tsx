@@ -1,66 +1,69 @@
-import { observer, useLocalStore } from 'mobx-react-lite';
-import { useEffect, useState, useMemo } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { runInAction } from 'mobx';
-
-import RecipesStore from '@store/RecipesStore/RecipesStore';
-import Loader from '@components/Loader';
 import classNames from 'classnames';
+import { observer, useLocalStore } from 'mobx-react-lite';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+
 import clock from '@assets/clock.svg';
 import Search from '@assets/search.svg?react';
 import Button from '@components/Button';
 import Card from '@components/Card';
 import Input from '@components/Input';
+import Loader from '@components/Loader';
 import MultiDropdown from '@components/MultiDropdown';
-import Consts from '@config/consts';
+import RecipesStore from '@store/RecipesStore/RecipesStore';
 import { Meta } from '@store/types';
-import styles from './RecipesList.module.scss';
-import React from 'react';
+import LoaderContainer from '../components/LoaderContainer/LoaderContainer';
 import  {MEAL_TYPES}  from './types';
+import { getRecipeSubtitle, getRecipeKcal } from '@utils/recipe';
+import styles from './RecipesList.module.scss';
+
 
 
 const RecipesList = observer(() => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const recipesStore = useLocalStore(() => new RecipesStore());
   
-  const [searchValue, setSearchValue] = useState(() => 
-    searchParams.get('search') || ''
-  );
+  const [searchInputValue, setSearchInputValue] = useState('');
+  const [appliedSearchValue, setAppliedSearchValue] = useState('');
   const [currentPage, setCurrentPage] = useState(() => 
     Number(searchParams.get('page')) || 1
   );
   const [selectedTypes, setSelectedTypes] = useState<Option[]>(() => {
-    const types = searchParams.get('types');
+    const types = searchParams.get('type');
     return types 
       ? types.split(',').map(type => ({
           key: type,
           value: type
         }))
       : [];
+
   });
 
-  useEffect(() => {
+  const [isListLoading, setIsListLoading] = useState(false);
+
+ 
+
+  useEffect(() => {  
+    setIsListLoading(true);
+    recipesStore.getRecipesList({
+      page: currentPage,
+      query: appliedSearchValue,
+      type: selectedTypes.map(type => type.value)
+    }).finally(() => {
+      setIsListLoading(false);
+    });
     setSearchParams({
       page: currentPage.toString(),
-      search: searchValue,
-      types: selectedTypes.map(type => type.value).join(',')
+      search: appliedSearchValue,
+      type: selectedTypes.map(type => type.value).join(',')
     });
-  }, [currentPage, searchValue, selectedTypes]);
+  }, [currentPage, selectedTypes, recipesStore, appliedSearchValue]);
 
-  useEffect(() => {
-    recipesStore.getRecipesList({
-      page: currentPage,
-      query: searchValue,
-      types: selectedTypes.map(type => type.value)
-    });
-  }, [currentPage, searchValue, selectedTypes]);
+
 
   const handleSearch = () => {
-    recipesStore.getRecipesList({
-      page: currentPage,
-      query: searchValue,
-      types: selectedTypes.map(type => type.value)
-    });
+    setAppliedSearchValue(searchInputValue);
   };
 
   const renderPagination = useMemo(() => {
@@ -83,12 +86,15 @@ const RecipesList = observer(() => {
 
   return (
     <React.Fragment>
-      {recipesStore.meta === Meta.loading && (
-        <div className={styles.loader}>
-          <Loader size="l" />
-        </div>
+      {recipesStore.meta === Meta.loading && recipesStore.recipes.length === 0 && (
+        <LoaderContainer />
       )}
-      {recipesStore.meta === Meta.success && (
+       {recipesStore.meta === Meta.error && recipesStore.recipes.length === 0 && (
+        <div className={styles.recipes__content__error}>
+          <p>Error loading recipes</p>
+        </div>  
+      )}
+      {(recipesStore.meta === Meta.success || recipesStore.recipes.length > 0) && (
         <React.Fragment>
           <div className={styles.banner}></div>
           <div className={styles.recipes}>
@@ -101,8 +107,8 @@ const RecipesList = observer(() => {
                 <div className={styles.recipes__content__search}>
                   <Input
                     className={styles.recipes__content__search__input}
-                    value={searchValue}
-                    onChange={setSearchValue}
+                    value={searchInputValue}
+                    onChange={setSearchInputValue}
                     placeholder='Enter dishes'
                     afterSlot={<Button onClick={handleSearch}><Search /></Button>}
                   />
@@ -115,25 +121,30 @@ const RecipesList = observer(() => {
                     }
                   />
                 </div>
-                <div className={styles.recipes__content__grid}>
-                  {recipesStore.recipes.map((recipe) => (
-                    <Card
-                      key={recipe.id}
-                      image={recipe.image}
-                      captionSlot={
-                        <>
-                          <img src={clock} alt="clock" />
-                          {`${recipe.readyInMinutes ?? 0} minutes`}
-                        </>
-                      }
-                      title={recipe.title}
-                      subtitle={recipe.nutrition?.ingredients?.map((i) => i.name).join(' + ') || 'No ingredients'}
-                      contentSlot={`${Math.round(recipe.nutrition?.nutrients[0]?.amount ?? 0)} kcal`}
-                      onClick={() => navigate(`/recipe/${recipe.id}`)}
-                      actionSlot={<Button onClick={(e) => e.stopPropagation()}>Save</Button>}
-                    />
-                  ))}
-                </div>
+               
+                {isListLoading ? (
+                  <LoaderContainer />
+                ) : (
+                  <div className={styles.recipes__content__grid}>
+                    {recipesStore.recipes.map((recipe) => (
+                      <Card
+                        key={recipe.id}
+                        image={recipe.image}
+                        captionSlot={
+                          <>
+                            <img src={clock} alt="clock" />
+                            {`${recipe.readyInMinutes ?? 0} minutes`}
+                          </>
+                        }
+                        title={recipe.title}
+                        subtitle={getRecipeSubtitle(recipe)}
+                        contentSlot={getRecipeKcal(recipe)}
+                        onClick={() => navigate(`/recipe/${recipe.id}`)}
+                        actionSlot={<Button onClick={(e) => e.stopPropagation()}>Save</Button>}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
               {renderPagination}
             </div>

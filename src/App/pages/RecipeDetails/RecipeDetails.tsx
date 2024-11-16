@@ -7,6 +7,7 @@ import RecipeDetailsStore from '@store/RecipeDetailsStore/RecipeDetailsStore';
 import { Meta } from '@store/types';
 import styles from './RecipeDetails.module.scss';
 import React from 'react';
+import LoaderContainer  from '../components/LoaderContainer/LoaderContainer';
 
 const RecipeDetails = observer(() => {
   const { id } = useParams<{ id: string }>();
@@ -20,20 +21,16 @@ const RecipeDetails = observer(() => {
 
  
 
-  if (recipeDetailsStore.meta === Meta.error || !recipeDetailsStore.recipe) {
-    return <div>Рецепт не найден</div>;
-  }
-
-  console.log(recipeDetailsStore.recipe.nutrition?.ingredients[0].name);
+ /*  console.log(recipeDetailsStore.recipe.nutrition?.ingredients[0].name); */
   return (
     <React.Fragment> 
-      {recipeDetailsStore.meta === Meta.loading && <div className={styles.loader}><Loader size='l' /></div>}
+      {recipeDetailsStore.meta === Meta.loading && <LoaderContainer />}
       {recipeDetailsStore.meta === Meta.success && (
     <div className={styles.recipe}>
       <div className={styles.recipe__container}>
         <div className={styles.recipe__top}>
           <h1 className={styles.recipe__title}>
-            {recipeDetailsStore.recipe.title}{' '}
+            {recipeDetailsStore.recipe?.title}{' '}
             <NavLink to="/recipes">
               <ArrowRound />
             </NavLink>
@@ -67,9 +64,9 @@ const RecipeDetails = observer(() => {
           <div className={styles.recipe__section}>
             <h2>Ingredients</h2>
             <ul>
-              {recipeDetailsStore.recipe.nutrition?.ingredients.map((ingredient, index) => (
+              {recipeDetailsStore.recipe?.extendedIngredients?.map((ingredient: {name: string; amount: number; unit: string}, index: number) => (
                 <li key={index}>
-                  {ingredient.name} {ingredient.amount} {ingredient.unit}
+                   {ingredient.amount} {ingredient.unit} {ingredient.name}
                 </li>
               ))}
             </ul>
