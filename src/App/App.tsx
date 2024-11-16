@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from '@components/Header/Header';
+
 import RecipesList from './pages/RecipesList/RecipesList';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails';
-
 
 function App() {
   return (

@@ -75,7 +75,7 @@
   &__content {
     padding: $space-xxs;
 
-    &__search {
+    .search {
       // background: $primary-color;
       margin-bottom: $space-48;
       display: flex;
@@ -102,7 +102,7 @@
       }
     }
 
-    &__grid {
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
       gap: $space-xl;

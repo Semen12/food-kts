@@ -5,18 +5,26 @@
   min-height: calc(100vh - 65px);
   width: 100%;
   overflow: hidden;
-  svg{
-      animation: spin 1s linear infinite;
+
+  svg {
+    animation: spin 1s linear infinite;
   }
 }
+
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .recipe {
   background: rgba(255, 192, 118, 0.23);
   font-family: $font-family;
+
   &__container {
     max-width: 1200px;
     margin: 0 auto;
@@ -26,9 +34,9 @@
   &__top {
     display: grid;
     grid-template-areas:
-      'title title title'
-      'image info info'
-      'summary summary summary';
+      "title title title"
+      "image info info"
+      "summary summary summary";
   }
 
   &__title {
@@ -40,12 +48,12 @@
     margin-bottom: $space-36;
     padding-left: $space-16;
     position: relative;
-    img{
+
+    svg {
       position: absolute;
       left: 0;
       top: 50%;
       transform: translate(-50%, -50%);
-     
     }
   }
 
@@ -56,8 +64,6 @@
     height: 298px;
     object-fit: cover;
     width: 100%;
-
-
   }
 
   &__info {
@@ -107,8 +113,6 @@
         text-decoration: none;
       }
     }
-
-
   }
 
   &__necessity {
@@ -118,7 +122,6 @@
     margin-bottom: $space-48;
 
     h2 {
-     
       font-weight: 600;
       font-size: 20px;
       line-height: 120%;
@@ -129,75 +132,83 @@
     & .recipe__section {
       margin-bottom: $space-48;
 
-      ul{
+      ul {
         list-style: none;
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
         font-size: 16px;
         line-height: 125%;
+
         li {
           flex-basis: 48.8%;
           position: relative;
           padding-left: 35px;
         }
       }
-      &:first-child{
+      &-ingredients {
+
         li:before {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
-
           transform: translateY(-50%, -50%);
           width: 25px;
           height: 17px;
-          background: $brand;
 
-          background: url('assets/dish.svg') no-repeat center center / contain;
+          background:url("@assets/dish.svg") no-repeat center center / contain;
         }
-        
       }
-      &:last-child{
-        
+      &-equipment {
         li:before {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           top: 0;
-          
+
           width: 25px;
           height: 25px;
           background: $brand;
-          background: url('assets/object.svg') no-repeat center center / contain;
+          background: url("assets/object.svg") no-repeat center center / contain;
+          background: url("@assets/object.svg") no-repeat center center / contain;
+        }
+      }
+
+      &:last-child {
+        li:before {
+          
         }
       }
     }
   }
-  &__section-steps{
+
+  &__section-steps {
     margin-bottom: $space-16;
-    h2{
+
+    h2 {
       font-weight: 600;
       font-size: 20px;
       line-height: 120%;
       color: $text-primary;
       margin-bottom: $space-xl;
     }
+
     display: flex;
     flex-direction: column;
     gap: $space-16;
-    h3{
+
+    h3 {
       font-weight: 600;
 
       line-height: 125%;
       color: $text-primary;
       margin-bottom: $space-xxs;
     }
-    p{
+
+    p {
       font-size: 14px;
       line-height: 125%;
       color: $text-primary;
     }
   }
-
 }
-

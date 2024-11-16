@@ -7,6 +7,7 @@ import { Recipe, RecipeDetails } from '@types/recipe';
 type PrivateFields = '_recipe' | '_meta';
 
 class RecipeDetailsStore {
+  [x: string]: any;
   private _recipe: RecipeDetails & Recipe = null;
   private _meta: Meta = Meta.initial;
 
@@ -42,6 +43,10 @@ class RecipeDetailsStore {
         this._meta = Meta.error;
       }
     });
+  }
+
+  get steps() {
+    return this.recipe?.analyzedInstructions[0]?.steps || [];
   }
 }
 
