@@ -61,7 +61,8 @@ module.exports = {
           ['@styles', path.resolve(__dirname, 'src/styles')],
           ['@types', path.resolve(__dirname, 'src/types')],
           ['@config', path.resolve(__dirname, 'src/config')],
-          ['@pages', path.resolve(__dirname, 'src/pages')]
+          ['@pages', path.resolve(__dirname, 'src/pages')],
+          ['@store', path.resolve(__dirname, 'src/store')],
         ],
         extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.svg']
       },

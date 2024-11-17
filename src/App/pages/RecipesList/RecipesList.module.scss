@@ -1,112 +1,135 @@
-
-
 .loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 65px);
-    width: 100%;
-    overflow: hidden;
-    svg{
-        animation: spin 1s linear infinite;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 65px);
+  width: 100%;
+  overflow: hidden;
+
+  svg {
+    animation: spin 1s linear infinite;
+  }
 }
+
+.gridLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  svg {
+    animation: spin 1s linear infinite;
+  }
+
+  margin-bottom: $space-xl;
+}
+
+.recipes__content__error {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .banner {
-    background: url('@assets/bg.jpg') no-repeat center center / cover;
-    height: 572px;
+  background: url("@assets/bg.jpg") no-repeat center center / cover;
+  height: 572px;
 }
 
 .recipes {
-    background: rgba(255, 192, 118, 0.23);
-    padding-top: $space-36;
+  background: rgba(255, 192, 118, 0.23);
+  padding-top: $space-36;
 
-    &__container {
-        max-width: 1240px;
-        margin: 0 auto;
+  &__container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
 
+  &__title {
+    font-size: 20px;
+    line-height: 120%;
+    color: $text-primary;
+    text-align: center;
+
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
     }
 
-    &__title {
-        font-size: 20px;
-        line-height: 120%;
-        color: $text-primary;
-        text-align: center;
+    margin-bottom: $space-48;
+  }
 
-        span {
-            text-decoration: underline;
-            text-decoration-skip-ink: none;
+  &__content {
+    padding: $space-xxs;
+
+    .search {
+      // background: $primary-color;
+      margin-bottom: $space-48;
+      display: flex;
+      justify-content: flex-end;
+      gap: $space-l;
+      flex-wrap: wrap;
+
+      &__input {
+        position: relative;
+
+        input[type="text"] {
+          max-width: 1150px;
         }
 
-        margin-bottom: $space-48;
+        button[type="button"] {
+          width: 64px;
+          height: 52px;
+          border-radius: 10px;
+          padding: 14px 20px;
+          background: $brand;
+          position: absolute;
+          right: 0;
+        }
+      }
     }
 
-
-    &__content {
-        padding: $space-xxs;
-
-        &__search {
-            // background: $primary-color;
-            margin-bottom: $space-48;
-            display: flex;
-            justify-content: flex-end;
-            gap: $space-l;
-            flex-wrap: wrap;
-
-            &__input {
-                position: relative;
-                input[type="text"] {
-                    max-width: 1150px;
-                }
-
-                
-                    button[type="button"] {
-                        width: 64px;
-                        height: 52px;
-                        border-radius: 10px;
-                        padding: 14px 20px;
-                        background: $brand;
-                        position: absolute;
-                        right: 0;
-                       
-                    }
-                
-            }
-
-        }
-
-        &__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
-            gap: $space-xl;
-            justify-items: center;
-            margin-bottom: $space-xl;
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
+      gap: $space-xl;
+      justify-items: center;
+      margin-bottom: $space-xl;
     }
+  }
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
-    gap: $space-s;
+  display: flex;
+  justify-content: center;
+  gap: $space-s;
 }
 
 .pageButton {
-    padding: $space-xs $space-s;
-    border: 1px solid $primary-color;
-    background: none;
-    cursor: pointer;
+  padding: $space-xs $space-s;
+  border: 1px solid $primary-color;
+  background: none;
+  cursor: pointer;
 
-    &.active {
-        background: $primary-color;
-        color: $white-color;
-    }
+  &.active {
+    background: $primary-color;
+    color: $white-color;
+  }
 
-    &:hover {
-        background: $primary-color-40;
-    }
+  &:hover {
+    background: $primary-color-40;
+  }
 }
