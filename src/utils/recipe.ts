@@ -10,28 +10,28 @@ export const getRecipeSubtitle = (recipe: Recipe): string => {
 
   interface RecipeInfoItem {
     label: string;
-    value: string | null;
+    value: string;
   }
   
   export const getRecipeInfoItems = (recipe: any): RecipeInfoItem[] => [
     {
       label: 'Preparation',
-      value: recipe.preparationMinutes ? `${recipe.preparationMinutes} minutes` : null,
+      value: recipe.preparationMinutes ? `${recipe.preparationMinutes} minutes` : '',
     },
     {
       label: 'Cooking',
-      value: recipe.cookingMinutes ? `${recipe.cookingMinutes} minutes` : null,
+      value: recipe.cookingMinutes ? `${recipe.cookingMinutes} minutes` : '',
     },
     {
       label: 'Total',
-      value: recipe.readyInMinutes ? `${recipe.readyInMinutes} minutes` : null,
+      value: recipe.readyInMinutes ? `${recipe.readyInMinutes} minutes` : '',
     },
     {
       label: 'Ratings',
-      value: recipe.aggregateLikes ? `${recipe.aggregateLikes} likes` : null,
+      value: recipe.aggregateLikes ? `${recipe.aggregateLikes} likes` : '',
     },
     {
       label: 'Servings',
-      value: recipe.servings ? `${recipe.servings} servings` : null,
+      value: recipe.servings ? `${recipe.servings} servings` : '',
     },
   ];

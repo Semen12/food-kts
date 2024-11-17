@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from '../../RecipesList.module.scss';
 import { useNavigate } from 'react-router-dom';
 import clock from '@assets/clock.svg';
@@ -6,14 +6,11 @@ import Button from '@components/Button';
 import Card from '@components/Card';
 import { Recipe } from '@store/types';
 import { getRecipeSubtitle, getRecipeKcal } from '@utils/recipe';
-;
-
-
 interface CardGridProps {
   recipes: Recipe[];
 }
 
-const CardGrid: React.FC<CardGridProps> = ({ recipes }) => {
+const CardGrid: React.FC<CardGridProps> = memo(({ recipes }) => {
   const navigate = useNavigate();
 
   return (
@@ -37,6 +34,6 @@ const CardGrid: React.FC<CardGridProps> = ({ recipes }) => {
       ))}
     </div>
   );
-}; 
+});
 
 export default CardGrid;

@@ -24,6 +24,7 @@ class RecipesStore  {
       _recipes: observable,
       _meta: observable,
       _searchQuery: observable,
+
       recipes: computed,
       meta: computed,
       searchQuery: computed,

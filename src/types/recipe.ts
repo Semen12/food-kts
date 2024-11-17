@@ -73,3 +73,15 @@ export interface GetRecipesParams {
 export interface GetRecipeById {
   id: number;
 }
+
+interface Step {
+  number: number;
+  step: string;
+  equipment: Array<{ name: string }>;
+}
+
+interface Ingredient {
+  name: string;
+  amount: number;
+  unit: string;
+}

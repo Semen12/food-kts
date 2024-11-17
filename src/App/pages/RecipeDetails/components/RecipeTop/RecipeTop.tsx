@@ -1,7 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 import ArrowRound from '@assets/arrow-round.svg?react';
-import styles from '../../RecipeDetails.module.scss';
+import styles from './RecipeTop.module.scss';
+import parse from 'html-react-parser';
 
 interface RecipeTopProps {
   title: string;
@@ -18,17 +19,15 @@ export const RecipeTop = observer(({ title, image, summary, recipeInfo }: Recipe
     <img src={image} alt={title} className={styles.recipe__image} />
     <div className={styles.recipe__info}>
       {recipeInfo
-        .filter(item => item.value)
-        .map((item, index) => (
+        .map((item, index) => item.value ? (
           <div key={index} className={styles.recipe__infoItem}>
             <span>{item.label}</span>
             <span>{item.value}</span>
           </div>
-        ))}
+        ) : null)}
     </div>
-    <div 
-      className={styles.recipe__summary} 
-      dangerouslySetInnerHTML={{ __html: summary }} 
-    />
+    <div className={styles.recipe__summary}>
+      {parse(summary)}
+    </div>
   </div>
 )); 

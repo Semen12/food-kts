@@ -7,8 +7,8 @@ import { Recipe, RecipeDetails } from '@types/recipe';
 type PrivateFields = '_recipe' | '_meta';
 
 class RecipeDetailsStore {
-  [x: string]: any;
-  private _recipe: RecipeDetails & Recipe = null;
+ 
+  private _recipe: RecipeDetails & Recipe | null = null;
   private _meta: Meta = Meta.initial;
 
   constructor() {
@@ -17,10 +17,11 @@ class RecipeDetailsStore {
       _meta: observable,
       recipe: computed,
       meta: computed,
+      steps: computed,
       getRecipeDetails: action
     });
   }
-  get recipe(): RecipeDetails & Recipe  {
+  get recipe(): RecipeDetails & Recipe | null {
     return this._recipe;
   }
 

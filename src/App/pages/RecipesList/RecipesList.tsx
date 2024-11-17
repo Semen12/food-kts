@@ -3,10 +3,10 @@ import React from 'react';
 import styles from './RecipesList.module.scss';
 import RecipesStore from '@store/RecipesStore/RecipesStore';
 import { Meta } from '@store/types';
-import LoaderContainer from '../components/LoaderContainer/LoaderContainer';
-import CardGrid from './components/CardGrid/CardGrid';
-import Pagination from './components/Pagination/Pagination';
-import Search from './components/Search/index';
+import LoaderContainer from '../components/LoaderContainer';
+import CardGrid from './components/CardGrid';
+import Pagination from './components/Pagination';
+import Search from './components/Search';
 import { useSearch } from './hooks/useSearch';
 
 
@@ -64,7 +64,7 @@ const RecipesList = observer(() => {
               </div>
               <Pagination
                 currentPage={currentPage}
-                onPageChange={setCurrentPage}
+                onPageChange={setCurrentPage}                
               />
             </div>
           </div>

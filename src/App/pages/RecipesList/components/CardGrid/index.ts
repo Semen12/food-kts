@@ -1,1 +1,1 @@
-export { default } from './CardGrid.tsx';
+export { default } from './CardGrid';

@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 import RecipeDetailsStore from '@store/RecipeDetailsStore/RecipeDetailsStore';
 import { Meta } from '@store/types';
 import { getRecipeInfoItems } from '@utils/recipe';
-import LoaderContainer from '../components/LoaderContainer/LoaderContainer';
-import { RecipeTop } from './components/RecipeTop/RecipeTop';
-import { RecipeNecessity } from './components/RecipeNecessity/RecipeNecessity';
+import LoaderContainer from '../components/LoaderContainer';
+import { RecipeNecessity } from './components/RecipeNecessity';
+import { RecipeTop } from './components/Recipetop';
 import styles from './RecipeDetails.module.scss';
 
 const RecipeDetails = observer(() => {
@@ -29,10 +29,7 @@ const RecipeDetails = observer(() => {
               title={recipeDetailsStore.recipe.title}
               image={recipeDetailsStore.recipe.image}
               summary={recipeDetailsStore.recipe.summary}
-              recipeInfo={getRecipeInfoItems(recipeDetailsStore.recipe)?.map(item => ({
-                ...item,
-                value: item.value || ''
-              }))}
+              recipeInfo={getRecipeInfoItems(recipeDetailsStore.recipe)}
             />
             <RecipeNecessity
               ingredients={recipeDetailsStore.recipe.extendedIngredients}

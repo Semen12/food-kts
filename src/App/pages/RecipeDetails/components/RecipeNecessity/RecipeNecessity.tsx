@@ -1,18 +1,8 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import styles from '../../RecipeDetails.module.scss';
+import styles from './RecipeNecessity.module.scss';
+import { Ingredient, Step } from '@types/recipe';
 
-interface Step {
-  number: number;
-  step: string;
-  equipment: Array<{ name: string }>;
-}
-
-interface Ingredient {
-  name: string;
-  amount: number;
-  unit: string;
-}
 
 interface RecipeNecessityProps {
   ingredients: Ingredient[];
