@@ -10,11 +10,18 @@ interface UseSearchProps {
 export const useSearch = ({ recipesStore }: UseSearchProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   
-  const [searchInputValue, setSearchInputValue] = useState('');
-  const [appliedSearchValue, setAppliedSearchValue] = useState('');
+  const [searchInputValue, setSearchInputValue] = useState(() => 
+    searchParams.get('search') || ''
+  );
+  
+  const [appliedSearchValue, setAppliedSearchValue] = useState(() => 
+    searchParams.get('search') || ''
+  );
+  
   const [currentPage, setCurrentPage] = useState(() => 
     Number(searchParams.get('page')) || 1
   );
+  
   const [selectedTypes, setSelectedTypes] = useState<Option[]>(() => {
     const types = searchParams.get('type');
     return types 
@@ -24,6 +31,7 @@ export const useSearch = ({ recipesStore }: UseSearchProps) => {
         }))
       : [];
   });
+  
   const [isListLoading, setIsListLoading] = useState(false);
 
   useEffect(() => {  
@@ -35,11 +43,20 @@ export const useSearch = ({ recipesStore }: UseSearchProps) => {
     }).finally(() => {
       setIsListLoading(false);
     });
-    setSearchParams({
+    
+    const params: Record<string, string> = {
       page: currentPage.toString(),
-      search: appliedSearchValue,
-      type: selectedTypes.map(type => type.value).join(',')
-    });
+    };
+    
+    if (appliedSearchValue) {
+      params.search = appliedSearchValue;
+    }
+    
+    if (selectedTypes.length > 0) {
+      params.type = selectedTypes.map(type => type.value).join(',');
+    }
+    
+    setSearchParams(params);
   }, [currentPage, selectedTypes, recipesStore, appliedSearchValue]);
 
   return {
