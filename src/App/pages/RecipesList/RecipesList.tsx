@@ -64,7 +64,9 @@ const RecipesList = observer(() => {
               </div>
               <Pagination
                 currentPage={currentPage}
-                onPageChange={setCurrentPage}                
+                onPageChange={setCurrentPage}
+                totalResults={recipesStore.totalResults}
+                number={recipesStore.number}
               />
             </div>
           </div>

@@ -5,7 +5,7 @@ import { Recipe } from '@types/recipe';
 
 import { Meta, IRecipesStore } from '../types';
 
-type PrivateFields = '_recipes' | '_meta' | '_searchQuery';
+type PrivateFields = '_recipes' | '_meta' | '_searchQuery' | '_totalResults' | '_number';
 
 interface GetRecipesParams {
   page: number;
@@ -17,6 +17,8 @@ class RecipesStore  {
   private _recipes: Recipe[] = [];
   private _meta: Meta = Meta.initial;
   private _searchQuery: string = '';
+  private _totalResults: number = 0;
+  private _number: number = 9;
   
 
   constructor() {
@@ -24,10 +26,14 @@ class RecipesStore  {
       _recipes: observable,
       _meta: observable,
       _searchQuery: observable,
+      _totalResults: observable,
+      _number: observable,
 
       recipes: computed,
       meta: computed,
       searchQuery: computed,
+      totalResults: computed,
+      number: computed,
       
       getRecipesList: action
     });
@@ -48,6 +54,14 @@ class RecipesStore  {
     return this._searchQuery;
   }
 
+  get totalResults(): number {
+    return this._totalResults;
+  }
+
+  get number(): number {
+    return this._number;
+  }
+
  
 
   async getRecipesList(params: GetRecipesParams): Promise<void> {
@@ -60,6 +74,8 @@ class RecipesStore  {
       runInAction(() => {
         if (response?.results) {
           this._recipes = response.results;
+          this._totalResults = response.totalResults;
+          this._number = response.number;
           this._meta = Meta.success;
         } else {
           this._meta = Meta.error;
