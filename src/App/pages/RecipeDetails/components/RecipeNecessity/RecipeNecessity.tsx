@@ -23,16 +23,20 @@ export const RecipeNecessity = observer(({ ingredients, steps }: RecipeNecessity
       </ul>
     </div>
     <div className={styles.recipe__section}>
-      <h2>Equipment</h2>
-      <ul className={styles['recipe__section-equipment']}>
-        {steps
+      {steps.filter(step => step.equipment?.length > 0).length > 0 && (
+        <>
+          <h2>Equipment</h2>
+          <ul className={styles['recipe__section-equipment']}>
+            {steps
           .filter(step => step.equipment?.length > 0)
           .map((step) => (
             <li key={step.number}>
               {step.equipment.map((item) => item.name).join(', ')}
             </li>
-          ))}
-      </ul>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
     <div className={styles['recipe__section-steps']}>
       <h2>Directions</h2>
