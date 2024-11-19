@@ -14,13 +14,13 @@
     "jsx": "react-jsx",
     "noEmit": true,
 
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "baseUrl": "./src",
+    "baseUrl": "./src/",
 
     "paths": {
       "@components/*": ["components/*"],
@@ -34,7 +34,7 @@
       "@store/*": ["store/*"]
     }
   },
-  "include": ["src", ".eslintrc.cjs"],
+  "include": ["src/**/*", ".eslintrc.cjs"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
 

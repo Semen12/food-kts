@@ -9,7 +9,7 @@ export const getRecipes = async ({ page = 1, pageSize = 9, query, type }: GetRec
   try {
     const { data } = await axiosInstance.get<GetRecipesParams>('/recipes/complexSearch', {
       params: {
-        apiKey: import.meta.env.VITE_API_KEY,
+        apiKey:process.env.API_KEY,
         offset,
         number: pageSize,
         query,
@@ -30,7 +30,7 @@ export const getRecipeById = async (id:number) => {
   try {
     const { data } = await axiosInstance.get(`/recipes/${id}/information`, {
       params: {
-        apiKey: import.meta.env.VITE_API_KEY
+        apiKey: process.env.API_KEY
       }
     });
     return data;

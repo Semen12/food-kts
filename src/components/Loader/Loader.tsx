@@ -1,7 +1,7 @@
 import React from 'react';
-import LoaderL from './assets/Size=l.svg?react';
-import LoaderM from './assets/Size=m.svg?react';
-import LoaderS from './assets/Size=s.svg?react';
+import SizeL from './assets/SizeL.svg';
+import SizeM from './assets/SizeM.svg';
+import SizeS from './assets/SizeS.svg';
 
 export type LoaderProps = {
   size?: 's' | 'm' | 'l';
@@ -13,13 +13,13 @@ const Loader: React.FC<LoaderProps> = ({ size = 'l', className }) => {
   return (
     <>
       {size === 'l' && (
-        <LoaderL className={className}/>
+        <SizeL className={className}/>
       )}
       {size === 'm' && (
-       <LoaderM className={className}/>
+       <SizeM className={className}/>
       )}
       {size === 's' && (
-       <LoaderS className={className}/>
+       <SizeS className={className}/>
       )}
     </>
   );

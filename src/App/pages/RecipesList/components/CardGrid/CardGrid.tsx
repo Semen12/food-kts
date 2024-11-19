@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import styles from '../../RecipesList.module.scss';
 import { useNavigate } from 'react-router-dom';
-import clock from '@assets/clock.svg';
+import Clock from '@assets/clock.svg';
 import Button from '@components/Button';
 import Card from '@components/Card';
 import { Recipe } from '@store/types';
@@ -14,6 +14,7 @@ const CardGrid: React.FC<CardGridProps> = memo(({ recipes }) => {
   const navigate = useNavigate();
 
   return (
+    
     <div className={styles.grid}>
       {recipes.map((recipe) => (
         <Card
@@ -21,7 +22,7 @@ const CardGrid: React.FC<CardGridProps> = memo(({ recipes }) => {
           image={recipe.image}
           captionSlot={
             <>
-              <img src={clock} alt="clock" />
+              <Clock />
               {`${recipe.readyInMinutes ?? 0} minutes`}
             </>
           }
@@ -33,6 +34,7 @@ const CardGrid: React.FC<CardGridProps> = memo(({ recipes }) => {
         />
       ))}
     </div>
+    
   );
 });
 

@@ -1,7 +1,7 @@
-import React from 'react';
 import { observer } from 'mobx-react-lite';
-import styles from './RecipeNecessity.module.scss';
+import React from 'react';
 import { Ingredient, Step } from '@types/recipe';
+import styles from './RecipeNecessity.module.scss';
 
 
 interface RecipeNecessityProps {

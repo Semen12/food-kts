@@ -1,16 +1,15 @@
 import classnames from 'classnames';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Like from '@assets/like.svg?react';
-import Logo from '@assets/logo.svg?react';
-import User from '@assets/user.svg?react';
-// eslint-disable-next-line import/default
+import  Like from '@assets/like.svg';
+import Logo from '@assets/logo.svg';
+import User from '@assets/user.svg';
 import styles from './Header.module.scss';
 
 const Header = () => {
   return (
     <React.Fragment>
-      <header className={styles.header}>
+      <div className={styles.header}>
         <div className={styles.header__container}>
         <div className={styles.header__left}>
           <div className={styles.header__logo}>
@@ -59,14 +58,14 @@ const Header = () => {
 
         <div className={styles.header__buttons}>
           <button className={styles.header__button}>
-            <Like />
+            <Like/>
           </button>
           <button className={styles.header__button}>
             <User />
           </button>
           </div>
         </div>
-      </header>
+      </div>
     </React.Fragment>
   );
 };
