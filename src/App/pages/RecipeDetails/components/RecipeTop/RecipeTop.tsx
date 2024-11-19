@@ -1,8 +1,9 @@
+import React from 'react';
+import parse from 'html-react-parser';
 import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
-import ArrowRound from '@assets/arrow-round.svg?react';
+import ArrowRound from '@assets/arrow-round.svg';
 import styles from './RecipeTop.module.scss';
-import parse from 'html-react-parser';
 
 interface RecipeTopProps {
   title: string;
@@ -21,24 +22,23 @@ export const RecipeTop = observer(({ title, image, summary, recipeInfo }: Recipe
   return (
     <div className={styles.recipe__top}>
       <h1 className={styles.recipe__title}>
-        {title} 
+        {title}
         <button onClick={handleGoBack} className={styles.backButton}>
           <ArrowRound />
         </button>
       </h1>
       <img src={image} alt={title} className={styles.recipe__image} />
       <div className={styles.recipe__info}>
-        {recipeInfo
-          .map((item, index) => item.value ? (
+        {recipeInfo.map((item, index) =>
+          item.value ? (
             <div key={index} className={styles.recipe__infoItem}>
               <span>{item.label}</span>
               <span>{item.value}</span>
             </div>
-          ) : null)}
+          ) : null,
+        )}
       </div>
-      <div className={styles.recipe__summary}>
-        {parse(summary)}
-      </div>
+      <div className={styles.recipe__summary}>{parse(summary)}</div>
     </div>
   );
-}); 
+});

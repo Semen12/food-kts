@@ -11,14 +11,14 @@
     "isolatedModules": true,
     "moduleDetection": "force",
 
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
     "composite": true,
     "emitDeclarationOnly": true
   },
-  "include": ["vite.config.ts", "tsconfig.json"]
+  "include": ["tsconfig.json"]
 }

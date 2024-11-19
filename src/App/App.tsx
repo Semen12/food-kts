@@ -1,14 +1,14 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Header from '@components/Header/Header';
+import Header from '@components/Header';
 
-import RecipesList from './pages/RecipesList/RecipesList';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails';
+import RecipesList from './pages/RecipesList/RecipesList';
 
 function App() {
   return (
   <>
-      <Header />
+      <Header/>
       <Routes>
         <Route path="/" element={<RecipesList />} />
         <Route path="/recipes" element={<RecipesList />} />
