@@ -22,12 +22,18 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "@styles/styles.scss" as *; @use "@styles/_fonts.scss" \
-         as *; @use "@styles/_reset.scss" as *; @use "@styles/_mixin.scss" as *;',
+        additionalData: '@use "@styles/_reset.scss" as *; @use "@styles/styles.scss" as *; @use "@styles/_fonts.scss" \
+         as *;  @use "@styles/_mixin.scss" as *;',
       },
     },
   },
   server: {
     port: 3000,
+    hmr: {
+      overlay: true,
+    },
+    watch: {
+      usePolling: true,
+    },
   },
 });
