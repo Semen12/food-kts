@@ -1,13 +1,37 @@
 import classnames from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Like from '@assets/like.svg?react';
 import Logo from '@assets/logo.svg?react';
 import User from '@assets/user.svg?react';
-// eslint-disable-next-line import/default
 import styles from './Header.module.scss';
+import DynamicAdapt from '@utils/dynamic_adapt.js';
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuItemClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const da = new DynamicAdapt("max");
+    da.init();
+    console.log('DynamicAdapt initialized from Header');
+    console.log('Found elements:', document.querySelectorAll("[data-da]").length);
+     if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMenuOpen]);
+
+
+
   return (
     <React.Fragment>
       <header className={styles.header}>
@@ -18,38 +42,57 @@ const Header = () => {
               to="/"
               className={({ isActive, isPending }) => classnames(styles.header__logoLink, isPending && styles.header__logoLinkPending, isActive && styles.header__logoLinkActive)
               }
+              onClick={handleMenuItemClick}
             >
               <Logo className={styles.header__logoImg} />
               <p className={styles.header__logoText}>Food Client</p>
             </NavLink>
           </div>
-          <div className={styles.header__menuItems}>
+          <button 
+            className={classnames(styles.burger, isMenuOpen && styles.burger_active)} 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div className={classnames(
+            styles.header__menuItems,
+            'header__menuItems',
+            isMenuOpen && styles.header__menuItems_active
+          )}>
             <NavLink
               to="/recipes"
+              onClick={handleMenuItemClick}
               className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
             >
               Recipes
             </NavLink>
             <NavLink
               to="/ingredients"
+              onClick={handleMenuItemClick}
               className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
             >
-              Ingradients
+              Ingredients
             </NavLink>
             <NavLink
               to="/products"
+              onClick={handleMenuItemClick}
               className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
             >
               Products
             </NavLink>
             <NavLink
               to="/menu-items"
+              onClick={handleMenuItemClick}
               className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
             >
               Menu Items
             </NavLink>
             <NavLink
               to="/meal-planning"
+              onClick={handleMenuItemClick}
               className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
             >
               Meal Planning
@@ -57,11 +100,13 @@ const Header = () => {
           </div>
         </div>
 
-        <div className={styles.header__buttons}>
-          <button className={styles.header__button}>
+        <div className={styles.header__buttons} data-da=".header__menuItems,893,6">
+          <button className={styles.header__button}
+            onClick={handleMenuItemClick}
+          >
             <Like />
           </button>
-          <button className={styles.header__button}>
+          <button className={styles.header__button} onClick={handleMenuItemClick}>
             <User />
           </button>
           </div>
