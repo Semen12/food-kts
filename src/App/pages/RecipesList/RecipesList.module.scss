@@ -27,11 +27,31 @@
 }
 
 .recipes__content__error {
-  width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: calc(100vh - 65px);
+  width: 100%;
+  padding: $space-xxs;
+}
+
+.errorContainer {
+  background-color: rgba($brand, 0.1);
+  border: 1px solid $brand;
+  border-radius: $space-xxs;
+  padding: $space-16 $space-l;
+  text-align: center;
+
+  h3 {
+    color: $brand;
+    margin-bottom: $space-xxs;
+    font-size: $space-l;
+  }
+
+  p {
+    color: $brand-active;
+    font-size: $space-16;
+  }
 }
 
 @keyframes spin {

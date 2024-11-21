@@ -22,7 +22,8 @@ export const getRecipes = async ({ page = 1, pageSize = 9, query, type }: GetRec
     
     return data;
   } catch (error) {
-    console.error('Error fetching recipes:', error);
+    console.log('Error fetching recipes:', error);
+    return error;
   }
 };
 

@@ -35,7 +35,10 @@ const RecipesList = observer(() => {
       )}
       {recipesStore.meta === Meta.error && recipesStore.recipes.length === 0 && (
         <div className={styles.recipes__content__error}>
-          <p>Error loading recipes</p>
+          <div className={styles.errorContainer}>
+            <h3>Ошибка загрузки рецептов</h3>
+            <p>{recipesStore.errorMessage}</p>
+          </div>
         </div>  
       )}
       {(recipesStore.meta === Meta.success || recipesStore.recipes.length > 0) && (

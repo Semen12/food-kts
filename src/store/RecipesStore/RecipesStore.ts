@@ -5,7 +5,7 @@ import { Recipe } from '@types/recipe';
 
 import { Meta, IRecipesStore } from '../types';
 
-type PrivateFields = '_recipes' | '_meta' | '_searchQuery' | '_totalResults' | '_number';
+type PrivateFields = '_recipes' | '_meta' | '_searchQuery' | '_totalResults' | '_number' | '_errorMessage';
 
 interface GetRecipesParams {
   page: number;
@@ -19,6 +19,7 @@ class RecipesStore  {
   private _searchQuery: string = '';
   private _totalResults: number = 0;
   private _number: number = 9;
+  private _errorMessage: string = '';
   
 
   constructor() {
@@ -28,12 +29,14 @@ class RecipesStore  {
       _searchQuery: observable,
       _totalResults: observable,
       _number: observable,
+      _errorMessage: observable,
 
       recipes: computed,
       meta: computed,
       searchQuery: computed,
       totalResults: computed,
       number: computed,
+      errorMessage: computed,
       
       getRecipesList: action
     });
@@ -62,6 +65,10 @@ class RecipesStore  {
     return this._number;
   }
 
+  get errorMessage(): string {
+    return this._errorMessage;
+  }
+
  
 
   async getRecipesList(params: GetRecipesParams): Promise<void> {
@@ -79,6 +86,8 @@ class RecipesStore  {
           this._meta = Meta.success;
         } else {
           this._meta = Meta.error;
+          this._errorMessage = response?.response?.data?.message || 'Произошла ошибка';
+         
         }
     });
   }
