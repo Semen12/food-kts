@@ -33,6 +33,7 @@ interface SearchProps {
       afterSlot={<Button onClick={onSearch}><SearchIcon /></Button>}
     />
     <MultiDropdown
+      className={styles.search__dropdown}
       options={MEAL_TYPES}
       value={selectedTypes}
       onChange={onTypesChange}

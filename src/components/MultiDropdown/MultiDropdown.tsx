@@ -89,13 +89,29 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   return (
     <div className={rootClass} ref={dropdownRef}>
-      <Input
+      <Input 
+        className={classNames(
+          styles.root__multidropdown,
+          {
+            [styles.is_open]: isOpen
+          }
+        )}
         value={isOpen ? filter : value.length ? getTitle(value) : ''}
         placeholder={getTitle(value)}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
         disabled={disabled}
-        afterSlot={<ArrowDownIcon width={20} height={20} color="secondary" />}
+        afterSlot={
+          <ArrowDownIcon 
+            className={classNames(
+              styles.root__multidropdown_afterslot,
+              isOpen && styles.rotated
+            )} 
+            width={24} 
+            height={24} 
+            color="secondary" 
+          />
+        }
       />
 
       {isOpen && !disabled && filteredOptions.length > 0 && (

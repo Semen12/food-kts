@@ -66,27 +66,32 @@
 }
 
 .banner {
-  
+
   background: url("@assets/bg.jpg") no-repeat center center / cover;
   min-height: calc(100vh - 65px);
-  
+
   @media (max-width: 475px) {
     background-position: 53% 0px;
     min-height: 572px;
     height: 100%;
   }
-  img{
+
+  img {
     display: none;
   }
- 
+
 }
 
 .recipes {
   background: rgba(255, 192, 118, 0.23);
   padding-top: $space-36;
+  @media (max-width: $mobile) {
+    padding-top: $space-16;
+  }
 
   &__container {
-    max-width: 1240px;
+    max-width: 1208px;
+    padding: 0 $space-16;
     margin: 0 auto;
   }
 
@@ -102,24 +107,36 @@
     }
 
     margin-bottom: $space-48;
+    @media (max-width:$mobile){
+      margin-bottom: $space-26;
+      font-size: 16px;
+    }
   }
 
   &__content {
-    padding: $space-xxs;
+
 
     .search {
       // background: $primary-color;
       margin-bottom: $space-48;
-      display: flex;
+      /*  display: flex;
       justify-content: flex-end;
       gap: $space-l;
       flex-wrap: wrap;
+*/
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: end;
 
       &__input {
-        position: relative;
+        justify-content: space-between;
+        gap: $space-xxs;
+        margin-bottom: $space-l;
 
         input[type="text"] {
-          max-width: 1150px;
+          max-width: 1095px;
+          width: 100%;
+
         }
 
         button[type="button"] {
@@ -128,10 +145,12 @@
           border-radius: 10px;
           padding: 14px 20px;
           background: $brand;
-          position: absolute;
-          right: 0;
+
+
         }
       }
+
+      
     }
 
     .grid {

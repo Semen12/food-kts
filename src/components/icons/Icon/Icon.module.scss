@@ -1,14 +1,16 @@
-@use '@styles/mixin.scss' as *;
 .icon {
-  &_primary {
-    @include icon-color('primary');
+  &_primary path {
+   fill: $primary-color;
+   stroke: $primary-color;
   }
 
-  &_secondary {
-    @include icon-color('secondary');
+  &_secondary path {
+   fill: $secondary-color;
+   stroke: $secondary-color;
   }
 
-  &_accent {
-    @include icon-color('accent');
+  &_accent path {
+   fill: $accent-color;
+   stroke: $accent-color;
   }
 } 

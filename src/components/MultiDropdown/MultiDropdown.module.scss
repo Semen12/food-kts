@@ -1,14 +1,54 @@
-
-
 .root {
   font-family: $font-family;
   width: 370px;
   display: flex;
-  
+
   gap: $space-xs;
   position: relative;
 
+  .root__multidropdown {
+    &.is_open {
+      input[type="text"] {
+
+        &::placeholder {
+          color: $primary-color;
+        }
+
+      }
+
+    }
+
+    &::placeholder {
+      color: $secondary-color;
+    }
+
+    input[type="text"] {
+      padding-right: 38px;
+
+
+    }
+
+    .root__multidropdown_afterslot {
+      position: absolute;
+      right: 14px;
+      transform: rotate(180deg);
+      transition: all 0.3s ease 0s;
+
+
+      &.rotated {
+        transform: rotate(0deg);
+        transition: all 0.3s ease 0s;
+      }
+
+      & .icon_secondary {
+        @include icon-color('secondary', $fill: false, $stroke: true);
+      }
+    }
+
+  }
 }
+
+
 
 .options {
   background-color: $white-color;
@@ -20,13 +60,28 @@
   width: 100%;
   border-radius: 10px;
   z-index: 3;
-  
 
+  max-height: 300px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
 }
 
 .option {
   padding: $space-s $space-xs;
   cursor: pointer;
+  color: $primary-color;
 
   &:hover {
     color: $secondary-color;
@@ -34,5 +89,6 @@
 
   &.selected {
     color: $brand;
+
   }
-} 
+}
