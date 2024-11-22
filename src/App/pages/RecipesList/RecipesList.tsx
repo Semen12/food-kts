@@ -8,6 +8,7 @@ import CardGrid from './components/CardGrid';
 import Pagination from './components/Pagination';
 import Search from './components/Search';
 import { useSearch } from './hooks/useSearch';
+import bg from '@assets/bg.jpg';
 
 
 const RecipesList = observer(() => {
@@ -43,7 +44,9 @@ const RecipesList = observer(() => {
       )}
       {(recipesStore.meta === Meta.success || recipesStore.recipes.length > 0) && (
         <React.Fragment>
-          <div className={styles.banner}></div>
+          <div className={styles.banner}>
+      
+          </div>
           <div className={styles.recipes}>
             <div className={styles.recipes__container}>
               <div className={styles.recipes__title}>

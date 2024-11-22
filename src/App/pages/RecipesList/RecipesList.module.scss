@@ -36,11 +36,12 @@
 }
 
 .errorContainer {
-  background-color: rgba($brand, 0.1);
+  background-color: rgba(255, 192, 118, 0.23);
   border: 1px solid $brand;
   border-radius: $space-xxs;
   padding: $space-16 $space-l;
   text-align: center;
+  box-shadow: 3px 4px 10px 5px rgba(0, 0, 0, 0.1);
 
   h3 {
     color: $brand;
@@ -65,8 +66,19 @@
 }
 
 .banner {
+  
   background: url("@assets/bg.jpg") no-repeat center center / cover;
-  height: 572px;
+  min-height: calc(100vh - 65px);
+  
+  @media (max-width: 475px) {
+    background-position: 53% 0px;
+    min-height: 572px;
+    height: 100%;
+  }
+  img{
+    display: none;
+  }
+ 
 }
 
 .recipes {
@@ -136,6 +148,7 @@
   display: flex;
   justify-content: center;
   gap: $space-s;
+  flex-wrap: wrap;
 }
 
 .pageButton {
