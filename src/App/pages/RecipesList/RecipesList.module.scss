@@ -85,6 +85,7 @@
 .recipes {
   background: rgba(255, 192, 118, 0.23);
   padding-top: $space-36;
+
   @media (max-width: $mobile) {
     padding-top: $space-16;
   }
@@ -108,14 +109,15 @@
     }
 
     margin-bottom: $space-48;
-    @media (max-width:$mobile){
+
+    @media (max-width:$mobile) {
       margin-bottom: $space-26;
       font-size: 16px;
     }
   }
 
   &__content {
-
+    margin-bottom: $space-xl;
 
     .search {
       // background: $primary-color;
@@ -150,8 +152,8 @@
 
         }
       }
-
       
+
     }
 
     .grid {
@@ -159,13 +161,15 @@
       grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
       gap: 24px;
       justify-items: center;
-      margin-bottom: $space-xl;
+     
+
       @media (max-width: 1145px) {
         gap: 30px;
         grid-template-columns: repeat(auto-fill, minmax(348px, 360px));
         justify-content: center;
       }
-      @media (max-width:$mobileSmall){
+
+      @media (max-width:$mobileSmall) {
         justify-content: center;
         grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
       }
@@ -177,21 +181,50 @@
   display: flex;
   justify-content: center;
   gap: $space-s;
-  flex-wrap: wrap;
-}
+  flex-wrap: nowrap;
+  align-items: center;
+  padding-bottom: $space-26;
 
-.pageButton {
-  padding: $space-xs $space-s;
-  border: 1px solid $primary-color;
-  background: none;
-  cursor: pointer;
+  .pageButton {
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    min-width: 38px;
+  
 
-  &.active {
-    background: $primary-color;
-    color: $white-color;
+    &.active {
+      padding: 10px;
+      background: $loader-bg;
+      color: $white-color;
+      padding: 10px;
+    
+    }
+
+    &:hover {
+      background: $primary-color-40;
+    
+      
+    }
+
+    &.disabled {
+      svg path {
+        stroke:$text-secondary;
+      }
+      
+    }
+
+    &:not(.disabled) {
+      svg path {
+        stroke: #151411;
+      }
+      
+    }
   }
 
-  &:hover {
-    background: $primary-color-40;
+  @media (max-width: $mobileSmall) {
+    gap: $space-xs;
+    .pageButton {
+      min-width: 30px;
+    }
   }
 }

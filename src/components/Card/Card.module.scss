@@ -16,12 +16,14 @@
 
   &__imageContainer {
     width: 360px;
-    @media (max-width:$mobileSmall){
+
+    height: 360px;
+    background-color: $button-primary-text;
+
+    @media (max-width:$mobileSmall) {
       width: 300px;
       height: auto;
     }
-    height: 360px;
-    background-color: $button-primary-text;
 
     .card__image {
       width: 100%;
