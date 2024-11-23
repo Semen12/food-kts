@@ -26,8 +26,9 @@
   font-family: $font-family;
 
   &__container {
-    max-width: 1200px;
+    max-width: 1208px;
+    padding: 0 $space-16;
     margin: 0 auto;
-    padding: 20px;
+    overflow: hidden;
   }
 }

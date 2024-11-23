@@ -5,6 +5,11 @@
       "title title title"
       "image info info"
       "summary summary summary";
+      padding-top: $space-48;
+      @media (max-width:$tablet){
+        padding-top: $space-26;
+        display: block;
+      }
   }
 
   &__title {
@@ -16,7 +21,13 @@
     margin-bottom: $space-36;
     padding-left: $space-16;
     position: relative;
-
+    @media (max-width:$tablet){
+      font-size: 27px;
+      margin-bottom: $space-26;
+    }
+    @media (max-width:$mobileSmall){
+       font-size: 21px; 
+    }
     svg {
       position: absolute;
       left: 0;
@@ -32,6 +43,9 @@
     height: 298px;
     object-fit: cover;
     width: 100%;
+    @media (max-width:$tablet){
+      margin-bottom: $space-26;
+    }
   }
 
   &__info {
@@ -40,7 +54,7 @@
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
-    margin-left: 150px;
+   // margin-left: 150px;
     align-items: center;
 
     &Item {
@@ -68,6 +82,12 @@
     font-size: 16px;
     line-height: 125%;
     margin-bottom: $space-48;
+    @media (max-width:$tablet){
+       margin-top: $space-26;
+       padding: $space-16; 
+       margin-bottom: $space-26;
+       
+    }
 
     a {
       color: $text-primary;
