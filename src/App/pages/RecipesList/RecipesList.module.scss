@@ -93,6 +93,7 @@
     max-width: 1208px;
     padding: 0 $space-16;
     margin: 0 auto;
+    overflow: hidden;
   }
 
   &__title {
@@ -156,9 +157,18 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
-      gap: $space-xl;
+      gap: 24px;
       justify-items: center;
       margin-bottom: $space-xl;
+      @media (max-width: 1145px) {
+        gap: 30px;
+        grid-template-columns: repeat(auto-fill, minmax(348px, 360px));
+        justify-content: center;
+      }
+      @media (max-width:$mobileSmall){
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+      }
     }
   }
 }
