@@ -6,8 +6,12 @@ import Logo from '@assets/logo.svg?react';
 import User from '@assets/user.svg?react';
 import styles from './Header.module.scss';
 import DynamicAdapt from '@utils/dynamic_adapt.js';
+import { useTheme } from '@/context/ThemeContext';
+import Moon from '@assets/moon.svg?react';
+import Sun from '@assets/sun.svg?react';
 
 const Header = () => {
+  const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuItemClick = () => {
@@ -99,18 +103,29 @@ const Header = () => {
             </NavLink>
           </div>
         </div>
-
+        <div className={styles.header__theme} >
+        <button 
+            className={styles.header__button} 
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+            
+          >
+            {theme === 'light' ? <Moon /> : <Sun />}
+          </button>
+        </div>
         <div className={styles.header__buttons} data-da=".header__menuItems,893,6">
           <button className={styles.header__button}
             onClick={handleMenuItemClick}
           >
             <Like />
           </button>
+        
           <button className={styles.header__button} onClick={handleMenuItemClick}>
             <User />
           </button>
           </div>
         </div>
+       
       </header>
     </React.Fragment>
   );

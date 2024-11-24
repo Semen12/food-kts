@@ -16,6 +16,10 @@
   border: none;
   border-radius: 10px;
   background-color: $white-color;
+  html[data-theme="dark"] & {
+    background-color: $text-secondary-light;
+    
+  }
   font-size: 16px;
   color: $text-primary;
 }
@@ -31,6 +35,9 @@
 
 .input::placeholder {
   color: $text-secondary;
+  html[data-theme="dark"] & {
+    color:$text-secondary-dark ;
+  }
 }
 
 .after-slot {

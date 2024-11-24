@@ -33,6 +33,9 @@
   min-height: calc(100vh - 65px);
   width: 100%;
   padding: $space-xxs;
+  html[data-theme="dark"] & {
+    background:$text-secondary-dark;
+  }
 }
 
 .errorContainer, .noResults {
@@ -42,7 +45,11 @@
   padding: $space-16 $space-l;
   text-align: center;
   box-shadow: 3px 4px 10px 5px rgba(0, 0, 0, 0.1);
-
+  transition: all 0.3s ease 0s;
+  html[data-theme="dark"] & {
+    background:$text-secondary-light;
+    transition: all 0.3s ease 0s;
+  }
   h3 {
     color: $brand;
     margin-bottom: $space-xxs;
@@ -86,6 +93,10 @@
 .recipes {
   background: rgba(255, 192, 118, 0.23);
   padding-top: $space-36;
+  html[data-theme="dark"] & {
+    background: $primary-color;
+    
+  }
 
   @media (max-width: $mobile) {
     padding-top: $space-16;
@@ -96,6 +107,7 @@
     padding: 0 $space-16;
     margin: 0 auto;
     overflow: hidden;
+    
   }
 
   &__title {
@@ -103,7 +115,10 @@
     line-height: 120%;
     color: $text-primary;
     text-align: center;
-
+    html[data-theme="dark"] & {
+      color: $white-color;
+      
+    }
     span {
       text-decoration: underline;
       text-decoration-skip-ink: none;
@@ -191,7 +206,9 @@
     background: none;
     cursor: pointer;
     min-width: 38px;
-  
+    html[data-theme="dark"] & {
+      color: $white-color;
+    }
 
     &.active {
       padding: 10px;
@@ -203,6 +220,10 @@
 
     &:hover {
       background: $primary-color-40;
+      html[data-theme="dark"] & {
+        background: $text-secondary-light;
+        color: $text-secondary-dark;
+      }
       
     }
 
@@ -216,6 +237,9 @@
     &:not(.disabled) {
       svg path {
         stroke: #151411;
+        html[data-theme="dark"] & {
+          stroke: $white-color;
+        }
       }
       
     }

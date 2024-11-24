@@ -19,7 +19,16 @@
   .recipe__section {
     margin-bottom: $space-48;
     position: relative;
-
+    html[data-theme="dark"] & {
+      color: $text-secondary-light;
+      /* background: $text-secondary-light;
+      padding: $space-16; 
+      border-radius: $space-xxs;*/
+      
+      h2 {
+        color: $white-color;
+      }
+    }
     &:first-child::after {
       content: '';
       position: absolute;
@@ -90,7 +99,9 @@
   gap: $space-16;
  
   h2 {
-
+    html[data-theme="dark"] & {
+      color: $white-color;
+    }
     @media (max-width:$tablet) {
       margin-bottom: 0px;
     }
@@ -101,11 +112,17 @@
     line-height: 125%;
     color: $text-primary;
     margin-bottom: $space-xxs;
+    html[data-theme="dark"] & {
+      color: $text-secondary-light;
+    }
   }
 
   p {
     font-size: 16px;
     line-height: 125%;
     color: $text-primary;
+    html[data-theme="dark"] & {
+      color: $text-secondary-light;
+    }
   }
 }

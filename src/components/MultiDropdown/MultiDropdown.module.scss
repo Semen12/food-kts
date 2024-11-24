@@ -61,6 +61,9 @@
 
   .options {
     background-color: $white-color;
+    html[data-theme="dark"] & {
+      background-color: $text-secondary-light;
+    }
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     padding-bottom: 8px;
     margin-top: 10px;
@@ -70,7 +73,7 @@
     width: 100%;
     border-radius: 10px;
     z-index: 3;
-
+ 
     max-height: 300px;
     overflow-y: auto;
 

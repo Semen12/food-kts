@@ -11,6 +11,8 @@ $button-primary-bg-active: #872d01;
 $button-primary-text-active: #fff;
 $text-primary: #000;
 $text-secondary: #afadb5;
+$text-secondary-light: #e3e1ebee;
+$text-secondary-dark: #5a5959;
 $text-accent: #b5460f;
 $input-text: #000;
 $input-bg: #fff;
@@ -89,3 +91,4 @@ $pc: em($containerWidth); // ПК, ноутбуки, некоторые план
 $tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
 $mobile: em(767.98); // Телефоны L
 $mobileSmall: em(479.98); // Телефоны S
+

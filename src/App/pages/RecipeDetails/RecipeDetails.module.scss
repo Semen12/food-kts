@@ -52,7 +52,11 @@
 .recipe {
   background: rgba(255, 192, 118, 0.23);
   font-family: $font-family;
-
+  transition: all 0.3s ease 0s;
+  html[data-theme="dark"] & {
+    background: $text-primary;
+    transition: all 0.3s ease 0s;
+  }
   &__container {
     max-width: 1208px;
     padding: 0 $space-16;

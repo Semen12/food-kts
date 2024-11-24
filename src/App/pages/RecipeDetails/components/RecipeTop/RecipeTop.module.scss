@@ -1,4 +1,5 @@
 .recipe {
+ 
   &__top {
     display: grid;
     grid-template-areas:
@@ -18,6 +19,9 @@
     font-size: 44px;
     line-height: 109%;
     color: $text-primary;
+    html[data-theme="dark"] & {
+      color: $white-color;
+    }
     margin-bottom: $space-36;
     padding-left: $space-16;
     position: relative;
@@ -45,6 +49,15 @@
     width: 100%;
     @media (max-width:$tablet){
       margin-bottom: $space-26;
+      object-fit: contain;
+      display: block;
+      width: max-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (max-width:$mobileSmall){
+      width: 100%;
+      object-fit: cover;
     }
   }
 
@@ -56,6 +69,9 @@
     flex-wrap: wrap;
    // margin-left: 150px;
     align-items: center;
+    /* @media (max-width:$tablet){
+      column-gap: $space-xxs;
+    } */
 
     &Item {
       display: flex;
@@ -63,7 +79,19 @@
       align-items: center;
       flex-basis: 33.33%;
       gap: $space-xxs;
-
+      html[data-theme="dark"] & {
+        color: $white-color;
+      }
+      @media (max-width:$tablet){
+       margin-bottom: $space-xxs10;
+       &:not(:nth-child(-n+3)){
+        margin-bottom: 0;
+       }
+      }
+     
+      @media (max-width: 400px){
+          flex-basis: 50%;
+      }
       span:last-child {
         font-weight: 600;
         font-size: 16px;
@@ -78,6 +106,10 @@
     margin-top: $space-48;
     padding: $space-36;
     background: rgba(181, 70, 15, 0.33);
+    html[data-theme="dark"] & {
+      background: $text-secondary-light;
+      color: $text-primary;
+    }
     border-radius: 10px;
     font-size: 16px;
     line-height: 125%;
@@ -87,6 +119,9 @@
        padding: $space-16; 
        margin-bottom: $space-26;
        
+    }
+    @media (max-width:$mobileSmall){
+      font-size: 14px;
     }
 
     a {
