@@ -37,4 +37,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  .clearIcon {
+    position: absolute;
+    right: 95px;
+  }
+ 
 }

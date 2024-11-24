@@ -5,7 +5,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-
+  cursor: pointer;
   @media (max-width:$mobileSmall) {
     width: 300px;
   }

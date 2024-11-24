@@ -25,7 +25,24 @@ const RecipesList = observer(() => {
   } = useSearch({ recipesStore });
 
   const handleSearch = () => {
+    setCurrentPage(1);
     setAppliedSearchValue(searchInputValue);
+  };
+
+  const handleTypesChange = (types: string[]) => {
+    setCurrentPage(1);
+    setSelectedTypes(types);
+  };
+
+  const handleClearSearch = () => {
+    setSearchInputValue('');
+    setAppliedSearchValue('');
+    setCurrentPage(1);
+  };
+
+  const handleClearTypes = () => {
+    setSelectedTypes([]);
+    setCurrentPage(1);
   };
 
   return (
@@ -57,8 +74,15 @@ const RecipesList = observer(() => {
                   searchValue={searchInputValue}
                   onSearchChange={setSearchInputValue}
                   onSearch={handleSearch}
+                  onClearSearch={handleClearSearch}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch();
+                    }
+                  }}
                   selectedTypes={selectedTypes}
-                  onTypesChange={setSelectedTypes}
+                  onTypesChange={handleTypesChange}
+                  onClearTypes={handleClearTypes}
                 />
                 
                 {isListLoading ? (

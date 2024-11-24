@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 
+import DeleteIcon from '../icons/DeleteIcon';
+
 //import './MultiDropdown.css';
 import styles from './MultiDropdown.module.scss';
 
@@ -27,6 +29,7 @@ export type MultiDropdownProps = {
   disabled?: boolean;
   /** Возвращает строку которая будет выводится в инпуте. В случае если опции не выбраны, строка должна отображаться как placeholder. */
   getTitle: (value: Option[]) => string;
+  onClear?: () => void;
 };
 
 const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -36,6 +39,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   onChange,
   disabled,
   getTitle,
+  onClear
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState('');
@@ -87,6 +91,12 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   const rootClass = classNames(styles.root, className);
 
+  const handleClear = () => {
+    onChange([]);
+    setFilter('');
+    onClear?.();
+  };
+
   return (
     <div className={rootClass} ref={dropdownRef}>
       <Input 
@@ -101,6 +111,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         onChange={handleInputChange}
         onFocus={handleInputFocus}
         disabled={disabled}
+        onClear={value.length > 0 ? handleClear : undefined}
         afterSlot={
           <ArrowDownIcon 
             className={classNames(
@@ -111,6 +122,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
             height={24} 
             color="secondary" 
           />
+          
         }
       />
 

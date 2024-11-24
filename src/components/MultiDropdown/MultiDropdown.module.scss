@@ -1,4 +1,5 @@
 .root {
+ 
   font-family: $font-family;
   width: 370px;
   display: flex;
@@ -23,17 +24,20 @@
     }
 
     input[type="text"] {
-      padding-right: 38px;
+      padding-right: 95px;
 
 
     }
 
+    
     .root__multidropdown_afterslot {
-      position: absolute;
-      right: 14px;
-      /* transform: rotate(180deg); */
+      display: block;
+      position: relative;
+      right: $space-36;
+
       transition: all 0.3s ease 0s;
 
+     
 
       &.rotated {
         transform: rotate(180deg);
@@ -43,53 +47,60 @@
       & .icon_secondary {
         @include icon-color('secondary', $fill: false, $stroke: true);
       }
+
+
     }
 
+
+
+    
+
+  }
+
+
+
+  .options {
+    background-color: $white-color;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding-bottom: 8px;
+    margin-top: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border-radius: 10px;
+    z-index: 3;
+
+    max-height: 300px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+    }
+  }
+
+  .option {
+    padding: $space-s $space-xs;
+    cursor: pointer;
+    color: $primary-color;
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &.selected {
+      color: $brand;
+
+    }
   }
 }
 
-
-
-.options {
-  background-color: $white-color;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  padding-bottom: 8px;
-  margin-top: 10px;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  border-radius: 10px;
-  z-index: 3;
-
-  max-height: 300px;
-  overflow-y: auto;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-  }
-}
-
-.option {
-  padding: $space-s $space-xs;
-  cursor: pointer;
-  color: $primary-color;
-
-  &:hover {
-    color: $secondary-color;
-  }
-
-  &.selected {
-    color: $brand;
-
-  }
-}
