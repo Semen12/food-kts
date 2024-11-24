@@ -37,6 +37,6 @@ export const getRecipeById = async (id:number) => {
     return data;
   } catch (error) {
     console.error('Ошибка при получении данных рецепта:', error);
- 
+    return error;
   }
 }; 

@@ -76,7 +76,7 @@ class RecipesStore  {
       return;
     }
     this._meta = Meta.loading;
-
+    this._errorMessage = '';
       const response= await getRecipes(params);
       runInAction(() => {
         if (response?.results) {

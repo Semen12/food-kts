@@ -16,12 +16,21 @@ const RecipeDetails = observer(() => {
   useEffect(() => {
     if (id) {
       recipeDetailsStore.getRecipeDetails(Number(id));
+      window.scrollTo(0, 0);
     }
   }, [id, recipeDetailsStore]);
 
   return (
     <React.Fragment>
       {recipeDetailsStore.meta === Meta.loading && <LoaderContainer />}
+      {recipeDetailsStore.meta === Meta.error && (
+        <div className={styles.recipes__content__error}>
+          <div className={styles.errorContainer}>
+            <h3>Ошибка загрузки рецепта</h3>
+            <p>{recipeDetailsStore.errorMessage}</p>
+          </div>
+        </div>  
+      )}
       {recipeDetailsStore.meta === Meta.success && (
         <div className={styles.recipe}>
           <div className={styles.recipe__container}>

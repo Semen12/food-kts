@@ -182,11 +182,11 @@
   justify-content: center;
   gap: $space-s;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: stretch;
   padding-bottom: $space-26;
-
+  height: auto;
   .pageButton {
-    padding: 0;
+   // padding: 10px;
     background: none;
     cursor: pointer;
     min-width: 38px;
@@ -196,13 +196,12 @@
       padding: 10px;
       background: $loader-bg;
       color: $white-color;
-      padding: 10px;
+     
     
     }
 
     &:hover {
       background: $primary-color-40;
-    
       
     }
 
@@ -227,4 +226,5 @@
       min-width: 30px;
     }
   }
+  
 }
