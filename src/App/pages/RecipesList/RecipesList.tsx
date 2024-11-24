@@ -9,10 +9,11 @@ import Pagination from './components/Pagination';
 import Search from './components/Search';
 import { useSearch } from './hooks/useSearch';
 import bg from '@assets/bg.jpg';
+import FavoriteRecipesStore from '@store/FavoriteRecipesStore';
 
 const RecipesList = observer(() => {
   const recipesStore = useLocalStore(() => new RecipesStore());
-  
+
   const {
     searchInputValue,
     setSearchInputValue,

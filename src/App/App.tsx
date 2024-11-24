@@ -1,24 +1,27 @@
+import { ThemeProvider } from '@context/ThemeContext';
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from '@components/Header/Header';
+import { FavoriteRecipesProvider } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
 
-import RecipesList from './pages/RecipesList/RecipesList';
+import FavoriteRecipes from './pages/FavoriteRecipes/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails';
-import { ThemeProvider } from '@context/ThemeContext';
+import RecipesList from './pages/RecipesList/RecipesList';
 
 function App() {
   return (
-  <>
-    <ThemeProvider>
-      <Header />
-      <Routes>
-        <Route path="/" element={<RecipesList />} />
-        <Route path="/recipes" element={<RecipesList />} />
-        <Route path="/recipe/:id" element={<RecipeDetails />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+    <FavoriteRecipesProvider>
+      <ThemeProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<RecipesList />} />
+          <Route path="/recipes" element={<RecipesList />} />
+          <Route path="/recipe/:id" element={<RecipeDetails />} />
+          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/favorites" element={<FavoriteRecipes />} />
+        </Routes>
       </ThemeProvider>
-   </>
+    </FavoriteRecipesProvider>
   );
 }
 

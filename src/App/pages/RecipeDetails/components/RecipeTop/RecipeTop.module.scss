@@ -23,20 +23,27 @@
       color: $white-color;
     }
     margin-bottom: $space-36;
-    padding-left: $space-16;
+    padding-left: $space-36;
     position: relative;
     @media (max-width:$tablet){
       font-size: 27px;
-      margin-bottom: $space-26;
+      margin-bottom: $space-36;
     }
     @media (max-width:$mobileSmall){
        font-size: 21px; 
     }
     svg {
       position: absolute;
-      left: 0;
+      left: 0px;
       top: 50%;
-      transform: translate(-50%, -50%);
+      transform: translateY(-50%);
+      cursor: pointer;
+      &:hover{
+        transform: translateY(-50%) scale(1.1);
+        transition: all 0.3s ease 0s;
+        text-decoration: underline;
+        background-color: $text-secondary-dark;
+    }
     }
   }
 

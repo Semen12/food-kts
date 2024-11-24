@@ -1,18 +1,22 @@
 import classnames from 'classnames';
+import { observer, useLocalStore } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useTheme } from '@/context/ThemeContext';
 import Like from '@assets/like.svg?react';
 import Logo from '@assets/logo.svg?react';
-import User from '@assets/user.svg?react';
-import styles from './Header.module.scss';
-import DynamicAdapt from '@utils/dynamic_adapt.js';
-import { useTheme } from '@/context/ThemeContext';
 import Moon from '@assets/moon.svg?react';
 import Sun from '@assets/sun.svg?react';
+import User from '@assets/user.svg?react';
+import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import DynamicAdapt from '@utils/dynamic_adapt.js';
+import styles from './Header.module.scss';
 
-const Header = () => {
+const Header = observer(() => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const favoriteStore = useFavoriteRecipes();
 
   const handleMenuItemClick = () => {
     setIsMenuOpen(false);
@@ -32,7 +36,7 @@ const Header = () => {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen,favoriteStore]);
 
 
 
@@ -114,13 +118,22 @@ const Header = () => {
           </button>
         </div>
         <div className={styles.header__buttons} data-da=".header__menuItems,893,6">
-          <button className={styles.header__button}
-            onClick={handleMenuItemClick}
+          <button 
+            className={styles.header__button + ' header__button_favorite'}
+            onClick={() => {
+              handleMenuItemClick();
+              navigate('/favorites');
+            }}
           >
             <Like />
+            {favoriteStore.favoritesCount > 0 && (
+              <span className={styles.header__favoriteCount}>
+                {favoriteStore.favoritesCount > 99 ? '99+' : favoriteStore.favoritesCount}
+              </span>
+            )}
           </button>
         
-          <button className={styles.header__button} onClick={handleMenuItemClick}>
+          <button className={styles.header__button + ' header__button_user'} onClick={handleMenuItemClick}>
             <User />
           </button>
           </div>
@@ -129,6 +142,6 @@ const Header = () => {
       </header>
     </React.Fragment>
   );
-};
+});
 
 export default Header;

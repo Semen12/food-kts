@@ -151,6 +151,30 @@
         }
       }
     }
+    
+  }
+  &__button {
+    position: relative;
+    flex: 0 0 auto;
+  }
+  &__favoriteCount {
+    position: absolute;
+    top: -12px;
+    right: -10px;
+    background: #eb5858;
+    color: $white-color;
+    border-radius: 50%;
+    min-width: 20px;
+    max-width: max-content;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-sizing: content-box;
+    padding: 1px;
+    flex: 0 0 auto;
+
   }
 }
 
@@ -198,4 +222,5 @@
       }
     }
   }
+  
 }
