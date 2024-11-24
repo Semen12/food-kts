@@ -1,7 +1,8 @@
 .favorites {
-    
+
     background: rgba(255, 192, 118, 0.23);
-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+
     html[data-theme="dark"] & {
         background: $primary-color;
         transition: all 0.3s ease 0s;
@@ -17,6 +18,7 @@ transition: all 0.3s ease 0s;
         flex-direction: column;
         align-items: center;
         padding-bottom: 53px;
+        overflow: hidden;
     }
 
 
@@ -30,19 +32,22 @@ transition: all 0.3s ease 0s;
         color: $text-primary;
         text-align: center;
         position: relative;
-        svg{
+
+        svg {
             position: absolute;
             left: -50px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            &:hover{
+
+            &:hover {
                 transform: translateY(-50%) scale(1.1);
                 transition: all 0.3s ease 0s;
                 text-decoration: underline;
                 background-color: $text-secondary-dark;
             }
         }
+
         html[data-theme="dark"] & {
             color: $white-color;
         }
@@ -52,16 +57,18 @@ transition: all 0.3s ease 0s;
 
             margin-bottom: $space-xxs;
         }
-        @media (max-width:$mobileSmall){
+
+        @media (max-width:$mobileSmall) {
             font-size: 22px;
         }
 
     }
 
     &__content {
-        
+
         min-height: calc(100vh - 65px); // 300px banner + 65px header
-       min-width: 100%;
+        min-width: 100%;
+
         html[data-theme="dark"] & {
             background: $text-primary;
         }
@@ -78,31 +85,31 @@ transition: all 0.3s ease 0s;
         grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
         gap: 24px;
         justify-items: center;
-       
-  
+
+
         @media (max-width: 1145px) {
-          gap: 30px;
-          grid-template-columns: repeat(auto-fill, minmax(348px, 360px));
-          justify-content: center;
+            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(348px, 360px));
+            justify-content: center;
         }
-  
+
         @media (max-width:$mobileSmall) {
-          justify-content: center;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+            justify-content: center;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
         }
     }
-    
+
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
 }
 
 .noResults {
-   
+
     background-color: rgba(255, 192, 118, 0.23);
     border: 1px solid $brand;
     border-radius: $space-xxs;
@@ -110,18 +117,81 @@ transition: all 0.3s ease 0s;
     text-align: center;
     box-shadow: 3px 4px 10px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
+
     html[data-theme="dark"] & {
-      background:$text-secondary-light;
-      transition: all 0.3s ease 0s;
+        background: $text-secondary-light;
+        transition: all 0.3s ease 0s;
     }
+
     h3 {
-      color: $brand;
-      margin-bottom: $space-xxs;
-      font-size: $space-l;
+        color: $brand;
+        margin-bottom: $space-xxs;
+        font-size: $space-l;
     }
-  
+
     p {
-      color: $brand-active;
-      font-size: $space-16;
+        color: $brand-active;
+        font-size: $space-16;
     }
-  }
+}
+
+.searchContainer {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px 0 35px 0;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.searchInput {
+    width: 100%;
+    height: 52px;
+    padding: 0 40px 0 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: $white-color;
+    font-family: "Roboto";
+    font-size: 16px;
+    color: $text-primary;
+
+    &::placeholder {
+        color: $text-secondary;
+    }
+
+    &:focus {
+        outline: 1px solid $brand;
+    }
+
+    html[data-theme="dark"] & {
+        background-color: $text-secondary-light;
+        // color: $white-color;
+
+        &::placeholder {
+            color: $text-secondary-dark;
+        }
+    }
+}
+
+.clearIcon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+
+    &:hover {
+        color: $text-primary;
+    }
+
+    html[data-theme="dark"] & {
+        color: $text-secondary-dark;
+
+        &:hover {
+            color: $white-color;
+        }
+    }
+}
