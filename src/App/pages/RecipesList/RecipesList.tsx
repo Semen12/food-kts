@@ -10,7 +10,6 @@ import Search from './components/Search';
 import { useSearch } from './hooks/useSearch';
 import bg from '@assets/bg.jpg';
 
-
 const RecipesList = observer(() => {
   const recipesStore = useLocalStore(() => new RecipesStore());
   
@@ -64,6 +63,11 @@ const RecipesList = observer(() => {
                 
                 {isListLoading ? (
                   <LoaderContainer />
+                ) : recipesStore.recipes.length === 0 ? (
+                  <div className={styles.noResults}>
+                    <h3>Рецепты не найдены</h3>
+                    <p>Попробуйте изменить параметры поиска.</p>
+                  </div>
                 ) : (
                   <CardGrid recipes={recipesStore.recipes} />
                 )}
