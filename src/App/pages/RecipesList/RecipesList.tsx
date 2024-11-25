@@ -1,6 +1,8 @@
 import { observer, useLocalStore } from 'mobx-react-lite';
 import React from 'react';
-import styles from './RecipesList.module.scss';
+import bg from '@assets/bg.jpg';
+import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
+import FavoriteRecipesStore from '@store/FavoriteRecipesStore';
 import RecipesStore from '@store/RecipesStore/RecipesStore';
 import { Meta } from '@store/types';
 import LoaderContainer from '../components/LoaderContainer';
@@ -8,8 +10,7 @@ import CardGrid from './components/CardGrid';
 import Pagination from './components/Pagination';
 import Search from './components/Search';
 import { useSearch } from './hooks/useSearch';
-import bg from '@assets/bg.jpg';
-import FavoriteRecipesStore from '@store/FavoriteRecipesStore';
+import styles from './RecipesList.module.scss';
 
 const RecipesList = observer(() => {
   const recipesStore = useLocalStore(() => new RecipesStore());
@@ -52,12 +53,9 @@ const RecipesList = observer(() => {
         <LoaderContainer />
       )}
       {recipesStore.meta === Meta.error && recipesStore.recipes.length === 0 && (
-        <div className={styles.recipes__content__error}>
-          <div className={styles.errorContainer}>
-            <h3>Ошибка загрузки рецептов</h3>
-            <p>{recipesStore.errorMessage}</p>
-          </div>
-        </div>  
+        <div className={styles.errorWrapper}>
+          <ErrorMessage title="Ошибка загрузки рецептов" message={recipesStore.errorMessage}/>
+        </div>
       )}
       {(recipesStore.meta === Meta.success || recipesStore.recipes.length > 0) && (
         <React.Fragment>
@@ -89,10 +87,10 @@ const RecipesList = observer(() => {
                 {isListLoading ? (
                   <LoaderContainer />
                 ) : recipesStore.recipes.length === 0 ? (
-                  <div className={styles.noResults}>
-                    <h3>Рецепты не найдены</h3>
-                    <p>Попробуйте изменить параметры поиска.</p>
-                  </div>
+                  <>
+                     
+                    <ErrorMessage title='Рецепты не найдены' message='Попробуйте изменить параметры поиска.' />
+                  </>
                 ) : (
                   <CardGrid recipes={recipesStore.recipes} />
                 )}

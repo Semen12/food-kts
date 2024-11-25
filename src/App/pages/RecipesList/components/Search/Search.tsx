@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from '../../RecipesList.module.scss';
 import SearchIcon from '@assets/search.svg?react';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import MultiDropdown, { Option } from '@components/MultiDropdown';
+import styles from '../../RecipesList.module.scss';
 
 
 import { MEAL_TYPES } from '../../types';

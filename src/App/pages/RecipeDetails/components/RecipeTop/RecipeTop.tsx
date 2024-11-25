@@ -1,9 +1,9 @@
+import parse from 'html-react-parser';
 import { observer } from 'mobx-react-lite';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ArrowRound from '@assets/arrow-round.svg?react';
 import styles from './RecipeTop.module.scss';
-import parse from 'html-react-parser';
-import React from 'react';
 
 interface RecipeTopProps {
   title: string;

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
-import styles from '../../RecipesList.module.scss';
-import ArrowDownIcon from '@components/icons/ArrowDownIcon';
 import ArrowRound from '@assets/arrow-round.svg?react';
 import ArrrowRoundtwo from '@assets/arrow-round_copy.svg?react';
+import ArrowDownIcon from '@components/icons/ArrowDownIcon';
+import styles from '../../RecipesList.module.scss';
 
 interface PaginationProps {
   currentPage: number;

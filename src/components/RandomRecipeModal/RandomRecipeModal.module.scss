@@ -1,0 +1,116 @@
+.modalOverlay {
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  @media (max-width:$mobileSmall){
+   align-items: start;
+  }
+  align-items: center;
+  z-index: 10;
+  transition: all 0.3s ease 0s;
+  overflow-y: auto;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+ 
+    svg {
+      animation: rotate 1s linear infinite;
+    
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.errorWrapper {
+  min-height: 100%;
+  width: 100%;
+  
+}
+.modalContent {
+  background: $white-color;
+  padding: 30px 21px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  @media (max-width:$mobileSmall){
+   // top: 35px;
+  }
+
+  z-index: 10;
+  html[data-theme="dark"] & {
+    background: $text-secondary-light;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease 0s;
+  &:hover {
+    transform: scale(1.2);
+    transition: all 0.3s ease 0s;
+  }
+}
+
+.recipeCard {
+  img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  h2 {
+    margin: 15px 0;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+.recipeInfo {
+  margin: 15px 0;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.viewRecipeButton {
+  width: 100%;
+  padding: 10px;
+  
+  color: $white-color;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+} 

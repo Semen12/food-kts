@@ -1,13 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import styles from './FavoriteRecipes.module.scss';
-import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
-import CardGrid from '../RecipesList/components/CardGrid';
-import ArrowRound from '@assets/arrow-round.svg?react';
 import { useNavigate } from 'react-router-dom';
+import ArrowRound from '@assets/arrow-round.svg?react';
 import Button from '@components/Button';
-import { Recipe } from '@store/types';
+import { ErrorMessage } from '@components/ErrorMessage';
 import DeleteIcon from '@components/icons/DeleteIcon';
+import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import { Recipe } from '@store/types';
+import CardGrid from '../RecipesList/components/CardGrid';
+import styles from './FavoriteRecipes.module.scss';
 
 const FavoriteRecipes = observer(() => {
   const favoriteStore = useFavoriteRecipes();
@@ -67,19 +68,12 @@ const FavoriteRecipes = observer(() => {
 
         <div className={styles.favorites__content}>
           {favoriteStore.favorites.length === 0 ? (
-            <div className={styles.container}>
-              <div className={styles.noResults}>
-                <h3>Нет сохраненных рецептов</h3>
-                <p>Сохраняйте понравившиеся рецепты, нажимая кнопку "Save" на карточках.</p>
-              </div>
-            </div>
+            <ErrorMessage title='Нет сохраненных рецептов' message='Сохраняйте понравившиеся рецепты, нажимая кнопку &quot;Save&quot; на карточках.'/>
           ) : filteredFavorites.length === 0 ? (
-            <div className={styles.container}>
-              <div className={styles.noResults}>
-                <h3>Рецепты не найдены</h3>
-                <p>Попробуйте изменить поисковый запрос</p>
-              </div>
+            <div className={styles.errorWrapper}>
+              <ErrorMessage title='Рецепты не найдены' message='Попробуйте изменить поисковый запрос'/>
             </div>
+            
           ) : (
             <CardGrid 
               recipes={filteredFavorites}

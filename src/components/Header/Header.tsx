@@ -3,13 +3,18 @@ import { observer, useLocalStore } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTheme } from '@/context/ThemeContext';
+import Dice from '@assets/dice.svg?react';
 import Like from '@assets/like.svg?react';
 import Logo from '@assets/logo.svg?react';
 import Moon from '@assets/moon.svg?react';
 import Sun from '@assets/sun.svg?react';
 import User from '@assets/user.svg?react';
 import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import RecipeDetailsStore from '@store/RecipeDetailsStore/RecipeDetailsStore';
+import RecipesStore from '@store/RecipesStore/RecipesStore';
+import { Recipe, RecipeDetails } from '@types/recipe';
 import DynamicAdapt from '@utils/dynamic_adapt.js';
+import RandomRecipeModal from '../RandomRecipeModal/RandomRecipeModal';
 import styles from './Header.module.scss';
 
 const Header = observer(() => {
@@ -17,9 +22,19 @@ const Header = observer(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const favoriteStore = useFavoriteRecipes();
+  const [showRandomModal, setShowRandomModal] = useState(false);
+  const [randomRecipe, setRandomRecipe] = useState<RecipeDetails & Recipe | null>(null);
+  const recipeDetailsStore = useLocalStore(() => new RecipeDetailsStore());
 
   const handleMenuItemClick = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleRandomRecipe = () => {
+   
+     recipeDetailsStore.getRandomRecipe();
+    setRandomRecipe(recipeDetailsStore.randomRecipe);
+     setShowRandomModal(true);
   };
 
   useEffect(() => {
@@ -36,7 +51,7 @@ const Header = observer(() => {
     return () => {
       document.body.style.overflow = 'auto';
     };
-  }, [isMenuOpen,favoriteStore]);
+  }, [isMenuOpen,favoriteStore,recipeDetailsStore]);
 
 
 
@@ -107,9 +122,10 @@ const Header = observer(() => {
             </NavLink>
           </div>
         </div>
+          <div className={styles.header__utils}>
         <div className={styles.header__theme} >
         <button 
-            className={styles.header__button} 
+            className={styles.header__button + ' header__button_theme'} 
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
             
@@ -117,7 +133,17 @@ const Header = observer(() => {
             {theme === 'light' ? <Moon /> : <Sun />}
           </button>
         </div>
-        <div className={styles.header__buttons} data-da=".header__menuItems,893,6">
+          <div className={styles.header__random}>
+          <button 
+            className={styles.header__button + ' header__button_random'}
+            onClick={handleRandomRecipe}
+            aria-label="Get random recipe"
+          >
+            <Dice />
+          </button>
+        </div>
+        </div>
+        <div className={styles.header__buttons} data-da=".header__menuItems,931,6">
           <button 
             className={styles.header__button + ' header__button_favorite'}
             onClick={() => {
@@ -127,9 +153,9 @@ const Header = observer(() => {
           >
             <Like />
             {favoriteStore.favoritesCount > 0 && (
-              <span className={styles.header__favoriteCount}>
+              <p className={styles.header__favoriteCount}>
                 {favoriteStore.favoritesCount > 99 ? '99+' : favoriteStore.favoritesCount}
-              </span>
+              </p>
             )}
           </button>
         
@@ -140,6 +166,15 @@ const Header = observer(() => {
         </div>
        
       </header>
+      
+      {showRandomModal && (
+        <RandomRecipeModal 
+          recipe={recipeDetailsStore.randomRecipe}
+          onClose={() => setShowRandomModal(false)}
+          meta={recipeDetailsStore.meta}
+          errorMessage={recipeDetailsStore.errorMessage}
+        />
+      )}
     </React.Fragment>
   );
 });

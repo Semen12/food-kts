@@ -1,14 +1,14 @@
+import classNames from 'classnames';
 import { observer, useLocalStore } from 'mobx-react-lite';
 import React, { memo } from 'react';
-import styles from '../../RecipesList.module.scss';
 import { useNavigate } from 'react-router-dom';
 import clock from '@assets/clock.svg';
 import Button from '@components/Button';
 import Card from '@components/Card';
-import { Recipe } from '@store/types';
 import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import { Recipe } from '@store/types';
 import { getRecipeSubtitle, getRecipeKcal } from '@utils/recipe';
-import classNames from 'classnames';
+import styles from '../../RecipesList.module.scss';
 
 interface CardGridProps {
   recipes: Recipe[];

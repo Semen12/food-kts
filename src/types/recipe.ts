@@ -39,6 +39,8 @@ export type RecipeDetails = {
       unit: string;
     }>;
   };
+  vegetarian: boolean;
+  veryHealthy: boolean;
   analyzedInstructions: Array<{
     steps: Array<{
       number: number;

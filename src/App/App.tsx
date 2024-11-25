@@ -1,7 +1,7 @@
-import { ThemeProvider } from '@context/ThemeContext';
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from '@components/Header/Header';
+import { ThemeProvider } from '@context/ThemeContext';
 import { FavoriteRecipesProvider } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
 
 import FavoriteRecipes from './pages/FavoriteRecipes/FavoriteRecipes';

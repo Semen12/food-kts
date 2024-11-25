@@ -38,27 +38,13 @@
   }
 }
 
-.errorContainer, .noResults {
-  background-color: rgba(255, 192, 118, 0.23);
-  border: 1px solid $brand;
-  border-radius: $space-xxs;
-  padding: $space-16 $space-l;
-  text-align: center;
-  box-shadow: 3px 4px 10px 5px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
+.errorWrapper {
+  min-height: calc(100vh - 65px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   html[data-theme="dark"] & {
-    background:$text-secondary-light;
-    transition: all 0.3s ease 0s;
-  }
-  h3 {
-    color: $brand;
-    margin-bottom: $space-xxs;
-    font-size: $space-l;
-  }
-
-  p {
-    color: $brand-active;
-    font-size: $space-16;
+    background: $text-secondary-dark;
   }
 }
 

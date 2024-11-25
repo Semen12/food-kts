@@ -39,4 +39,21 @@ export const getRecipeById = async (id:number) => {
     console.error('Ошибка при получении данных рецепта:', error);
     return error;
   }
-}; 
+};
+
+export const getrandomRecipe = async () => {
+  try {
+    const { data } = await axiosInstance.get('/recipes/random', {
+      params: {
+        apiKey: import.meta.env.VITE_API_KEY,
+        number: 1 // получаем только 1 случайный рецепт
+      }
+    });
+    console.log('data', data.recipes[0]    );
+    return data; // API возвращает массив recipes
+  } catch (error) {
+    console.error('Ошибка при получении случайного рецепта:', error);
+    return error;
+  }
+};
+
