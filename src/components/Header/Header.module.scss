@@ -85,6 +85,10 @@
         color: $white-color;
       }
     }
+    &Transitioning {
+      color: $text-secondary;
+      font-weight: 400;
+    }
   }
 
   &__menuItems {

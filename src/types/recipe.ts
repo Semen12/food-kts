@@ -54,6 +54,7 @@ export type RecipeDetails = {
     name: string;
     amount: number;
     unit: string;
+    
   }>;
 };
 
@@ -76,14 +77,16 @@ export interface GetRecipeById {
   id: number;
 }
 
-interface Step {
+export interface Step {
   number: number;
   step: string;
   equipment: Array<{ name: string }>;
 }
 
-interface Ingredient {
+export interface Ingredient {
+  id: number;
   name: string;
   amount: number;
   unit: string;
+  image: string;
 }

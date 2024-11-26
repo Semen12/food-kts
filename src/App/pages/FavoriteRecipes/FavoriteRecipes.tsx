@@ -5,7 +5,7 @@ import ArrowRound from '@assets/arrow-round.svg?react';
 import Button from '@components/Button';
 import { ErrorMessage } from '@components/ErrorMessage';
 import DeleteIcon from '@components/icons/DeleteIcon';
-import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
 import { Recipe } from '@store/types';
 import CardGrid from '../RecipesList/components/CardGrid';
 import styles from './FavoriteRecipes.module.scss';

@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import FavoriteRecipesStore from './FavoriteRecipesStore';
+import FavoriteRecipesStore from '@store/FavoriteRecipesStore';
 
 const FavoriteRecipesContext = createContext<FavoriteRecipesStore | null>(null);
 

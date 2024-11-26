@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import clock from '@assets/clock.svg';
 import Button from '@components/Button';
 import Card from '@components/Card';
-import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
 import { Recipe } from '@store/types';
 import { getRecipeSubtitle, getRecipeKcal } from '@utils/recipe';
 import styles from '../../RecipesList.module.scss';

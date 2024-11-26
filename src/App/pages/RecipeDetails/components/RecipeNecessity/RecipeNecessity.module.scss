@@ -14,21 +14,27 @@
     line-height: 120%;
     color: $text-primary;
     margin-bottom: $space-xl;
+
+    @media (max-width:$tablet) {
+      text-align: center;
+    }
   }
 
   .recipe__section {
     margin-bottom: $space-48;
     position: relative;
+
     html[data-theme="dark"] & {
       color: $text-secondary-light;
       /* background: $text-secondary-light;
       padding: $space-16; 
       border-radius: $space-xxs;*/
-      
+
       h2 {
         color: $white-color;
       }
     }
+
     &:first-child::after {
       content: '';
       position: absolute;
@@ -38,7 +44,8 @@
       width: 7px;
       height: 253px;
       background: url("@assets/line-before.png") no-repeat center center / contain;
-      @media (max-width:$tablet){
+
+      @media (max-width:$tablet) {
         display: none;
       }
     }
@@ -54,19 +61,40 @@
       flex-wrap: wrap;
       font-size: 16px;
       line-height: 125%;
-     
+
 
       li {
         flex-basis: 48.8%;
+
+        @media (max-width:$tablet) {
+          flex-basis: 50%;
+        }
+
         position: relative;
         padding-left: 35px;
-         @media (max-width:$mobileSmall){
-         flex-basis: 100%;
-      }
+
+        @media (max-width:$mobileSmall) {
+          flex-basis: 100%;
+        }
+
       }
     }
 
     &-ingredients {
+      @media (max-width:$tablet) {
+        justify-content: center;
+
+      }
+
+      &-name {
+
+        display: flex;
+        align-items: center;
+        gap: $space-xs;
+        justify-content: space-between;
+
+      }
+
       li:before {
         content: "";
         position: absolute;
@@ -79,6 +107,10 @@
     }
 
     &-equipment {
+      @media (max-width:$tablet) {
+        justify-content: center;
+      }
+
       li:before {
         content: "";
         position: absolute;
@@ -97,11 +129,12 @@
   display: flex;
   flex-direction: column;
   gap: $space-16;
- 
+
   h2 {
     html[data-theme="dark"] & {
       color: $white-color;
     }
+
     @media (max-width:$tablet) {
       margin-bottom: 0px;
     }
@@ -112,6 +145,7 @@
     line-height: 125%;
     color: $text-primary;
     margin-bottom: $space-xxs;
+
     html[data-theme="dark"] & {
       color: $text-secondary-light;
     }
@@ -121,6 +155,7 @@
     font-size: 16px;
     line-height: 125%;
     color: $text-primary;
+
     html[data-theme="dark"] & {
       color: $text-secondary-light;
     }

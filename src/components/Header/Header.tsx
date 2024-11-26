@@ -9,12 +9,13 @@ import Logo from '@assets/logo.svg?react';
 import Moon from '@assets/moon.svg?react';
 import Sun from '@assets/sun.svg?react';
 import User from '@assets/user.svg?react';
-import { useFavoriteRecipes } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
 import RecipeDetailsStore from '@store/RecipeDetailsStore/RecipeDetailsStore';
 import RecipesStore from '@store/RecipesStore/RecipesStore';
 import { Recipe, RecipeDetails } from '@types/recipe';
 import DynamicAdapt from '@utils/dynamic_adapt.js';
 import RandomRecipeModal from '../RandomRecipeModal/RandomRecipeModal';
+import { ShoppingListModal } from '../ShoppingListModal/ShoppingListModal';
 import styles from './Header.module.scss';
 
 const Header = observer(() => {
@@ -25,6 +26,7 @@ const Header = observer(() => {
   const [showRandomModal, setShowRandomModal] = useState(false);
   const [randomRecipe, setRandomRecipe] = useState<RecipeDetails & Recipe | null>(null);
   const recipeDetailsStore = useLocalStore(() => new RecipeDetailsStore());
+  const [isShoppingListOpen, setIsShoppingListOpen] = useState(false);
 
   const handleMenuItemClick = () => {
     setIsMenuOpen(false);
@@ -93,9 +95,20 @@ const Header = observer(() => {
               Recipes
             </NavLink>
             <NavLink
-              to="/ingredients"
-              onClick={handleMenuItemClick}
-              className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
+              to="#"
+              onClick={(e) => {
+                e.preventDefault();
+                handleMenuItemClick();
+                setIsShoppingListOpen(true);
+              }}
+              className={({ isActive, isPending, isTransitioning }) => 
+                classnames(
+                  styles.header__menuItem, 
+                  isPending && styles.header__menuItemPending, 
+                  isActive && styles.header__menuItemActive,
+                  isTransitioning && styles.header__menuItemTransitioning
+                )
+              }
             >
               Ingredients
             </NavLink>
@@ -136,7 +149,10 @@ const Header = observer(() => {
           <div className={styles.header__random}>
           <button 
             className={styles.header__button + ' header__button_random'}
-            onClick={handleRandomRecipe}
+            onClick={() => {
+              handleMenuItemClick();
+              handleRandomRecipe();
+            }}
             aria-label="Get random recipe"
           >
             <Dice />
@@ -174,6 +190,10 @@ const Header = observer(() => {
           meta={recipeDetailsStore.meta}
           errorMessage={recipeDetailsStore.errorMessage}
         />
+      )}
+
+      {isShoppingListOpen && (
+        <ShoppingListModal onClose={() => setIsShoppingListOpen(false)} />
       )}
     </React.Fragment>
   );

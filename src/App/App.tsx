@@ -2,11 +2,12 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from '@components/Header/Header';
 import { ThemeProvider } from '@context/ThemeContext';
-import { FavoriteRecipesProvider } from '@store/FavoriteRecipesStore/FavoriteRecipesContext';
+import { FavoriteRecipesProvider } from '@context/FavoriteRecipesContext';
 
 import FavoriteRecipes from './pages/FavoriteRecipes/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails/RecipeDetails';
 import RecipesList from './pages/RecipesList/RecipesList';
+import ShoppingList from './pages/ShoppingList';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/recipe/:id" element={<RecipeDetails />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/favorites" element={<FavoriteRecipes />} />
+         
         </Routes>
       </ThemeProvider>
     </FavoriteRecipesProvider>
