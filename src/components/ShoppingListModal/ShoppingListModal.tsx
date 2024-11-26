@@ -11,7 +11,7 @@ interface ShoppingListModalProps {
 
 const SPOONACULAR_IMAGE_URL = 'https://spoonacular.com/cdn/ingredients_100x100/';
 
-export const ShoppingListModal = observer(({ onClose }: ShoppingListModalProps) => {
+ const ShoppingListModal = observer(({ onClose }: ShoppingListModalProps) => {
   React.useEffect(() => {
     // Блокируем прокрутку при монтировании
     document.body.style.overflow = 'hidden';
@@ -74,3 +74,5 @@ export const ShoppingListModal = observer(({ onClose }: ShoppingListModalProps) 
     </div>
   );
 }); 
+
+export default ShoppingListModal; 

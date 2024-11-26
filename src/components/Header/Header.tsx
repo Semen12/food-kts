@@ -2,7 +2,6 @@ import classnames from 'classnames';
 import { observer, useLocalStore } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useTheme } from '@/context/ThemeContext';
 import Dice from '@assets/dice.svg?react';
 import Like from '@assets/like.svg?react';
 import Logo from '@assets/logo.svg?react';
@@ -10,12 +9,13 @@ import Moon from '@assets/moon.svg?react';
 import Sun from '@assets/sun.svg?react';
 import User from '@assets/user.svg?react';
 import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
-import RecipeDetailsStore from '@store/RecipeDetailsStore/RecipeDetailsStore';
-import RecipesStore from '@store/RecipesStore/RecipesStore';
+import { useTheme } from '@context/ThemeContext';
+import { useAuth } from '@context/UseAuthContext';
+import RecipeDetailsStore from '@store/RecipeDetailsStore';
 import { Recipe, RecipeDetails } from '@types/recipe';
 import DynamicAdapt from '@utils/dynamic_adapt.js';
-import RandomRecipeModal from '../RandomRecipeModal/RandomRecipeModal';
-import { ShoppingListModal } from '../ShoppingListModal/ShoppingListModal';
+import RandomRecipeModal from '../RandomRecipeModal';
+import ShoppingListModal from '../ShoppingListModal';
 import styles from './Header.module.scss';
 
 const Header = observer(() => {
@@ -27,6 +27,8 @@ const Header = observer(() => {
   const [randomRecipe, setRandomRecipe] = useState<RecipeDetails & Recipe | null>(null);
   const recipeDetailsStore = useLocalStore(() => new RecipeDetailsStore());
   const [isShoppingListOpen, setIsShoppingListOpen] = useState(false);
+  const authStore = useAuth();
+  const [activeMenuItem, setActiveMenuItem] = useState<string | null>(null);
 
   const handleMenuItemClick = () => {
     setIsMenuOpen(false);
@@ -37,6 +39,15 @@ const Header = observer(() => {
      recipeDetailsStore.getRandomRecipe();
     setRandomRecipe(recipeDetailsStore.randomRecipe);
      setShowRandomModal(true);
+  };
+
+  const handleUserClick = () => {
+    handleMenuItemClick();
+    if (authStore.isAuthenticated) {
+      navigate('/profile');
+    } else {
+      navigate('/login');
+    }
   };
 
   useEffect(() => {
@@ -65,9 +76,14 @@ const Header = observer(() => {
           <div className={styles.header__logo}>
             <NavLink
               to="/"
-              className={({ isActive, isPending }) => classnames(styles.header__logoLink, isPending && styles.header__logoLinkPending, isActive && styles.header__logoLinkActive)
-              }
-              onClick={handleMenuItemClick}
+              className={({ isActive }) => classnames(
+                styles.header__logoLink, 
+                isActive && activeMenuItem === 'logo' && styles.header__logoLinkActive
+              )}
+              onClick={() => {
+                handleMenuItemClick();
+                setActiveMenuItem('logo');
+              }}
             >
               <Logo className={styles.header__logoImg} />
               <p className={styles.header__logoText}>Food Client</p>
@@ -89,50 +105,34 @@ const Header = observer(() => {
           )}>
             <NavLink
               to="/recipes"
-              onClick={handleMenuItemClick}
-              className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
-            >
-              Recipes
-            </NavLink>
-            <NavLink
-              to="#"
-              onClick={(e) => {
-                e.preventDefault();
+              onClick={() => {
                 handleMenuItemClick();
-                setIsShoppingListOpen(true);
+                setActiveMenuItem('recipes');
               }}
-              className={({ isActive, isPending, isTransitioning }) => 
+              className={({ isActive }) =>
                 classnames(
-                  styles.header__menuItem, 
-                  isPending && styles.header__menuItemPending, 
-                  isActive && styles.header__menuItemActive,
-                  isTransitioning && styles.header__menuItemTransitioning
+                  styles.header__menuItem,
+                  isActive && activeMenuItem === 'recipes' && styles.header__menuItemActive
                 )
               }
             >
+              Recipes
+            </NavLink>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleMenuItemClick();
+                setActiveMenuItem('ingredients');
+                setIsShoppingListOpen(true);
+              }}
+              className={classnames(
+                styles.header__menuItem,
+                activeMenuItem === 'ingredients' && styles.header__menuItemActive
+              )}
+            >
               Ingredients
-            </NavLink>
-            <NavLink
-              to="/products"
-              onClick={handleMenuItemClick}
-              className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
-            >
-              Products
-            </NavLink>
-            <NavLink
-              to="/menu-items"
-              onClick={handleMenuItemClick}
-              className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
-            >
-              Menu Items
-            </NavLink>
-            <NavLink
-              to="/meal-planning"
-              onClick={handleMenuItemClick}
-              className={({ isActive, isPending }) => classnames(styles.header__menuItem, isPending && styles.header__menuItemPending, isActive && styles.header__menuItemActive)}
-            >
-              Meal Planning
-            </NavLink>
+            </button>
+            
           </div>
         </div>
           <div className={styles.header__utils}>
@@ -175,8 +175,15 @@ const Header = observer(() => {
             )}
           </button>
         
-          <button className={styles.header__button + ' header__button_user'} onClick={handleMenuItemClick}>
+          <button 
+            className={styles.header__button + ' header__button_user'} 
+            onClick={() => {
+              handleMenuItemClick();
+              handleUserClick();
+            }}
+          >
             <User />
+            {authStore.isAuthenticated && <span className={styles.header__userDot} />}
           </button>
           </div>
         </div>
@@ -193,7 +200,10 @@ const Header = observer(() => {
       )}
 
       {isShoppingListOpen && (
-        <ShoppingListModal onClose={() => setIsShoppingListOpen(false)} />
+        <ShoppingListModal onClose={() => {
+          setIsShoppingListOpen(false);
+          setActiveMenuItem(null);
+        }} />
       )}
     </React.Fragment>
   );

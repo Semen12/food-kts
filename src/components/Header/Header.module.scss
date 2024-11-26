@@ -1,13 +1,20 @@
 .header {
   position: sticky;
   top: 0;
-  background: $button-primary-text;
+  background: rgba($button-primary-text, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 100;
   transition: all 0.3s ease 0s;
+  
 
   html[data-theme="dark"] & {
-    background: $primary-color;
+    background: rgba($primary-color, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease 0s;
+    border-bottom: 1px solid $white-color
+    
   }
 
   &__container {
@@ -56,7 +63,7 @@
     line-height: 120%;
     color: $text-primary;
     flex: 0 0 auto;
-
+    
     a {
       display: flex;
       align-items: center;
@@ -84,11 +91,9 @@
       html[data-theme="dark"] & {
         color: $white-color;
       }
+     
     }
-    &Transitioning {
-      color: $text-secondary;
-      font-weight: 400;
-    }
+   
   }
 
   &__menuItems {
@@ -147,7 +152,7 @@
       }
     }
 
-    a.header__menuItemActive {
+    .header__menuItemActive {
       font-weight: 600;
       font-size: 16px;
       line-height: 125%;
@@ -158,7 +163,15 @@
       }
     }
   }
-
+  &__menuItemActive {
+    font-weight: 700;
+    color: $brand;
+    &:hover{
+      color: $brand-hover-color;
+      transition: color 0.3s ease;
+      text-decoration: underline;
+    }
+  }
   &__utils {
     display: flex;
     align-items: center;
