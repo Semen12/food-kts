@@ -9,6 +9,7 @@ import SearchInput from './components/SearchInput/SearchInput';
 import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
 import { Recipe } from '@store/types';
 import styles from './FavoriteRecipes.module.scss';
+import { scrollLock } from '@utils/scrollLock';
 
 const FavoriteRecipes = observer(() => {
   const favoriteStore = useFavoriteRecipes();
@@ -63,6 +64,7 @@ const FavoriteRecipes = observer(() => {
               title='Нет сохраненных рецептов' 
               message='Сохраняйте понравившиеся рецепты, нажимая кнопку "Save" на карточках.'
             />
+            
           ) : filteredFavorites.length === 0 ? (
             <div className={styles.errorWrapper}>
               <ErrorMessage 

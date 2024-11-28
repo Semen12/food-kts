@@ -14,6 +14,15 @@ const SPOONACULAR_IMAGE_URL = 'https://spoonacular.com/cdn/ingredients_100x100/'
 
  const ShoppingListModal = observer(({ onClose }: ShoppingListModalProps) => {
  
+  useEffect(() => {
+    // Блокируем прокрутку при открытии модального окна
+    scrollLock.lock();
+    
+    // Разблокируем прокрутку при закрытии модального окна
+    return () => {
+      scrollLock.unlock();
+    };
+  }, []);
 
   return (
     <div className={styles.modalOverlay} onClick={onClose}>

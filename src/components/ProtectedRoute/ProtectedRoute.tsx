@@ -37,3 +37,5 @@ export const PublicOnlyRoute = ({ children }: { children: React.ReactNode }) => 
 
   return <>{children}</>;
 };
+
+export default { ProtectedRoute, PublicOnlyRoute };

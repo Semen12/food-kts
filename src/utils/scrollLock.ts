@@ -1,27 +1,34 @@
 export const scrollLock = {
   getScrollbarWidth(): number {
-    return window.innerWidth - document.documentElement.clientWidth;
-  },
+    const outer = document.createElement('div');
+    outer.style.visibility = 'hidden';
+    outer.style.overflow = 'scroll';
+    document.body.appendChild(outer);
 
-  hasScrollbar(): boolean {
-    return document.body.scrollHeight > window.innerHeight;
+    const inner = document.createElement('div');
+    outer.appendChild(inner);
+
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+    outer.parentNode?.removeChild(outer);
+
+    return scrollbarWidth;
   },
 
   lock(): void {
-    if (this.hasScrollbar()) {
-      const scrollbarWidth = this.getScrollbarWidth();
-      document.body.style.overflow = 'hidden';
-      
-      if (scrollbarWidth > 0) {
-        document.body.style.paddingRight = `${scrollbarWidth}px`;
-      }
+    const scrollbarWidth = this.getScrollbarWidth();
+    
+    // Блокируем прокрутку
+    document.body.style.overflow = 'hidden';
+    
+    // Компенсируем ширину скроллбара, чтобы избежать "прыжка" контента
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
     }
   },
 
   unlock(): void {
-    if (this.hasScrollbar()) {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    }
+    // Возвращаем возможность прокрутки и убираем компенсацию
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   }
 }; 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@components/Button/Button';
 import { ErrorMessage } from '@components/ErrorMessage';
@@ -19,7 +19,15 @@ interface RandomRecipeModalProps {
 const RandomRecipeModal = ({ recipe, onClose, meta, errorMessage }: RandomRecipeModalProps) => {
   const navigate = useNavigate();
   
- 
+  useEffect(() => {
+    // Блокируем прокрутку при открытии модального окна
+    scrollLock.lock();
+    
+    // Разблокируем прокрутку при закрытии модального окна
+    return () => {
+      scrollLock.unlock();
+    };
+  }, []); // Пустой массив зависимостей, так как эффект должен сработать только при монтировании/размонтировании
 
   return (
     <React.Fragment>
