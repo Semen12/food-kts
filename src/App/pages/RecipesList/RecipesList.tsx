@@ -1,130 +1,95 @@
-import classNames from 'classnames';
-import { useEffect, useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { observer, useLocalStore } from 'mobx-react-lite';
 
-import clock from '@assets/clock.svg';
-import Search from '@assets/search.svg?react';
-import Button from '@components/Button';
-import Card from '@components/Card';
-import Input from '@components/Input';
-import Loader from '@components/Loader';
-import MultiDropdown from '@components/MultiDropdown';
-import Consts from '@config/consts';
-import { getRecipes } from '@services/recipesService';
-import { Recipe } from '@types/recipe';
+import React from 'react';
+import bg from '@assets/bg.jpg';
+import { ErrorMessage } from '@components/ErrorMessage/ErrorMessage';
+import FavoriteRecipesStore from '@store/FavoriteRecipesStore';
+import RecipesStore from '@store/RecipesStore/RecipesStore';
+import { Meta } from '@store/types';
+import CardGrid from '../../../components/CardGrid';
+import LoaderContainer from '../components/LoaderContainer';
+import Pagination from './components/Pagination';
+import Search from './components/Search';
+import { useSearch } from './hooks/useSearch';
 import styles from './RecipesList.module.scss';
-const RecipesList = () => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [searchValue, setSearchValue] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState<Option[]>([]);
-  const navigate = useNavigate();
-/* 
-  const fetchRecipes = async (page: number) => {
-    setLoading(true);
-    try {
-      const response = await axiosInstance.get<RecipesResponse>('/recipes/complexSearch', {
-        params: {
-          addRecipeNutrition: true,
-          offset: (page - 1) * 9,
-          number: 9,
-        },
-      });
-      setRecipes(response.data.results);
-    } catch (error) {
-      console.error('Ошибка при загрузке рецептов:', error);
-    } finally {
-      setLoading(false);
-    }
-  }; */
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getRecipes(currentPage);
-      if (response?.results) {
-        setRecipes(response.results);
-        if(recipes){
-          setLoading(false);
-        }
-      }
-    };
-    fetchData();
-  }, [currentPage]);
+const RecipesList = observer(() => {
+  const recipesStore = useLocalStore(() => new RecipesStore());
 
-  const renderPagination = useMemo(() => {
-    return (
-      <div className={styles.pagination}>
-        {[...Array(9)].map((_, index) => (
-          <button
-            key={index}
-            className={classNames(styles.pageButton, {
-              [styles.active]: currentPage === index + 1,
-            })}
-            onClick={() => setCurrentPage(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
-    );
-  }, [currentPage]);
+  const {
+    searchInputValue,
+    setSearchInputValue,
+    setAppliedSearchValue,
+    currentPage,
+    setCurrentPage,
+    selectedTypes,
+    setSelectedTypes,
+    isListLoading,
+    handleSearch,
+    handleTypesChange,
+    handleClearSearch,
+    handleClearTypes
+  } = useSearch({ recipesStore });
 
- 
   return (
-    <>  
-      {loading && <div  className={styles.loader}><Loader size='l' /></div>}
-      {! loading && (
+    <React.Fragment>
+      {recipesStore.meta === Meta.loading && recipesStore.recipes.length === 0 && (
+        <LoaderContainer />
+      )}
+      {recipesStore.meta === Meta.error && recipesStore.recipes.length === 0 && (
+        <div className={styles.errorWrapper}>
+          <ErrorMessage title="Ошибка загрузки рецептов" message={recipesStore.errorMessage} />
+        </div>
+      )}
+      {(recipesStore.meta === Meta.success || recipesStore.recipes.length > 0) && (
         <>
-          <div className={styles.banner}></div>
+          <div className={styles.banner} >
+            <img src={bg} alt="banner" />
+          </div>
           <div className={styles.recipes}>
-        <div className={styles.recipes__container}>
+            <div className={styles.recipes__container}>
           <div className={styles.recipes__title}>
-            Find the perfect food and <span>drink ideas</span> for every occasion, from <span>weeknight dinners</span>{' '}
-            to <span>holiday feasts</span>.
+            Find the perfect food and <span>drink ideas</span> for every occasion, from{' '}
+            <span>weeknight dinners</span> to <span>holiday feasts</span>.
           </div>
           <div className={styles.recipes__content}>
-            <div className={styles.recipes__content__search}>
-              <Input
-                className={styles.recipes__content__search__input}
-                value={searchValue}
-                onChange={setSearchValue}
-                placeholder='Enter dishes'
-                afterSlot={
-                  <Button>
-                   <Search />
-                  </Button>
+            <Search
+              searchValue={searchInputValue}
+              onSearchChange={setSearchInputValue}
+              onSearch={handleSearch}
+              onClearSearch={handleClearSearch}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && searchInputValue.trim()) {
+                  handleSearch();
                 }
-              />
-              <MultiDropdown 
-                options={Consts.options}
-                value={selectedCategories} 
-                onChange={setSelectedCategories} 
-                getTitle={(selected) => selected.length ? selected.map(s => s.value).join(', ') : 'Categories'} 
-              />
-            </div>
-            <div className={styles.recipes__content__grid}>
-              {recipes.map((recipe) => (
-                <Card
-                  key={recipe.id}
-                  image={recipe.image}
-                  captionSlot={<><img src={clock} alt="clock" />{`${recipe.readyInMinutes ?? 0} minutes`}</>}
-                  title={recipe.title}
-                  subtitle={recipe.nutrition?.ingredients?.map(i => i.name).join(' + ') || 'No ingredients'}
-                  contentSlot={`${Math.round(recipe.nutrition?.nutrients[0]?.amount ?? 0)} kcal`}
-                  onClick={() => navigate(`/recipe/${recipe.id}`)}
-                  actionSlot={<Button onClick={(e) => e.stopPropagation()}>Save</Button>}
-                />
-              ))}
-            </div>
-            {renderPagination}
+              }}
+              isSearchDisabled={!searchInputValue.trim()}
+              selectedTypes={selectedTypes}
+              onTypesChange={handleTypesChange}
+              onClearTypes={handleClearTypes} />
+
+            {isListLoading ? (
+              <LoaderContainer />
+            ) : recipesStore.recipes.length === 0 ? (
+              <>
+
+                <ErrorMessage title='Рецепты не найдены' message='Попробуйте изменить параметры поиска.' />
+              </>
+            ) : (
+              <CardGrid recipes={recipesStore.recipes} />
+            )}
           </div>
-        </div>
+          <Pagination
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+            totalResults={recipesStore.totalResults}
+            number={recipesStore.number} />
+            </div>
           </div>
         </>
       )}
-    </>
+    </React.Fragment>
   );
-};
+});
 
 export default RecipesList;

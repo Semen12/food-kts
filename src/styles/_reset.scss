@@ -1,4 +1,5 @@
 /* Reset and base styles  */
+
 * {
   padding: 0;
   margin: 0;
@@ -84,10 +85,16 @@ legend {
   display: block;
 }
 
-html {
-font-family:'Roboto', sans-serif;
- min-height: 100%;
-}
-/* #root {
-  min-height: 100vh;
-} */
+
+ 
+  body {
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    /* mobile viewport bug fix */
+    min-height: -webkit-fill-available;
+  }
+   
+  html {
+    height: -webkit-fill-available;
+  }
+

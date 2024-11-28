@@ -39,6 +39,8 @@ export type RecipeDetails = {
       unit: string;
     }>;
   };
+  vegetarian: boolean;
+  veryHealthy: boolean;
   analyzedInstructions: Array<{
     steps: Array<{
       number: number;
@@ -48,6 +50,12 @@ export type RecipeDetails = {
       }>;
     }>;
   }>;
+  extendedIngredients: Array<{
+    name: string;
+    amount: number;
+    unit: string;
+    
+  }>;
 };
 
 export type RecipesResponse = {
@@ -56,3 +64,29 @@ export type RecipesResponse = {
   number: number;
   totalResults: number;
 }; 
+
+export interface GetRecipesParams {
+  page?: number;
+  pageSize?: number;
+  query?: string;
+  type?: string[];
+}
+
+
+export interface GetRecipeById {
+  id: number;
+}
+
+export interface Step {
+  number: number;
+  step: string;
+  equipment: Array<{ name: string }>;
+}
+
+export interface Ingredient {
+  id: number;
+  name: string;
+  amount: number;
+  unit: string;
+  image: string;
+}

@@ -1,112 +1,187 @@
-
-
 .loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 65px);
-    width: 100%;
-    overflow: hidden;
-    svg{
-        animation: spin 1s linear infinite;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 65px);
+  width: 100%;
+  overflow: hidden;
+
+  svg {
+    animation: spin 1s linear infinite;
+  }
 }
+
+.gridLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  svg {
+    animation: spin 1s linear infinite;
+  }
+
+  margin-bottom: $space-xl;
+}
+
+.recipes__content__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 65px);
+  width: 100%;
+  padding: $space-xxs;
+  html[data-theme="dark"] & {
+    background:$text-secondary-dark;
+  }
+}
+
+.errorWrapper {
+  min-height: calc(100vh - 65px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  html[data-theme="dark"] & {
+    background: $text-secondary-dark;
+  }
+}
+
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .banner {
-    background: url('@assets/bg.jpg') no-repeat center center / cover;
-    height: 572px;
+background: url("@assets/bg.jpg") no-repeat center center / cover;
+ 
+  min-height: calc(100vh - 65px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  @media (max-width: 650px) {
+    background-position: 53% 0px;
+    min-height: 572px;
+    height: 100%;
+  }
+
+  img {
+    display: none;
+  }
 }
 
 .recipes {
-    background: rgba(255, 192, 118, 0.23);
-    padding-top: $space-36;
+  background: rgba(255, 192, 118, 0.23);
+  padding-top: $space-36;
+  html[data-theme="dark"] & {
+    background: $primary-color;
+    
+  }
 
-    &__container {
-        max-width: 1240px;
-        margin: 0 auto;
+  @media (max-width: $mobile) {
+    padding-top: $space-16;
+  }
 
+  &__container {
+    max-width: 1208px;
+    padding: 0 $space-16;
+    margin: 0 auto;
+    overflow: hidden;
+    
+  }
+
+  &__title {
+    font-size: 20px;
+    line-height: 120%;
+    color: $text-primary;
+    text-align: center;
+    width: 100%;
+    padding: 0 $space-16;
+    
+    html[data-theme="dark"] & {
+      color: $white-color;
+    }
+    
+    span {
+      text-decoration: underline;
+      text-decoration-skip-ink: none;
     }
 
-    &__title {
-        font-size: 20px;
-        line-height: 120%;
-        color: $text-primary;
-        text-align: center;
+    margin-bottom: $space-48;
 
-        span {
-            text-decoration: underline;
-            text-decoration-skip-ink: none;
+    @media (max-width: $mobile) {
+      margin-bottom: $space-26;
+      font-size: 16px;
+    }
+  }
+
+  &__content {
+    margin-bottom: $space-xl;
+
+    .search {
+      // background: $primary-color;
+      margin-bottom: $space-48;
+      /*  display: flex;
+      justify-content: flex-end;
+      gap: $space-l;
+      flex-wrap: wrap;
+*/
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: end;
+
+      &__input {
+        justify-content: space-between;
+        gap: $space-xxs;
+        margin-bottom: $space-l;
+
+        input[type="text"] {
+          max-width: 1095px;
+          width: 100%;
+
         }
 
-        margin-bottom: $space-48;
-    }
+        button[type="button"] {
+          width: 64px;
+          height: 52px;
+          border-radius: 10px;
+          padding: 14px 20px;
+          //background: $brand;
 
-
-    &__content {
-        padding: $space-xxs;
-
-        &__search {
-            // background: $primary-color;
-            margin-bottom: $space-48;
-            display: flex;
-            justify-content: flex-end;
-            gap: $space-l;
-            flex-wrap: wrap;
-
-            &__input {
-                position: relative;
-                input[type="text"] {
-                    max-width: 1150px;
-                }
-
-                
-                    button[type="button"] {
-                        width: 64px;
-                        height: 52px;
-                        border-radius: 10px;
-                        padding: 14px 20px;
-                        background: $brand;
-                        position: absolute;
-                        right: 0;
-                       
-                    }
-                
-            }
 
         }
+      }
+      
 
-        &__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
-            gap: $space-xl;
-            justify-items: center;
-            margin-bottom: $space-xl;
-        }
-    }
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: $space-s;
-}
-
-.pageButton {
-    padding: $space-xs $space-s;
-    border: 1px solid $primary-color;
-    background: none;
-    cursor: pointer;
-
-    &.active {
-        background: $primary-color;
-        color: $white-color;
     }
 
-    &:hover {
-        background: $primary-color-40;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
+      gap: 24px;
+      justify-items: center;
+     
+
+      @media (max-width: 1145px) {
+        gap: 30px;
+        grid-template-columns: repeat(auto-fill, minmax(348px, 360px));
+        justify-content: center;
+      }
+
+      @media (max-width:$mobileSmall) {
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+      }
     }
+  }
 }
+

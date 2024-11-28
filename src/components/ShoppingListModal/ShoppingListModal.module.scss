@@ -1,0 +1,177 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  padding-bottom: 20px;
+  @media (max-width:$mobileSmall){
+   align-items: start;
+   }
+   overflow-y: auto;
+   transition: all 0.3s ease 0s;
+}
+
+.modal {
+  background: #ffeded;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: absolute;
+  top: 35px;
+  display: flex;
+  flex-direction: column;
+
+  html[data-theme="dark"] & {
+    background: $text-secondary-dark;
+    color: $white-color;
+    transition: all 0.3s ease 0s;
+  }
+  @media (max-width:$mobileSmall){
+    position: relative;
+   top: 35px;
+  }
+  transition: all 0.3s ease 0s;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid $text-primary;
+  html[data-theme="dark"] & {
+    border-bottom: 1px solid $white-color;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease 0s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  
+  &:hover {
+    transform: scale(1.2);
+    transition: all 0.3s ease 0s;
+  }
+
+ 
+}
+
+.modalContent {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: #e2d7d7;
+  border-radius: 6px;
+  gap: $space-xxs;
+  transition: all 0.3s ease 0s;
+  html[data-theme="dark"] & {
+    background: #918181;
+    transition: all 0.3s ease 0s;
+  }
+  
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.itemImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemName {
+  font-weight: 500;
+}
+
+.itemAmount {
+  font-size: 14px;
+  color: #666;
+
+  html[data-theme="dark"] & {
+    color: #ccc;
+  }
+}
+
+.removeButton {
+ 
+  background-color: $brand;
+  color: $white-color;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 14px 20px;
+  width: 79px;
+  height: 52px;
+  min-height: 52px;
+  
+}
+
+.clearButton {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: $brand;
+  color: $white-color;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 14px 20px;
+ 
+  height: 52px;
+  min-height: 52px;
+  
+}
+
+.emptyMessage {
+  text-align: center;
+  color: #666;
+  margin: 20px 0;
+
+  html[data-theme="dark"] & {
+    color: #ccc;
+  }
+} 
