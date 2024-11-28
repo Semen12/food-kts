@@ -5,7 +5,11 @@ import { defineConfig } from 'vite';
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
+<<<<<<< HEAD
   base: "https://Semen12.github.io/food-kts/",
+=======
+   base: "https://Semen12.github.io/food-kts/",
+>>>>>>> main
   plugins: [react(), svgr()],
   resolve: {
     alias: {
