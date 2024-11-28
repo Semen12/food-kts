@@ -1,16 +1,16 @@
-import LoaderContainer from '../components/LoaderContainer';
 import axios from 'axios';
 import { observer } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import avatarImage from '@assets/avatar.jpg';
 import EyeOffIcon from '@assets/eye-off.svg?react';
 import EyeIcon from '@assets/eye.svg?react';
 import Button from '@components/Button';
 import Input from '@components/Input';
 import { useAuth } from '@context/UseAuthContext';
 import { Meta } from '@store/types';
+import LoaderContainer from '../components/LoaderContainer';
 import styles from './Profile.module.scss';
-import avatarImage from '@assets/avatar.jpg';
 
 
 const Profile = observer(() => {

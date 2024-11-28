@@ -16,8 +16,8 @@ import { Recipe, RecipeDetails } from '@types/recipe';
 import DynamicAdapt from '@utils/dynamic_adapt.js';
 import RandomRecipeModal from '../RandomRecipeModal';
 import ShoppingListModal from '../ShoppingListModal';
-import styles from './Header.module.scss';
 import { useHeaderHandlers } from './hooks/useHeaderHandlers';
+import styles from './Header.module.scss';
 
 const Header = observer(() => {
   const { theme, toggleTheme } = useTheme();

@@ -1,15 +1,15 @@
 import { observer, useLocalStore } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import EyeOffIcon  from '@assets/eye-off.svg?react';
+import EyeIcon  from '@assets/eye.svg?react';
 import Button from '@components/Button';
 import { ErrorMessage } from '@components/ErrorMessage';
+import Input from '@components/Input';
 import { useAuth } from '@context/UseAuthContext';
+import { useAuthForm } from '@hooks/useAuthForm';
 import { Meta } from '@store/types';
 import styles from './Login.module.scss';
-import Input from '@components/Input';
-import EyeIcon  from '@assets/eye.svg?react';
-import EyeOffIcon  from '@assets/eye-off.svg?react';
-import { useAuthForm } from '@hooks/useAuthForm';
 
 const Login = observer(() => {
   const authStore = useAuth();

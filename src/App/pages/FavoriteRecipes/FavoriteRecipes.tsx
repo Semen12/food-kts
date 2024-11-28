@@ -4,12 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@components/Button';
 import CardGrid from '@components/CardGrid';
 import { ErrorMessage } from '@components/ErrorMessage';
-import PageTitle from './components/PageTitle/PageTitle';
-import SearchInput from './components/SearchInput/SearchInput';
 import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
 import { Recipe } from '@store/types';
+import PageTitle from './components/PageTitle/PageTitle';
+import SearchInput from './components/SearchInput/SearchInput';
 import styles from './FavoriteRecipes.module.scss';
-import { scrollLock } from '@utils/scrollLock';
 
 const FavoriteRecipes = observer(() => {
   const favoriteStore = useFavoriteRecipes();

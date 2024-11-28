@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import styles from './ScrollToTop.module.scss';
 import ArrowUp from '@assets/arrow-up.svg?react';
+import styles from './ScrollToTop.module.scss';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);

@@ -1,6 +1,6 @@
-import { LoginData, RegisterData, UpdateUserData, User } from '@types/user';
 import { AuthResponse, RegisterResponse, UpdateUserResponse } from '@types/auth';
 import { api, BASE_URL } from '@config/axios';
+import { LoginData, RegisterData, UpdateUserData, User } from '@types/user';
 
 export const authService = {
   async login(data: LoginData): Promise<AuthResponse> {

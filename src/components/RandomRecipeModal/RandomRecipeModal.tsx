@@ -6,8 +6,8 @@ import Loader from '@components/Loader';
 import DeleteIcon from '@components/icons/DeleteIcon';
 import { Meta } from '@store/types';
 import { Recipe, RecipeDetails } from '@types/recipe';
-import styles from './RandomRecipeModal.module.scss';
 import { scrollLock } from '@utils/scrollLock';
+import styles from './RandomRecipeModal.module.scss';
 
 interface RandomRecipeModalProps {
   recipe: RecipeDetails & Recipe | null;

@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import shoppingListStore from '@store/ShoppingListStore/ShoppingListStore';
-import styles from './ShoppingListModal.module.scss';
-import DeleteIcon from '@components/icons/DeleteIcon';
+import React, { useEffect } from 'react';
 import Button from '@components/Button';
+import DeleteIcon from '@components/icons/DeleteIcon';
+import shoppingListStore from '@store/ShoppingListStore/ShoppingListStore';
 import { scrollLock } from '@utils/scrollLock';
+import styles from './ShoppingListModal.module.scss';
 
 interface ShoppingListModalProps {
   onClose: () => void;

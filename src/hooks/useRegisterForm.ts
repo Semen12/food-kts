@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useAuth } from '@context/UseAuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@context/UseAuthContext';
 
 interface FormData {
   email: string;
