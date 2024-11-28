@@ -9,65 +9,22 @@ import styles from './Register.module.scss';
 import Input from '@components/Input';
 import EyeIcon  from '@assets/eye.svg?react';
 import EyeOffIcon  from '@assets/eye-off.svg?react';
+import { useRegisterForm } from '@hooks/useRegisterForm';
 
 const Register = observer(() => {
-  const authStore = useAuth();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    username: '',
-  });
+  const {
+    formData,
+    errors,
+    showPassword,
+    setShowPassword,
+    handleInputChange,
+    handleSubmit: handleFormSubmit,
+    isFormValid,
+    authStore
+  } = useRegisterForm();
 
-  const [errors, setErrors] = useState({
-    username: '',
-    password: '',
-    email: ''
-  });
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const validateField = (name: string, value: string) => {
-    switch (name) {
-      case 'username':
-        if (value.trim().length < 3) {
-          return 'Имя пользователя должно быть не менее 3 символов';
-        }
-        break;
-      case 'password':
-        if (value.trim().length < 3) {
-          return 'Пароль должен быть не менее 3 символов';
-        }
-        break;
-      case 'email':
-        if (!value.trim()) {
-          return 'Email обязателен';
-        }
-        break;
-    }
-    return '';
-  };
-
-  const handleInputChange = (value: string, name: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    const error = validateField(name, value);
-    setErrors(prev => ({
-      ...prev,
-      [name]: error
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await authStore.register(formData);
-    if (authStore.isAuthenticated) {
-      navigate('/profile');
-    }
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -76,10 +33,18 @@ const Register = observer(() => {
     };
   }, []);
 
-  const isFormValid = formData.email.trim() !== '' && 
-                     formData.password.trim().length >= 3 && 
-                     formData.username.trim().length >= 3 &&
-                     !Object.values(errors).some(error => error !== '');
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await authStore.register(formData);
+      if (authStore.isAuthenticated) {
+        navigate('/profile');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className={styles.register}>
@@ -134,9 +99,9 @@ const Register = observer(() => {
             <Button 
               type="submit" 
               className={styles.register__button}
-              disabled={!isFormValid}
+              disabled={!isFormValid || isLoading}
             >
-              Зарегистрироваться
+              {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
             </Button>
           </form>
           <p className={styles.register__footer}>

@@ -29,6 +29,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
+      
       <div className={inputContainerClasses}>
         <input
           ref={ref}
@@ -38,7 +39,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type='text'
           {...props}
         />
-        <div className={styles['after-slot'] + ' ' + styles.afterSlot_clearIcon}>
+        <div className={classNames(styles['after-slot'], styles.afterSlot_clearIcon)}>
           {value && onClear && (
             <DeleteIcon 
               width={20} 

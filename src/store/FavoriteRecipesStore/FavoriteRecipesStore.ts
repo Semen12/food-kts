@@ -9,7 +9,7 @@ class FavoriteRecipesStore {
     this.loadFromLocalStorage();
   }
 
-  private loadFromLocalStorage() {
+  public loadFromLocalStorage() {
     const saved = localStorage.getItem('favoriteRecipes');
     if (saved) {
       this.favorites = JSON.parse(saved);
@@ -23,9 +23,9 @@ class FavoriteRecipesStore {
   toggleFavorite(recipe: Recipe) {
     const index = this.favorites.findIndex(item => item.id === recipe.id);
     if (index === -1) {
-      this.favorites.push(recipe);
+      this.favorites = [...this.favorites, recipe];
     } else {
-      this.favorites.splice(index, 1);
+      this.favorites = this.favorites.filter(item => item.id !== recipe.id);
     }
     this.saveToLocalStorage();
   }

@@ -1,0 +1,66 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: $space-s;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  padding-bottom: $space-26;
+  height: auto;
+
+  @media (max-width: $mobileSmall) {
+    gap: $space-xs;
+  }
+}
+
+.pageButton {
+  min-width: 38px;
+  background: none;
+  cursor: pointer;
+
+  html[data-theme="dark"] & {
+    color: $white-color;
+  }
+
+  &.active {
+    padding: 10px;
+    background: $loader-bg;
+    color: $white-color;
+  }
+
+  &:hover {
+    background: $primary-color-40;
+    
+    html[data-theme="dark"] & {
+      background: $text-secondary-light;
+      color: $text-secondary-dark;
+    }
+  }
+
+  &:disabled {
+    svg path {
+      stroke: $text-secondary;
+    }
+  }
+
+  &:not(:disabled) {
+    svg path {
+      stroke: #151411;
+      
+      html[data-theme="dark"] & {
+        stroke: $white-color;
+      }
+    }
+  }
+
+  @media (max-width: $mobileSmall) {
+    min-width: 30px;
+  }
+}
+
+.dots {
+  cursor: default;
+  pointer-events: none;
+  &:hover {
+    background: inherit;
+  }
+} 

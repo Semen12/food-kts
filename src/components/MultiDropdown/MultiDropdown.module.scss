@@ -1,5 +1,4 @@
 .root {
- 
   font-family: $font-family;
   width: 370px;
   display: flex;
@@ -10,13 +9,10 @@
   .root__multidropdown {
     &.is_open {
       input[type="text"] {
-
         &::placeholder {
           color: $primary-color;
         }
-
       }
-
     }
 
     &::placeholder {
@@ -25,19 +21,16 @@
 
     input[type="text"] {
       padding-right: 95px;
-
-
     }
 
-    
     .root__multidropdown_afterslot {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
       right: $space-36;
-
+      cursor: pointer;
       transition: all 0.3s ease 0s;
-
-     
 
       &.rotated {
         transform: rotate(180deg);
@@ -45,25 +38,18 @@
       }
 
       & .icon_secondary {
-        @include icon-color('secondary', $fill: false, $stroke: true);
+        @include icon-color("secondary", $fill: false, $stroke: true);
       }
-
-
     }
-
-
-
-    
-
   }
-
-
 
   .options {
     background-color: $white-color;
+
     html[data-theme="dark"] & {
       background-color: $text-secondary-light;
     }
+
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     padding-bottom: 8px;
     margin-top: 10px;
@@ -73,7 +59,7 @@
     width: 100%;
     border-radius: 10px;
     z-index: 3;
- 
+
     max-height: 300px;
     overflow-y: auto;
 
@@ -102,8 +88,6 @@
 
     &.selected {
       color: $brand;
-
     }
   }
 }
-

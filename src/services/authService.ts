@@ -1,42 +1,26 @@
-import axios from 'axios';
 import { LoginData, RegisterData, UpdateUserData, User } from '@types/user';
-
-const BASE_URL = 'https://e41d8e14e1ed8f0f.mokky.dev';
-
-// Создаем инстанс axios с базовым URL
-const api = axios.create({
-  baseURL: BASE_URL
-});
-
-// Интерцептор для добавления токена к запросам
-api.interceptors.request.use((config) => {
-
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+import { AuthResponse, RegisterResponse, UpdateUserResponse } from '@types/auth';
+import { api, BASE_URL } from '@config/axios';
 
 export const authService = {
-  async login(data: LoginData) {
-    const response = await api.post('/auth', data);
+  async login(data: LoginData): Promise<AuthResponse> {
+    const response = await api.post<AuthResponse>('/auth', data);
     if (response.data.token) {
       localStorage.setItem('token', response.data.token);
     }
     return response.data;
   },
 
-  async register(data: RegisterData) {
-    const response = await api.post('/register', data);
+  async register(data: RegisterData): Promise<RegisterResponse> {
+    const response = await api.post<RegisterResponse>('/register', data);
     if (response.data.token) {
       localStorage.setItem('token', response.data.token);
     }
     return response.data;
   },
 
-  async getCurrentUser() {
-    const response = await api.get('/auth_me');
+  async getCurrentUser(): Promise<User> {
+    const response = await api.get<User>('/auth_me');
     return response.data;
   },
 
@@ -45,8 +29,7 @@ export const authService = {
       throw new Error('ID пользователя не определен');
     }
 
-    const response = await api.patch(`${BASE_URL}/users/${userId}`, userData);
-       
+    const response = await api.patch<User>(`${BASE_URL}/users/${userId}`, userData);
 
     if (!response.data) {
       throw new Error('Ошибка при обновлении профиля');
@@ -55,7 +38,7 @@ export const authService = {
     return response.data;
   },
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
   }
 }; 

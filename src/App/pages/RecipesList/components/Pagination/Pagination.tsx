@@ -2,8 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import ArrowRound from '@assets/arrow-round.svg?react';
 import ArrrowRoundtwo from '@assets/arrow-round_copy.svg?react';
-import ArrowDownIcon from '@components/icons/ArrowDownIcon';
-import styles from '../../RecipesList.module.scss';
+import styles from './Pagination.module.scss';
 
 interface PaginationProps {
   currentPage: number;
@@ -30,11 +29,7 @@ const Pagination: React.FC<PaginationProps> = ({
   // Если страница всего одна, не показываем пагинацию
   if (totalPages <= 1) return null;
 
-  const pages: (number | string)[] = [];
-
-  // Добавляем первую страницу
-  pages.push(1);
-
+ const pages: (number | string)[] = [1];
   // Добавляем '...' если текущая страница больше 3
   if (currentPage > 3) {
     pages.push('...');
@@ -71,8 +66,10 @@ const Pagination: React.FC<PaginationProps> = ({
           key={index}
           className={classNames(styles.pageButton, {
             [styles.active]: page === currentPage,
+            [styles.dots]: page === '...'
           })}
           onClick={() => typeof page === 'number' && onPageChange(page)}
+          disabled={page === '...'}
         >
           {page}
         </button>

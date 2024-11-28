@@ -1,15 +1,17 @@
+import LoaderContainer from '../components/LoaderContainer';
+import axios from 'axios';
 import { observer } from 'mobx-react-lite';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import EyeOffIcon from '@assets/eye-off.svg?react';
+import EyeIcon from '@assets/eye.svg?react';
+import Button from '@components/Button';
+import Input from '@components/Input';
 import { useAuth } from '@context/UseAuthContext';
 import { Meta } from '@store/types';
 import styles from './Profile.module.scss';
-import React from 'react';
-import Button from '@components/Button';
-import Input from '@components/Input';
-import EyeIcon from '@assets/eye.svg?react';
-import EyeOffIcon from '@assets/eye-off.svg?react';
-import axios from 'axios';
+import avatarImage from '@assets/avatar.jpg';
+
 
 const Profile = observer(() => {
   const authStore = useAuth();
@@ -20,18 +22,13 @@ const Profile = observer(() => {
     username: authStore.user?.username || '',
     email: authStore.user?.email || '',
   });
-  const [avatarUrl, setAvatarUrl] = useState('');
   const [isImageLoading, setIsImageLoading] = useState(true);
 
   useEffect(() => {
-    if (authStore.user?.id) {
-      setFormData({
-        id: authStore.user.id,
-        username: authStore.user.username || '',
-        email: authStore.user.email || '',
-      });
+    if (authStore.meta === Meta.success && !authStore.isAuthenticated) {
+      navigate('/login');
     }
-  }, [authStore.user]);
+  }, [authStore.meta, authStore.isAuthenticated, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,13 +47,6 @@ const Profile = observer(() => {
 
 
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   return (
     <div className={styles.profile}>
@@ -64,7 +54,7 @@ const Profile = observer(() => {
         <div className={styles.profile__content}>
           <h1 className={styles.profile__title}>Профиль</h1>
 
-          {authStore.meta === Meta.loading && <div>Загрузка...</div>}
+          {authStore.meta === Meta.loading && <LoaderContainer size="m" />}
 
           {authStore.meta === Meta.error && <div className={styles.error}>{authStore.errorMessage}</div>}
 
@@ -102,41 +92,36 @@ const Profile = observer(() => {
                 </form>
               ) : (
                 <div className={styles.profile__info}>
-                  <div className={styles.profile__avatarWrapper}>
-                    {isImageLoading && (
-                      <div className={styles.profile__imageLoader}>
-                        Загрузка...
+                      <div className={styles.profile__avatarWrapper}>
+
+                
+                        <img
+                          src={isImageLoading ? avatarImage :  'https://xsgames.co/randomusers/avatar.php?g=male'} 
+                          alt="Аватар"
+                          className={styles.profile__avatar}
+                          onLoad={() => setIsImageLoading(false)}
+                          onError={() => {
+                            setIsImageLoading(false);
+                          }}
+                          />
                       </div>
-                    )}
-                    <img 
-                      src={'https://xsgames.co/randomusers/avatar.php?g=male'} 
-                      alt="Аватар" 
-                      className={styles.profile__avatar}
-                      onLoad={() => setIsImageLoading(false)}
-                      onError={() => {
-                        setIsImageLoading(false);
-                        // Можно добавить fallback изображение при ошибке
-                        // e.target.src = 'path/to/fallback/image.png';
-                      }}
-                      style={{ display: isImageLoading ? 'none' : 'block' }}
-                    />
-                  </div>
-                  <p>
-                    <strong>Имя:</strong> {authStore.user?.username}
-                  </p>
-                  <p>
-                    <strong>Email:</strong> {authStore.user?.email}
-                  </p>
-                  <div className={styles.profile__buttons}>
-                    <Button className={styles.profile__button} onClick={() => setIsEditing(true)}>
-                      Редактировать
-                    </Button>
-                    <Button className={styles.profile__button} onClick={handleLogout}>
-                      Выйти
-                    </Button>
-                  </div>
-                </div>
-              )}
+                      <p>
+                        <strong>Имя:</strong> {authStore.user?.username}
+                      </p>
+                      <p>
+                        <strong>Email:</strong> {authStore.user?.email}
+                      </p>
+                      <div className={styles.profile__buttons}>
+                        <Button className={styles.profile__button} onClick={() => setIsEditing(true)}>
+                          Редактировать
+                        </Button>
+                        <Button className={styles.profile__button} onClick={handleLogout}>
+                          Выйти
+                        </Button>
+                      </div>
+                      </div>
+                    
+                )}
             </>
           )}
         </div>

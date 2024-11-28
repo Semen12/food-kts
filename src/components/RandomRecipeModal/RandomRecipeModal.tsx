@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@components/Button/Button';
@@ -8,6 +7,8 @@ import DeleteIcon from '@components/icons/DeleteIcon';
 import { Meta } from '@store/types';
 import { Recipe, RecipeDetails } from '@types/recipe';
 import styles from './RandomRecipeModal.module.scss';
+import { scrollLock } from '@utils/scrollLock';
+
 interface RandomRecipeModalProps {
   recipe: RecipeDetails & Recipe | null;
   onClose: () => void;
@@ -15,22 +16,14 @@ interface RandomRecipeModalProps {
   errorMessage: string;
 }
 
-const RandomRecipeModal = observer(({ recipe, onClose, meta, errorMessage }: RandomRecipeModalProps) => {
+const RandomRecipeModal = ({ recipe, onClose, meta, errorMessage }: RandomRecipeModalProps) => {
   const navigate = useNavigate();
   
-  React.useEffect(() => {
-    // Блокируем прокрутку при монтировании
-    document.body.style.overflow = 'hidden';
-    
-    // Разблокируем при размонтировании
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
+ 
 
   return (
     <React.Fragment>
-    <div className={styles.modalOverlay} /* onClick={onClose} */>
+    <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={onClose}><DeleteIcon/></button>
         {meta === Meta.loading ? (
@@ -66,6 +59,6 @@ const RandomRecipeModal = observer(({ recipe, onClose, meta, errorMessage }: Ran
       </div>
     </React.Fragment>
   );
-});
+};
 
 export default RandomRecipeModal; 

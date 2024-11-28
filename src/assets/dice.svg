@@ -8,6 +8,9 @@
       .dice {
         animation: bounce 1.5s ease-in-out infinite;
         transform-origin: center;
+        &:hover {
+          animation-play-state: paused;
+        }
       }
       .dice-face {
         fill: white;
@@ -25,14 +28,14 @@
     <!-- Основная форма кубика -->
     <rect class="dice-face" x="2" y="2" width="20" height="20" rx="3"/>
     
+    <!-- Декоративная линия для 3D эффекта -->
+    <path class="dice-face" d="M22 5v14c0 1.66-1.34 3-3 3H5" fill="none" stroke-linecap="round"/>
+    
     <!-- Точки (грань с 5 точками) -->
     <circle class="dot" cx="7" cy="7" r="2"/>
     <circle class="dot" cx="17" cy="7" r="2"/>
     <circle class="dot" cx="12" cy="12" r="2"/>
     <circle class="dot" cx="7" cy="17" r="2"/>
     <circle class="dot" cx="17" cy="17" r="2"/>
-    
-    <!-- Декоративная линия для 3D эффекта -->
-    <path class="dice-face" d="M22 5v14c0 1.66-1.34 3-3 3H5" fill="none" stroke-linecap="round"/>
   </g>
 </svg>

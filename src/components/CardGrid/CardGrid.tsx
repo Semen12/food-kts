@@ -8,7 +8,7 @@ import Card from '@components/Card';
 import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
 import { Recipe } from '@store/types';
 import { getRecipeSubtitle, getRecipeKcal } from '@utils/recipe';
-import styles from '../../RecipesList.module.scss';
+import styles from './CardGrid.module.scss';
 
 interface CardGridProps {
   recipes: Recipe[];

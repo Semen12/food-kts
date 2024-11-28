@@ -1,32 +1,39 @@
-import { observer } from 'mobx-react-lite';
-import { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
-import { AuthContext } from '@context/UseAuthContext';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '@context/UseAuthContext';
+import { Meta } from '@store/types';
+import LoaderContainer from '../../App/pages/components/LoaderContainer';
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-  authRequired?: boolean;
-}
+export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const auth = useAuth();
+  const location = useLocation();
 
-const ProtectedRoute = observer(({ children, authRequired = true }: ProtectedRouteProps) => {
-  const authStore = useContext(AuthContext);
-  
-  if (!authStore) {
-    throw new Error('AuthStore не найден в контексте');
+  // Показываем лоадер только при начальной загрузке
+  if (auth.meta === Meta.loading && !auth.isAuthenticated) {
+    return <LoaderContainer />;
   }
 
-  const isAuth = authStore.isAuthenticated;
-
-  if (authRequired && !isAuth) {
-    return <Navigate to="/login" replace />;
+  // Если не авторизован - редирект на логин
+  if (!auth.isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  if (!authRequired && isAuth) {
-    return <Navigate to="/profile" replace />;
+  return <>{children}</>;
+};
+
+export const PublicOnlyRoute = ({ children }: { children: React.ReactNode }) => {
+  const auth = useAuth();
+  const location = useLocation();
+
+  // Показываем лоадер только при начальной загрузке
+  if (auth.meta === Meta.loading && !auth.isAuthenticated) {
+    return <LoaderContainer />;
   }
 
-  return <React.Fragment>{children}</React.Fragment>;
-});
+  // Если авторизован - редирект на профиль или предыдущую страницу
+  if (auth.isAuthenticated) {
+    return <Navigate to={location.state?.from?.pathname || '/profile'} replace />;
+  }
 
-export default ProtectedRoute; 
+  return <>{children}</>;
+};

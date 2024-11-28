@@ -97,15 +97,15 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
     onClear?.();
   };
 
+  const handleIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className={rootClass} ref={dropdownRef}>
       <Input 
-        className={classNames(
-          styles.root__multidropdown,
-          {
-            [styles.is_open]: isOpen
-          }
-        )}
+        className={classNames(styles.root__multidropdown, isOpen && styles.is_open)}
         value={isOpen ? filter : value.length ? getTitle(value) : ''}
         placeholder={getTitle(value)}
         onChange={handleInputChange}
@@ -113,16 +113,20 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
         disabled={disabled}
         onClear={value.length > 0 ? handleClear : undefined}
         afterSlot={
-          <ArrowDownIcon 
+          <div 
             className={classNames(
               styles.root__multidropdown_afterslot,
               isOpen && styles.rotated
-            )} 
-            width={24} 
-            height={24} 
-            color="secondary" 
-          />
-          
+            )}
+            onClick={handleIconClick}
+            style={{ cursor: 'pointer' }}
+          >
+            <ArrowDownIcon 
+              width={24} 
+              height={24} 
+              color="secondary" 
+            />
+          </div>
         }
       />
 

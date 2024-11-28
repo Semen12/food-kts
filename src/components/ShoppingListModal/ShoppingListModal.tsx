@@ -4,6 +4,7 @@ import shoppingListStore from '@store/ShoppingListStore/ShoppingListStore';
 import styles from './ShoppingListModal.module.scss';
 import DeleteIcon from '@components/icons/DeleteIcon';
 import Button from '@components/Button';
+import { scrollLock } from '@utils/scrollLock';
 
 interface ShoppingListModalProps {
   onClose: () => void;
@@ -12,18 +13,10 @@ interface ShoppingListModalProps {
 const SPOONACULAR_IMAGE_URL = 'https://spoonacular.com/cdn/ingredients_100x100/';
 
  const ShoppingListModal = observer(({ onClose }: ShoppingListModalProps) => {
-  React.useEffect(() => {
-    // Блокируем прокрутку при монтировании
-    document.body.style.overflow = 'hidden';
-    
-    // Разблокируем при размонтировании
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, []);
+ 
 
   return (
-    <div className={styles.modalOverlay}>
+    <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
         <div className={styles.modalHeader}>
           <h2>Shopping List</h2>

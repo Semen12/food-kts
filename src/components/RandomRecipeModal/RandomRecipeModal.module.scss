@@ -1,20 +1,21 @@
 .modalOverlay {
   position: fixed;
-  top: 65px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: center;
-  
   align-items: center;
   @media (max-width:$mobileSmall){
    align-items: start;
+   
   }
   z-index: 10;
   transition: all 0.3s ease 0s;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .loader {
@@ -49,13 +50,12 @@
   max-width: 500px;
   width: 90%;
   position: relative;
-  @media (max-width:$mobileSmall){
-   // top: 35px;
-  }
-
-  z-index: 10;
-  html[data-theme="dark"] & {
-    background: $text-secondary-light;
+  margin: auto;
+  z-index: 1001;
+  
+  @media (max-width: $mobileSmall) {
+    margin-top: 35px;
+    margin-bottom: 35px;
   }
 }
 
@@ -79,7 +79,7 @@
 
 .recipeCard {
   img {
-    width: 100%;
+    width: 458px;
     height: 250px;
     object-fit: cover;
     border-radius: 8px;

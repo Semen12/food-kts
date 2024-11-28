@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from '@components/Header/Header';
-import ProtectedRoute from '@components/ProtectedRoute';
+import { ProtectedRoute, PublicOnlyRoute } from '@components/ProtectedRoute/ProtectedRoute';
 import ScrollToTop from '@components/ScrollToTop';
 import { FavoriteRecipesProvider } from '@context/FavoriteRecipesContext';
 import { ThemeProvider } from '@context/ThemeContext';
@@ -25,18 +25,32 @@ function App() {
             <Route path="/" element={<RecipesList />} />
             <Route path="/recipes" element={<RecipesList />} />
             <Route path="/recipe/:id" element={<RecipeDetails />} />
-            <Route path="*" element={<Navigate to="/" />} />
             <Route path="/favorites" element={<FavoriteRecipes />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/profile"
+            <Route 
+              path="/login" 
+              element={
+                <PublicOnlyRoute>
+                  <Login />
+                </PublicOnlyRoute>
+              } 
+            />
+            <Route 
+              path="/register" 
+              element={
+                <PublicOnlyRoute>
+                  <Register />
+                </PublicOnlyRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
               element={
                 <ProtectedRoute>
                   <Profile />
                 </ProtectedRoute>
-              }
+              } 
             />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
           </ThemeProvider>
         </FavoriteRecipesProvider>

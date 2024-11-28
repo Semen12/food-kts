@@ -17,9 +17,10 @@
     &:hover {
       transform: scale(1.1);
       transition: all 0.3s ease 0s;
-    }
-  transition: all 0.3s ease 0s;
-    &.added {
+    } transition: all 0.3s ease 0s;
+    
+  }
+  .added {
       transform: rotate(45deg);
       background-color: #ff4444; // или любой другой цвет для активного состояния
       transition: all 0.3s ease 0s;
@@ -28,4 +29,3 @@
       }
      
     }
-  }

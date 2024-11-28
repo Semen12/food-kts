@@ -18,6 +18,7 @@ interface SearchProps {
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void; // Добавлено свойство onKeyPress
   onClearSearch: () => void;
   onClearTypes: () => void;
+  isSearchDisabled?: boolean;
 }
 
  const Search: React.FC<SearchProps> = ({
@@ -28,7 +29,8 @@ interface SearchProps {
   selectedTypes,
   onTypesChange,
   onClearTypes,
-  onKeyPress
+  onKeyPress,
+  isSearchDisabled
 }) => (
   <div className={styles.search}>
     <Input
@@ -36,7 +38,14 @@ interface SearchProps {
       value={searchValue}
       onChange={onSearchChange}
       placeholder='Enter dishes'
-      afterSlot={<Button onClick={onSearch}><SearchIcon /></Button>}
+      afterSlot={
+        <Button 
+          onClick={onSearch}
+          disabled={isSearchDisabled}
+        >
+          <SearchIcon />
+        </Button>
+      }
       onKeyPress={onKeyPress}
       onClear={onClearSearch}
     />

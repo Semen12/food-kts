@@ -1,13 +1,13 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ArrowRound from '@assets/arrow-round.svg?react';
 import Button from '@components/Button';
+import CardGrid from '@components/CardGrid';
 import { ErrorMessage } from '@components/ErrorMessage';
-import DeleteIcon from '@components/icons/DeleteIcon';
+import PageTitle from './components/PageTitle/PageTitle';
+import SearchInput from './components/SearchInput/SearchInput';
 import { useFavoriteRecipes } from '@context/FavoriteRecipesContext';
 import { Recipe } from '@store/types';
-import CardGrid from '../RecipesList/components/CardGrid';
 import styles from './FavoriteRecipes.module.scss';
 
 const FavoriteRecipes = observer(() => {
@@ -34,46 +34,42 @@ const FavoriteRecipes = observer(() => {
     </Button>
   );
 
-  const filteredFavorites = favoriteStore.favorites.filter(recipe => 
-    recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredFavorites = useMemo(() => 
+    favoriteStore.favorites.filter(recipe => 
+      recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
+    ),
+    [favoriteStore.favorites, searchQuery]
   );
 
   return (
     <div className={styles.favorites}>
       <div className={styles.favorites__container}>
-        <h1 className={styles.favorites__title}>
-          <ArrowRound onClick={() => navigate(-1)}/>
-          Your Favorite Recipes
-        </h1>
+        <PageTitle 
+          title="Your Favorite Recipes" 
+          onBack={() => navigate(-1)} 
+        />
 
-       {favoriteStore.favorites.length > 0 && <div className={styles.searchContainer}>
-          <div className={styles.inputWrapper}>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Поиск по избранным рецептам..."
-              className={styles.searchInput}
-            />
-            {searchQuery && (
-              <DeleteIcon 
-                className={styles.clearIcon} 
-                onClick={() => setSearchQuery('')}
-              />
-                
-             
-            )}
-          </div>
-        </div>}
+        {favoriteStore.favorites.length > 0 && (
+          <SearchInput
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Поиск по избранным рецептам..."
+          />
+        )}
 
         <div className={styles.favorites__content}>
           {favoriteStore.favorites.length === 0 ? (
-            <ErrorMessage title='Нет сохраненных рецептов' message='Сохраняйте понравившиеся рецепты, нажимая кнопку &quot;Save&quot; на карточках.'/>
+            <ErrorMessage 
+              title='Нет сохраненных рецептов' 
+              message='Сохраняйте понравившиеся рецепты, нажимая кнопку "Save" на карточках.'
+            />
           ) : filteredFavorites.length === 0 ? (
             <div className={styles.errorWrapper}>
-              <ErrorMessage title='Рецепты не найдены' message='Попробуйте изменить поисковый запрос'/>
+              <ErrorMessage 
+                title='Рецепты не найдены' 
+                message='Попробуйте изменить поисковый запрос'
+              />
             </div>
-            
           ) : (
             <CardGrid 
               recipes={filteredFavorites}

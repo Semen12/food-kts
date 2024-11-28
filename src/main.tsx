@@ -5,6 +5,7 @@ import './config/configureMobX'
 import App from './App/App'
 
 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>

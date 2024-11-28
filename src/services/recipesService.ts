@@ -43,7 +43,7 @@ export const getRecipeById = async (id:number) => {
 
 export const getrandomRecipe = async () => {
   try {
-    const { data } = await axiosInstance.get('/recipes/random', {
+    const { data } = await axiosInstance.get<GetRecipesParams>('/recipes/random', {
       params: {
         apiKey: import.meta.env.VITE_API_KEY,
         number: 1 // получаем только 1 случайный рецепт

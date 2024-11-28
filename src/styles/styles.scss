@@ -1,5 +1,7 @@
 @use "sass:math";
 
+//неиспользуемые переменные можно удалить
+
 $loader-bg: #b5460f;
 $button-primary-bg: #b5460f;
 $button-primary-text: #fff;
@@ -69,6 +71,8 @@ $space-80: 80px;
 $space-left: 414px;
 $space-left322: 346px;
 $space-left320: 320px;
+
+$header-height: 66px;
 
 // Минимальная ширина страницы
 $minWidth: 320;

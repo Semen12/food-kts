@@ -1,7 +1,7 @@
 .login {
 
   background: rgba(255, 192, 118, 0.23);
-  min-height: calc(100vh - 65px);
+  min-height: calc(100vh - $header-height);
 
   //box-shadow: $box-shadow;
   [data-theme="dark"] & {
@@ -89,8 +89,9 @@
       }
 
       &:disabled {
-          opacity: 0.5;
+          opacity: 0.7;
           cursor: not-allowed;
+          pointer-events: none;
       }
   }
 
@@ -103,6 +104,11 @@
       gap: 8px;
       font-size: 14px;
       margin-top: 8px;
+
+      @media (max-width:$mobileSmall){
+         
+         flex-direction: column;
+      }
   }
 
   &__link {

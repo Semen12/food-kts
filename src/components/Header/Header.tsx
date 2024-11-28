@@ -17,6 +17,7 @@ import DynamicAdapt from '@utils/dynamic_adapt.js';
 import RandomRecipeModal from '../RandomRecipeModal';
 import ShoppingListModal from '../ShoppingListModal';
 import styles from './Header.module.scss';
+import { useHeaderHandlers } from './hooks/useHeaderHandlers';
 
 const Header = observer(() => {
   const { theme, toggleTheme } = useTheme();
@@ -30,25 +31,14 @@ const Header = observer(() => {
   const authStore = useAuth();
   const [activeMenuItem, setActiveMenuItem] = useState<string | null>(null);
 
-  const handleMenuItemClick = () => {
-    setIsMenuOpen(false);
-  };
-
-  const handleRandomRecipe = () => {
-   
-     recipeDetailsStore.getRandomRecipe();
-    setRandomRecipe(recipeDetailsStore.randomRecipe);
-     setShowRandomModal(true);
-  };
-
-  const handleUserClick = () => {
-    handleMenuItemClick();
-    if (authStore.isAuthenticated) {
-      navigate('/profile');
-    } else {
-      navigate('/login');
-    }
-  };
+  const handlers = useHeaderHandlers({
+    setIsMenuOpen,
+    setShowRandomModal,
+    setRandomRecipe,
+    setIsShoppingListOpen,
+    setActiveMenuItem,
+    recipeDetailsStore,
+  });
 
   useEffect(() => {
     const da = new DynamicAdapt("max");
@@ -80,10 +70,7 @@ const Header = observer(() => {
                 styles.header__logoLink, 
                 isActive && activeMenuItem === 'logo' && styles.header__logoLinkActive
               )}
-              onClick={() => {
-                handleMenuItemClick();
-                setActiveMenuItem('logo');
-              }}
+              onClick={handlers.handleLogoClick}
             >
               <Logo className={styles.header__logoImg} />
               <p className={styles.header__logoText}>Food Client</p>
@@ -105,10 +92,7 @@ const Header = observer(() => {
           )}>
             <NavLink
               to="/recipes"
-              onClick={() => {
-                handleMenuItemClick();
-                setActiveMenuItem('recipes');
-              }}
+              onClick={handlers.handleRecipesClick}
               className={({ isActive }) =>
                 classnames(
                   styles.header__menuItem,
@@ -119,12 +103,7 @@ const Header = observer(() => {
               Recipes
             </NavLink>
             <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleMenuItemClick();
-                setActiveMenuItem('ingredients');
-                setIsShoppingListOpen(true);
-              }}
+              onClick={handlers.handleIngredientsClick}
               className={classnames(
                 styles.header__menuItem,
                 activeMenuItem === 'ingredients' && styles.header__menuItemActive
@@ -149,10 +128,7 @@ const Header = observer(() => {
           <div className={styles.header__random}>
           <button 
             className={styles.header__button + ' header__button_random'}
-            onClick={() => {
-              handleMenuItemClick();
-              handleRandomRecipe();
-            }}
+            onClick={handlers.handleRandomRecipe}
             aria-label="Get random recipe"
           >
             <Dice />
@@ -162,10 +138,7 @@ const Header = observer(() => {
         <div className={styles.header__buttons} data-da=".header__menuItems,931,6">
           <button 
             className={styles.header__button + ' header__button_favorite'}
-            onClick={() => {
-              handleMenuItemClick();
-              navigate('/favorites');
-            }}
+            onClick={handlers.handleFavoritesClick}
           >
             <Like />
             {favoriteStore.favoritesCount > 0 && (
@@ -177,13 +150,10 @@ const Header = observer(() => {
         
           <button 
             className={styles.header__button + ' header__button_user'} 
-            onClick={() => {
-              handleMenuItemClick();
-              handleUserClick();
-            }}
+            onClick={handlers.handleUserClick}
           >
             <User />
-            {authStore.isAuthenticated && <span className={styles.header__userDot} />}
+            
           </button>
           </div>
         </div>

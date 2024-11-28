@@ -1,7 +1,7 @@
-import AddToShoppingListButton from '../../../components/AddToShoppingListButton';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Ingredient, Step } from '@types/recipe';
+import AddToShoppingListButton from '../../AddToShoppingListButton';
 import styles from './RecipeNecessity.module.scss';
 
 

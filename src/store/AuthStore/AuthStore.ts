@@ -34,11 +34,33 @@ class AuthStore {
       setError: action
     });
 
-    // Проверяем токен при инициализации
+    this.initializeAuth();
+  }
+
+  public async initializeAuth() {
+    this._meta = Meta.loading;
     const token = localStorage.getItem('token');
+    
     if (token) {
       this._token = token;
-      this.checkAuth();
+      try {
+        await this.checkAuth();
+        runInAction(() => {
+          this._meta = Meta.success;
+          this._isAuthenticated = true;
+        });
+      } catch (error) {
+        runInAction(() => {
+          this._meta = Meta.success;
+          this._isAuthenticated = false;
+          this.logout();
+        });
+      }
+    } else {
+      runInAction(() => {
+        this._meta = Meta.success;
+        this._isAuthenticated = false;
+      });
     }
   }
 
@@ -97,16 +119,23 @@ class AuthStore {
   }
 
   async checkAuth() {
+    if (!this._token) return;
+    
     try {
       const user = await authService.getCurrentUser();
       runInAction(() => {
         this._user = user;
         this._isAuthenticated = true;
+        this._meta = Meta.success;
       });
     } catch (error: any) {
-      if (error.response?.status === 401) {
-        this.logout();
-      }
+      runInAction(() => {
+        if (error.response?.status === 401) {
+          this.logout();
+        }
+        this._meta = Meta.error;
+        this._errorMessage = 'Ошибка авторизации';
+      });
     }
   }
   async updateUser(userData: UpdateUserData) {
@@ -138,6 +167,10 @@ class AuthStore {
     this._meta = Meta.error;
     this._errorMessage = message;
   }
+  clearError = () => {
+    this._meta = Meta.initial;
+    this._errorMessage = '';
+  };
 }
 
 export default AuthStore; 

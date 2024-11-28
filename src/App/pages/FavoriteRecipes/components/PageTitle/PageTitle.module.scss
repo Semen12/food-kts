@@ -1,0 +1,43 @@
+.title {
+    margin-top: $space-xxs10;
+    margin-bottom: $space-16;
+    font-size: 27px;
+    font-weight: 600;
+    color: $text-primary;
+    text-align: center;
+    position: relative;
+    padding-left: $space-36;
+
+   
+
+    @media (max-width:$tablet) {
+      text-align: center;
+    }
+    svg {
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        background-color: lighten($brand-hover, 50%);
+        &:hover{
+          transform: translateY(-50%) scale(1.1);
+          transition: all 0.3s ease 0s;
+        
+          background-color: lighten($brand-hover, 30%);
+      }
+    }
+
+    html[data-theme="dark"] & {
+        color: $white-color;
+    }
+
+    @media (max-width: $mobile) {
+        font-size: 25px;
+        margin-bottom: $space-xxs;
+    }
+
+    @media (max-width:$mobileSmall) {
+        font-size: 22px;
+    }
+} 

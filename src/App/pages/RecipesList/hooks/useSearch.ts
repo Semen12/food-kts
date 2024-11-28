@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Option } from '@components/MultiDropdown';
 import { RecipesStore } from '@store/RecipesStore/RecipesStore';
@@ -59,6 +59,27 @@ export const useSearch = ({ recipesStore }: UseSearchProps) => {
     setSearchParams(params);
   }, [currentPage, selectedTypes, recipesStore, appliedSearchValue]);
 
+  const handleSearch = useCallback(() => {
+    setCurrentPage(1);
+    setAppliedSearchValue(searchInputValue);
+  }, [searchInputValue, setCurrentPage, setAppliedSearchValue]);
+
+  const handleTypesChange = useCallback((types: string[]) => {
+    setCurrentPage(1);
+    setSelectedTypes(types);
+  }, [setCurrentPage, setSelectedTypes]);
+
+  const handleClearSearch = useCallback(() => {
+    setSearchInputValue('');
+    setAppliedSearchValue('');
+    setCurrentPage(1);
+  }, [setSearchInputValue, setAppliedSearchValue, setCurrentPage]);
+
+  const handleClearTypes = useCallback(() => {
+    setSelectedTypes([]);
+    setCurrentPage(1);
+  }, [setCurrentPage, setSelectedTypes]);
+
   return {
     searchInputValue,
     setSearchInputValue,
@@ -68,6 +89,10 @@ export const useSearch = ({ recipesStore }: UseSearchProps) => {
     setCurrentPage,
     selectedTypes,
     setSelectedTypes,
-    isListLoading
+    isListLoading,
+    handleSearch,
+    handleTypesChange,
+    handleClearSearch,
+    handleClearTypes,
   };
 }; 

@@ -20,7 +20,7 @@ export const RecipeTop = observer(({ title, image, summary, recipeInfo }: Recipe
   };
 
   return (
-    <React.Fragment>
+    
     <div className={styles.recipe__top}>
       <h1 className={styles.recipe__title}>
         {title} 
@@ -42,6 +42,6 @@ export const RecipeTop = observer(({ title, image, summary, recipeInfo }: Recipe
         {parse(summary)}
       </div>
     </div>
-    </React.Fragment>
+   
   );
 }); 

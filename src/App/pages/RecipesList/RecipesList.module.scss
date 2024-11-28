@@ -60,11 +60,15 @@
 }
 
 .banner {
-
-  background: url("@assets/bg.jpg") no-repeat center center / cover;
+background: url("@assets/bg.jpg") no-repeat center center / cover;
+ 
   min-height: calc(100vh - 65px);
-
-  @media (max-width: 475px) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+  @media (max-width: 650px) {
     background-position: 53% 0px;
     min-height: 572px;
     height: 100%;
@@ -73,7 +77,6 @@
   img {
     display: none;
   }
-
 }
 
 .recipes {
@@ -101,10 +104,13 @@
     line-height: 120%;
     color: $text-primary;
     text-align: center;
+    width: 100%;
+    padding: 0 $space-16;
+    
     html[data-theme="dark"] & {
       color: $white-color;
-      
     }
+    
     span {
       text-decoration: underline;
       text-decoration-skip-ink: none;
@@ -112,7 +118,7 @@
 
     margin-bottom: $space-48;
 
-    @media (max-width:$mobile) {
+    @media (max-width: $mobile) {
       margin-bottom: $space-26;
       font-size: 16px;
     }
@@ -149,7 +155,7 @@
           height: 52px;
           border-radius: 10px;
           padding: 14px 20px;
-          background: $brand;
+          //background: $brand;
 
 
         }
@@ -179,63 +185,3 @@
   }
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  gap: $space-s;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  padding-bottom: $space-26;
-  height: auto;
-  .pageButton {
-   // padding: 10px;
-    background: none;
-    cursor: pointer;
-    min-width: 38px;
-    html[data-theme="dark"] & {
-      color: $white-color;
-    }
-
-    &.active {
-      padding: 10px;
-      background: $loader-bg;
-      color: $white-color;
-     
-    
-    }
-
-    &:hover {
-      background: $primary-color-40;
-      html[data-theme="dark"] & {
-        background: $text-secondary-light;
-        color: $text-secondary-dark;
-      }
-      
-    }
-
-    &.disabled {
-      svg path {
-        stroke:$text-secondary;
-      }
-      
-    }
-
-    &:not(.disabled) {
-      svg path {
-        stroke: #151411;
-        html[data-theme="dark"] & {
-          stroke: $white-color;
-        }
-      }
-      
-    }
-  }
-
-  @media (max-width: $mobileSmall) {
-    gap: $space-xs;
-    .pageButton {
-      min-width: 30px;
-    }
-  }
-  
-}
