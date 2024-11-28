@@ -24,6 +24,12 @@ const Login = observer(() => {
   } = useAuthForm();
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    return () => {
+      authStore.clearError();
+    };
+  }, [authStore]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);

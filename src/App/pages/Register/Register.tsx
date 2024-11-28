@@ -12,6 +12,7 @@ import { Meta } from '@store/types';
 import styles from './Register.module.scss';
 
 const Register = observer(() => {
+ 
   const navigate = useNavigate();
   const {
     formData,
@@ -32,6 +33,12 @@ const Register = observer(() => {
       document.body.style.overflow = 'auto';
     };
   }, []);
+
+  useEffect(() => {
+    return () => {
+      authStore.clearError();
+    };
+  }, [authStore]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
