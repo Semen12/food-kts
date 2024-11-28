@@ -3,16 +3,20 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+   "homepage": "https://Semen12.github.com/food-kts",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint \"./src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"./src/**/*.{js,jsx,ts,tsx}\" --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy" : "npm run build",
+     "deploy" : "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
+    "gh-pages": "^6.2.0",
     "html-react-parser": "^5.1.18",
     "mobx": "^6.13.5",
     "mobx-react-lite": "^4.0.7",
