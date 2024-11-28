@@ -1,11 +1,25 @@
-@mixin icon-color($color) {
+@use 'sass:map';
+@use '@styles/styles.scss' as *;
+
+@mixin icon-color($color, $fill: true, $stroke: true) {
+  $color-map: (
+    'primary': $primary-color,
+    'secondary': $secondary-color,
+    'accent': $accent-color
+  );
+
   path {
-    fill: var(--#{$color}-color);
-    stroke: var(--#{$color}-color);
-    
-    &:first-child {
-      fill: none;
-      stroke: var(--#{$color}-color);
+    @if map.has-key($color-map, $color) {
+      $current-color: map.get($color-map, $color);
+      
+      color: $current-color;
+      @if $fill {
+        fill: $current-color;
+      }
+      @if $stroke {
+        stroke: $current-color;
+      }
     }
   }
 }
+

@@ -1,5 +1,6 @@
 import path from 'path';
 import react from '@vitejs/plugin-react';
+import autoprefixer from 'autoprefixer'
 import { defineConfig } from 'vite';
 import svgr from "vite-plugin-svgr";
 
@@ -17,17 +18,31 @@ export default defineConfig({
       '@config': path.resolve(__dirname, './src/config'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@store': path.resolve(__dirname, './src/store'),
+      '@context': path.resolve(__dirname, './src/context'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
     },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "@styles/styles.scss" as *; @use "@styles/_fonts.scss" \
-         as *; @use "@styles/_reset.scss" as *; @use "@styles/_mixin.scss" as *;',
+        additionalData: '@use "@styles/_reset.scss" as *; @use "@styles/styles.scss" as *; @use "@styles/_fonts.scss" \
+         as *;  @use "@styles/_mixin.scss" as *;',
       },
+    },
+    postcss: {
+      plugins: [
+        autoprefixer({}) // add options if needed
+      ],
     },
   },
   server: {
     port: 3000,
+    /* host: '0.0.0.0', */
+    hmr: {
+      overlay: true,
+    },
+    watch: {
+      usePolling: true,
+    },
   },
 });

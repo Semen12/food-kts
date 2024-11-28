@@ -1,6 +1,7 @@
 import { observer, useLocalStore } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { ErrorMessage } from '@components/ErrorMessage';
 import RecipeDetailsStore from '@store/RecipeDetailsStore/RecipeDetailsStore';
 import { Meta } from '@store/types';
 import { getRecipeInfoItems } from '@utils/recipe';
@@ -16,12 +17,18 @@ const RecipeDetails = observer(() => {
   useEffect(() => {
     if (id) {
       recipeDetailsStore.getRecipeDetails(Number(id));
+      window.scrollTo(0, 0);
     }
   }, [id, recipeDetailsStore]);
 
   return (
     <React.Fragment>
       {recipeDetailsStore.meta === Meta.loading && <LoaderContainer />}
+      {recipeDetailsStore.meta === Meta.error && (
+        <div className={styles.errorWrapper}>
+          <ErrorMessage title='Ошибка загрузки рецепта' message={recipeDetailsStore.errorMessage}/>
+        </div>
+      )}
       {recipeDetailsStore.meta === Meta.success && (
         <div className={styles.recipe}>
           <div className={styles.recipe__container}>

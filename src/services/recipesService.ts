@@ -22,7 +22,8 @@ export const getRecipes = async ({ page = 1, pageSize = 9, query, type }: GetRec
     
     return data;
   } catch (error) {
-    console.error('Error fetching recipes:', error);
+    console.log('Error fetching recipes:', error);
+    return error;
   }
 };
 
@@ -36,6 +37,23 @@ export const getRecipeById = async (id:number) => {
     return data;
   } catch (error) {
     console.error('Ошибка при получении данных рецепта:', error);
- 
+    return error;
   }
-}; 
+};
+
+export const getrandomRecipe = async () => {
+  try {
+    const { data } = await axiosInstance.get<GetRecipesParams>('/recipes/random', {
+      params: {
+        apiKey: import.meta.env.VITE_API_KEY,
+        number: 1 // получаем только 1 случайный рецепт
+      }
+    });
+    console.log('data', data.recipes[0]    );
+    return data; // API возвращает массив recipes
+  } catch (error) {
+    console.error('Ошибка при получении случайного рецепта:', error);
+    return error;
+  }
+};
+

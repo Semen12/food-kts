@@ -1,0 +1,17 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(348px, 1fr));
+    gap: 24px;
+    justify-items: center;
+
+    @media (max-width: 1145px) {
+        gap: 30px;
+        grid-template-columns: repeat(auto-fill, minmax(348px, 360px));
+        justify-content: center;
+    }
+
+    @media (max-width:$mobileSmall) {
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
+    }
+}

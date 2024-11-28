@@ -1,0 +1,37 @@
+.favorites {
+    background: rgba(255, 192, 118, 0.23);
+    transition: all 0.3s ease 0s;
+    min-height: calc(100vh - $header-height);
+
+    html[data-theme="dark"] & {
+        background: $primary-color;
+        transition: all 0.3s ease 0s;
+    }
+
+    &__container {
+        max-width: 1208px;
+        padding: 0 $space-16;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 53px;
+        padding-top: 46px;
+        overflow: hidden;
+        @media (max-width:$mobile){
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        html[data-theme="dark"] & {
+            background: $text-primary;
+        }
+
+        @media (max-width: $mobile) {
+            padding: $space-26 0;
+        }
+    }
+}

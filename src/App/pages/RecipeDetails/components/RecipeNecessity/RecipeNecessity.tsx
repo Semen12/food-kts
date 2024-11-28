@@ -1,7 +1,8 @@
-import React from 'react';
 import { observer } from 'mobx-react-lite';
-import styles from './RecipeNecessity.module.scss';
+import React from 'react';
 import { Ingredient, Step } from '@types/recipe';
+import AddToShoppingListButton from '../../AddToShoppingListButton';
+import styles from './RecipeNecessity.module.scss';
 
 
 interface RecipeNecessityProps {
@@ -16,8 +17,17 @@ export const RecipeNecessity = observer(({ ingredients, steps }: RecipeNecessity
       <h2>Ingredients</h2>
       <ul className={styles['recipe__section-ingredients']}>
         {ingredients?.map((ingredient, index) => (
-          <li key={index}>
-            {ingredient.amount} {ingredient.unit} {ingredient.name}
+          <li key={index} className={styles['recipe__section-ingredients-name']}>
+            <div>
+              {ingredient.amount} {ingredient.unit} {ingredient.name}
+            </div>
+            <AddToShoppingListButton 
+                id={ingredient.id} 
+                name={ingredient.name} 
+                amount={ingredient.amount} 
+                unit={ingredient.unit} 
+                image={ingredient.image} />
+            
           </li>
         ))}
       </ul>

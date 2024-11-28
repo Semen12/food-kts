@@ -31,7 +31,9 @@
       "@types/*": ["types/*"],
       "@config/*": ["config/*"],
       "@pages/*": ["pages/*"],
-      "@store/*": ["store/*"]
+      "@store/*": ["store/*"],  
+      "@context/*": ["context/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src", ".eslintrc.cjs"],

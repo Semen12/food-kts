@@ -1,27 +1,41 @@
-
-
 .card {
-  
+
   width: 360px;
-  height: 100%;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.3s ease 0s;
+  @media (max-width:$mobileSmall) {
+    width: 300px;
+  }
 
   &:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+    transition: transform 0.3s ease 0s;
+    html[data-theme="dark"] & {
+      box-shadow: 0 4px 10px rgba(228, 225, 225, 0.788);
+    }
   }
 
   &__imageContainer {
     width: 360px;
+
     height: 360px;
     background-color: $button-primary-text;
 
+    @media (max-width:$mobileSmall) {
+      width: 300px;
+      height: auto;
+    }
+
     .card__image {
-      width: 360px;
-      height: 360px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+     
     }
 
   }
@@ -33,6 +47,9 @@
     padding: $space-xl $space-xs;
     background-color: $white-color;
     flex: 1;
+    html[data-theme="dark"] & {
+      background-color: $text-secondary-light;
+    }
   }
 
   &__content {
@@ -40,7 +57,11 @@
 
     &_caption {
       margin-bottom: $space-xxs;
-      img{
+      html[data-theme="dark"] & {
+        color: $text-secondary-dark;
+      }
+
+      img {
         margin-right: $space-xxs;
       }
     }
@@ -51,6 +72,9 @@
 
     &_subtitle {
       margin-bottom: $space-l;
+      html[data-theme="dark"] & {
+        color: $text-secondary-dark;
+      }
     }
   }
 
@@ -59,22 +83,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+  }
+
+  &__footer {
+
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 122%;
+    color: $brand;
   }
 
   &__action {
-    button{
-        font-weight: 400;
-    font-size: 18px;
-    line-height: 100%;
-    color: $button-primary-text;
+    button {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 100%;
+      color: $button-primary-text;
 
-    border-radius: 10px;
-    border: 10px;
-    width: 79px;
-    height: 52px;
-    min-height: 52px;
+      border-radius: 10px;
+      border: 10px;
+      width: 79px;
+      height: 52px;
+      min-height: 52px;
     }
-  
+
   }
 
 }

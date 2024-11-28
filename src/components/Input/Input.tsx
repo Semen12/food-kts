@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import DeleteIcon from '../icons/DeleteIcon';
 import styles from './Input.module.scss';
 
 export type InputProps = Omit<
@@ -12,10 +13,11 @@ export type InputProps = Omit<
   onChange: (value: string) => void;
   /** Слот для иконки справа */
   afterSlot?: React.ReactNode;
+  onClear?: () => void;
 };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ value, onChange, afterSlot, className, ...props }, ref) => {
+  ({ value, onChange, afterSlot, className, onClear, ...props }, ref) => {
     // Классы для инпута и контейнера
     const inputContainerClasses = classNames(styles['input-container'], className);
     const inputClasses = classNames(styles.input);
@@ -27,16 +29,27 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
+      
       <div className={inputContainerClasses}>
         <input
           ref={ref}
           className={inputClasses}
           value={value}
-          onChange={handleChange}
+          onChange={(e) => onChange(e.target.value)}
           type='text'
           {...props}
         />
-        {afterSlot && <div className={styles['after-slot']}>{afterSlot}</div>}
+        <div className={classNames(styles['after-slot'], styles.afterSlot_clearIcon)}>
+          {value && onClear && (
+            <DeleteIcon 
+              width={20} 
+              height={20} 
+              onClick={onClear}
+              className={styles.clearIcon} 
+            />
+          )}
+          {afterSlot}
+        </div>
       </div>
     );
   }

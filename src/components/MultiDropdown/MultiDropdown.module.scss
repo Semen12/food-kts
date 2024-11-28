@@ -1,38 +1,93 @@
-
-
 .root {
   font-family: $font-family;
   width: 370px;
   display: flex;
-  
+
   gap: $space-xs;
   position: relative;
 
-}
+  .root__multidropdown {
+    &.is_open {
+      input[type="text"] {
+        &::placeholder {
+          color: $primary-color;
+        }
+      }
+    }
 
-.options {
-  background-color: $white-color;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  padding-bottom: 8px;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  border-radius: 10px;
-  z-index: 3;
-  
+    &::placeholder {
+      color: $secondary-color;
+    }
 
-}
+    input[type="text"] {
+      padding-right: 95px;
+    }
 
-.option {
-  padding: $space-s $space-xs;
-  cursor: pointer;
+    .root__multidropdown_afterslot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      right: $space-36;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
 
-  &:hover {
-    color: $secondary-color;
+      &.rotated {
+        transform: rotate(180deg);
+        transition: all 0.3s ease 0s;
+      }
+
+      & .icon_secondary {
+        @include icon-color("secondary", $fill: false, $stroke: true);
+      }
+    }
   }
 
-  &.selected {
-    color: $brand;
+  .options {
+    background-color: $white-color;
+
+    html[data-theme="dark"] & {
+      background-color: $text-secondary-light;
+    }
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding-bottom: 8px;
+    margin-top: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border-radius: 10px;
+    z-index: 3;
+
+    max-height: 300px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+    }
   }
-} 
+
+  .option {
+    padding: $space-s $space-xs;
+    cursor: pointer;
+    color: $primary-color;
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &.selected {
+      color: $brand;
+    }
+  }
+}

@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Input from '../Input';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 
+import DeleteIcon from '../icons/DeleteIcon';
+
 //import './MultiDropdown.css';
 import styles from './MultiDropdown.module.scss';
 
@@ -27,6 +29,7 @@ export type MultiDropdownProps = {
   disabled?: boolean;
   /** Возвращает строку которая будет выводится в инпуте. В случае если опции не выбраны, строка должна отображаться как placeholder. */
   getTitle: (value: Option[]) => string;
+  onClear?: () => void;
 };
 
 const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -36,6 +39,7 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
   onChange,
   disabled,
   getTitle,
+  onClear
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState('');
@@ -87,15 +91,43 @@ const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   const rootClass = classNames(styles.root, className);
 
+  const handleClear = () => {
+    onChange([]);
+    setFilter('');
+    onClear?.();
+  };
+
+  const handleIconClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className={rootClass} ref={dropdownRef}>
-      <Input
+      <Input 
+        className={classNames(styles.root__multidropdown, isOpen && styles.is_open)}
         value={isOpen ? filter : value.length ? getTitle(value) : ''}
         placeholder={getTitle(value)}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
         disabled={disabled}
-        afterSlot={<ArrowDownIcon width={20} height={20} color="secondary" />}
+        onClear={value.length > 0 ? handleClear : undefined}
+        afterSlot={
+          <div 
+            className={classNames(
+              styles.root__multidropdown_afterslot,
+              isOpen && styles.rotated
+            )}
+            onClick={handleIconClick}
+            style={{ cursor: 'pointer' }}
+          >
+            <ArrowDownIcon 
+              width={24} 
+              height={24} 
+              color="secondary" 
+            />
+          </div>
+        }
       />
 
       {isOpen && !disabled && filteredOptions.length > 0 && (

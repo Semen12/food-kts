@@ -1,4 +1,6 @@
+@use "sass:math";
 
+//неиспользуемые переменные можно удалить
 
 $loader-bg: #b5460f;
 $button-primary-bg: #b5460f;
@@ -11,6 +13,8 @@ $button-primary-bg-active: #872d01;
 $button-primary-text-active: #fff;
 $text-primary: #000;
 $text-secondary: #afadb5;
+$text-secondary-light: #e3e1ebee;
+$text-secondary-dark: #5a5959;
 $text-accent: #b5460f;
 $input-text: #000;
 $input-bg: #fff;
@@ -35,6 +39,7 @@ $card-image-bg: #d9d9d9;
 $card-bg: #fff;
 $dropdown-options-bg: #fff;
 $brand: #b5460f;
+$brand1: #eb5858;
 $brand-active: #872d01;
 $brand-hover: rgba(181, 70, 15, 0.7);
 $font-family: "Roboto", sans-serif;
@@ -66,3 +71,29 @@ $space-80: 80px;
 $space-left: 414px;
 $space-left322: 346px;
 $space-left320: 320px;
+
+$header-height: 66px;
+
+// Минимальная ширина страницы
+$minWidth: 320;
+// Ширина полотна (макета)
+$maxWidth: 1440;
+// Ширина ограничивающего контейнера (0 = нет ограничения)
+$maxWidthContainer: 1240;
+// Общий отступ у контейнера
+// (30 = по 15px слева и справа, 0 = нет отступа)
+$containerPadding: 32;
+
+// Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+@function em($px, $current: 16) {
+	$result: math.div($px, $current) + em;
+	@return $result;
+}
+// Брейк-поинты
+$pc: em($containerWidth); // ПК, ноутбуки, некоторые планшеты в горизонтальном положении
+$tablet: em(991.98); // Планшеты, некоторые телефоны в горизонтальном положении
+$mobile: em(767.98); // Телефоны L
+$mobileSmall: em(479.98); // Телефоны S
+
