@@ -29,13 +29,9 @@ const Register = observer(() => {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+
     return () => {
       document.body.style.overflow = 'auto';
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
       authStore.clearError();
     };
   }, [authStore]);
@@ -102,7 +98,7 @@ const Register = observer(() => {
               </div>
               {errors.password && <p className={styles.error_text}>{errors.password}</p>}
             </div>
-            {authStore.meta === Meta.error && <ErrorMessage title="Ошибка входа" message={authStore.errorMessage} />}
+            {authStore.meta === Meta.error && <ErrorMessage title="Ошибка регистрации" message={authStore.errorMessage} />}
             <Button 
               type="submit" 
               className={styles.register__button}
