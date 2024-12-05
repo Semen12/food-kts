@@ -13,6 +13,7 @@ import LoaderContainer from '../components/LoaderContainer';
 import styles from './Profile.module.scss';
 
 
+
 const Profile = observer(() => {
   const authStore = useAuth();
   const navigate = useNavigate();
@@ -24,11 +25,20 @@ const Profile = observer(() => {
   });
   const [isImageLoading, setIsImageLoading] = useState(true);
 
+ 
+
   useEffect(() => {
-    if (authStore.meta === Meta.success && !authStore.isAuthenticated) {
-      navigate('/login');
+    if (!authStore.user || !authStore.isAuthenticated) {
+      navigate('/login', { replace: true });
+      return;
     }
-  }, [authStore.meta, authStore.isAuthenticated, navigate]);
+    
+    setFormData({
+      id: authStore.user?.id || 0,
+      username: authStore.user?.username || '',
+      email: authStore.user?.email || '',
+    });
+  }, [authStore.user, authStore.isAuthenticated, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,8 +68,8 @@ const Profile = observer(() => {
 
           {authStore.meta === Meta.error && <div className={styles.error}>{authStore.errorMessage}</div>}
 
-          {authStore.meta === Meta.success && (
-            <>
+          {authStore.isAuthenticated && (
+            <React.Fragment>
               {isEditing ? (
                 <form onSubmit={handleSubmit} className={styles.profile__form}>
                   <div className={styles.profile__formGroup}>
@@ -122,7 +132,7 @@ const Profile = observer(() => {
                       </div>
                     
                 )}
-            </>
+            </React.Fragment>
           )}
         </div>
       </div>

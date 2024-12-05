@@ -88,7 +88,7 @@ class AuthStore {
         this._isAuthenticated = true;
         this._meta = Meta.success;
       });
-    } catch (error: any) {
+    } catch (error) {
       runInAction(() => {
         this._meta = Meta.error;
         this._errorMessage = error.response?.data?.message || 'Ошибка входа';

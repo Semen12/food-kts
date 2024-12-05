@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import RecipeDetails from './pages/RecipeDetails';
 import RecipesList from './pages/RecipesList';
 import Register from './pages/Register';
+
 function App() {
   return (
     <React.Fragment>

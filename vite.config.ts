@@ -5,8 +5,16 @@ import { defineConfig } from 'vite';
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
-  base: "https://semen12.github.io/food-kts/",
+  base: '/food-kts/',
   plugins: [react(), svgr()],
+  build: {
+    cssCodeSplit: false,
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[hash].[ext]',
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -32,7 +40,9 @@ export default defineConfig({
     },
     postcss: {
       plugins: [
-        autoprefixer({}) // add options if needed
+        autoprefixer({
+          overrideBrowserslist: ['last 5 versions'],
+        }) // add options if needed
       ],
     },
   },
@@ -46,4 +56,5 @@ export default defineConfig({
       usePolling: true,
     },
   },
+  
 });
